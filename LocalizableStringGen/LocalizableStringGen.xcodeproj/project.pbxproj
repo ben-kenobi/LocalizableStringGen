@@ -14,6 +14,10 @@
 		B8B7664F21A7A44F000E6ABA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B8B7664E21A7A44F000E6ABA /* Assets.xcassets */; };
 		B8B7665221A7A44F000E6ABA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B8B7665021A7A44F000E6ABA /* LaunchScreen.storyboard */; };
 		B8B7665521A7A44F000E6ABA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B8B7665421A7A44F000E6ABA /* main.m */; };
+		B8B7666021A7A614000E6ABA /* YFLocalizeUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = B8B7665F21A7A614000E6ABA /* YFLocalizeUtil.m */; };
+		B8B7666321A7A622000E6ABA /* YFLocalizeConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = B8B7666221A7A622000E6ABA /* YFLocalizeConfig.m */; };
+		B8B7666721A7F701000E6ABA /* YFLocalizedHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B8B7666621A7F701000E6ABA /* YFLocalizedHelper.m */; };
+		B8B7666A21A82509000E6ABA /* YFUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = B8B7666821A82509000E6ABA /* YFUtil.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +32,15 @@
 		B8B7665121A7A44F000E6ABA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B8B7665321A7A44F000E6ABA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B8B7665421A7A44F000E6ABA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		B8B7665E21A7A614000E6ABA /* YFLocalizeUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YFLocalizeUtil.h; sourceTree = "<group>"; };
+		B8B7665F21A7A614000E6ABA /* YFLocalizeUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YFLocalizeUtil.m; sourceTree = "<group>"; };
+		B8B7666121A7A622000E6ABA /* YFLocalizeConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YFLocalizeConfig.h; sourceTree = "<group>"; };
+		B8B7666221A7A622000E6ABA /* YFLocalizeConfig.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YFLocalizeConfig.m; sourceTree = "<group>"; };
+		B8B7666421A7A7A5000E6ABA /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		B8B7666521A7F701000E6ABA /* YFLocalizedHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YFLocalizedHelper.h; sourceTree = "<group>"; };
+		B8B7666621A7F701000E6ABA /* YFLocalizedHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YFLocalizedHelper.m; sourceTree = "<group>"; };
+		B8B7666821A82509000E6ABA /* YFUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YFUtil.m; sourceTree = "<group>"; };
+		B8B7666921A82509000E6ABA /* YFUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YFUtil.h; sourceTree = "<group>"; };
 		E57502938B854DD711E7B64C /* Pods-LocalizableStringGen.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LocalizableStringGen.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LocalizableStringGen/Pods-LocalizableStringGen.debug.xcconfig"; sourceTree = "<group>"; };
 		F50041756B98D1F6E0AF472B /* Pods-LocalizableStringGen.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LocalizableStringGen.release.xcconfig"; path = "Pods/Target Support Files/Pods-LocalizableStringGen/Pods-LocalizableStringGen.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -82,17 +95,50 @@
 		B8B7664421A7A44E000E6ABA /* LocalizableStringGen */ = {
 			isa = PBXGroup;
 			children = (
-				B8B7664521A7A44E000E6ABA /* AppDelegate.h */,
-				B8B7664621A7A44E000E6ABA /* AppDelegate.m */,
+				B8B7665D21A7A59F000E6ABA /* utils */,
+				B8B7665C21A7A59A000E6ABA /* info */,
+				B8B7665B21A7A590000E6ABA /* main */,
 				B8B7664821A7A44E000E6ABA /* ViewController.h */,
 				B8B7664921A7A44E000E6ABA /* ViewController.m */,
+			);
+			path = LocalizableStringGen;
+			sourceTree = "<group>";
+		};
+		B8B7665B21A7A590000E6ABA /* main */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = main;
+			sourceTree = "<group>";
+		};
+		B8B7665C21A7A59A000E6ABA /* info */ = {
+			isa = PBXGroup;
+			children = (
+				B8B7664521A7A44E000E6ABA /* AppDelegate.h */,
+				B8B7664621A7A44E000E6ABA /* AppDelegate.m */,
 				B8B7664B21A7A44E000E6ABA /* Main.storyboard */,
 				B8B7664E21A7A44F000E6ABA /* Assets.xcassets */,
 				B8B7665021A7A44F000E6ABA /* LaunchScreen.storyboard */,
 				B8B7665321A7A44F000E6ABA /* Info.plist */,
 				B8B7665421A7A44F000E6ABA /* main.m */,
 			);
-			path = LocalizableStringGen;
+			path = info;
+			sourceTree = "<group>";
+		};
+		B8B7665D21A7A59F000E6ABA /* utils */ = {
+			isa = PBXGroup;
+			children = (
+				B8B7666921A82509000E6ABA /* YFUtil.h */,
+				B8B7666821A82509000E6ABA /* YFUtil.m */,
+				B8B7666421A7A7A5000E6ABA /* PrefixHeader.pch */,
+				B8B7665E21A7A614000E6ABA /* YFLocalizeUtil.h */,
+				B8B7665F21A7A614000E6ABA /* YFLocalizeUtil.m */,
+				B8B7666121A7A622000E6ABA /* YFLocalizeConfig.h */,
+				B8B7666221A7A622000E6ABA /* YFLocalizeConfig.m */,
+				B8B7666521A7F701000E6ABA /* YFLocalizedHelper.h */,
+				B8B7666621A7F701000E6ABA /* YFLocalizedHelper.m */,
+			);
+			path = utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -175,6 +221,7 @@
 				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
 				"${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework",
 				"${BUILT_PRODUCTS_DIR}/RealReachability/RealReachability.framework",
+				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -183,6 +230,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Masonry.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealReachability.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -216,7 +264,11 @@
 			files = (
 				B8B7664A21A7A44E000E6ABA /* ViewController.m in Sources */,
 				B8B7665521A7A44F000E6ABA /* main.m in Sources */,
+				B8B7666721A7F701000E6ABA /* YFLocalizedHelper.m in Sources */,
+				B8B7666321A7A622000E6ABA /* YFLocalizeConfig.m in Sources */,
+				B8B7666A21A82509000E6ABA /* YFUtil.m in Sources */,
 				B8B7664721A7A44E000E6ABA /* AppDelegate.m in Sources */,
+				B8B7666021A7A614000E6ABA /* YFLocalizeUtil.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -361,7 +413,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6U96F6BXWV;
-				INFOPLIST_FILE = LocalizableStringGen/Info.plist;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/LocalizableStringGen/utils/PrefixHeader.pch";
+				INFOPLIST_FILE = "$(SRCROOT)/LocalizableStringGen/info/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.yf.LocalizableStringGen;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -376,7 +429,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6U96F6BXWV;
-				INFOPLIST_FILE = LocalizableStringGen/Info.plist;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/LocalizableStringGen/utils/PrefixHeader.pch";
+				INFOPLIST_FILE = "$(SRCROOT)/LocalizableStringGen/info/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.yf.LocalizableStringGen;
 				PRODUCT_NAME = "$(TARGET_NAME)";

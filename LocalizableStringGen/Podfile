@@ -3,5 +3,6 @@ use_frameworks!
 
 target 'LocalizableStringGen' do
     pod 'IOS_OC_BASIC'
+    pod 'SVProgressHUD'
 end
 
