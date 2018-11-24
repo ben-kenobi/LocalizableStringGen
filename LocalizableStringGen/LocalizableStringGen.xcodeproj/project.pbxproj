@@ -18,6 +18,13 @@
 		B8B7666321A7A622000E6ABA /* YFLocalizeConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = B8B7666221A7A622000E6ABA /* YFLocalizeConfig.m */; };
 		B8B7666721A7F701000E6ABA /* YFLocalizedHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B8B7666621A7F701000E6ABA /* YFLocalizedHelper.m */; };
 		B8B7666A21A82509000E6ABA /* YFUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = B8B7666821A82509000E6ABA /* YFUtil.m */; };
+		B8B7667121A92CFD000E6ABA /* YFLocalGroupConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = B8B7667021A92CFD000E6ABA /* YFLocalGroupConfig.m */; };
+		B8B7667421A92D0D000E6ABA /* YFLocalGroupHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B8B7667321A92D0D000E6ABA /* YFLocalGroupHelper.m */; };
+		B8B7667921A947E4000E6ABA /* YFLocalGroup2Config.m in Sources */ = {isa = PBXBuildFile; fileRef = B8B7667821A947E4000E6ABA /* YFLocalGroup2Config.m */; };
+		B8B7667C21A947F0000E6ABA /* YFLocalGroup2Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = B8B7667B21A947F0000E6ABA /* YFLocalGroup2Helper.m */; };
+		B8B7667E21A94F58000E6ABA /* pathNmoduleMap.plist in Resources */ = {isa = PBXBuildFile; fileRef = B8B7667D21A94F58000E6ABA /* pathNmoduleMap.plist */; };
+		B8B7668121A9981D000E6ABA /* YFLocalCSVConvetConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = B8B7668021A9981D000E6ABA /* YFLocalCSVConvetConfig.m */; };
+		B8B7668421A9982D000E6ABA /* YFLocalCSVConvertHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B8B7668321A9982D000E6ABA /* YFLocalCSVConvertHelper.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +48,19 @@
 		B8B7666621A7F701000E6ABA /* YFLocalizedHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YFLocalizedHelper.m; sourceTree = "<group>"; };
 		B8B7666821A82509000E6ABA /* YFUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YFUtil.m; sourceTree = "<group>"; };
 		B8B7666921A82509000E6ABA /* YFUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YFUtil.h; sourceTree = "<group>"; };
+		B8B7666F21A92CFD000E6ABA /* YFLocalGroupConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YFLocalGroupConfig.h; sourceTree = "<group>"; };
+		B8B7667021A92CFD000E6ABA /* YFLocalGroupConfig.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YFLocalGroupConfig.m; sourceTree = "<group>"; };
+		B8B7667221A92D0D000E6ABA /* YFLocalGroupHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YFLocalGroupHelper.h; sourceTree = "<group>"; };
+		B8B7667321A92D0D000E6ABA /* YFLocalGroupHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YFLocalGroupHelper.m; sourceTree = "<group>"; };
+		B8B7667721A947E4000E6ABA /* YFLocalGroup2Config.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YFLocalGroup2Config.h; sourceTree = "<group>"; };
+		B8B7667821A947E4000E6ABA /* YFLocalGroup2Config.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YFLocalGroup2Config.m; sourceTree = "<group>"; };
+		B8B7667A21A947F0000E6ABA /* YFLocalGroup2Helper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YFLocalGroup2Helper.h; sourceTree = "<group>"; };
+		B8B7667B21A947F0000E6ABA /* YFLocalGroup2Helper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YFLocalGroup2Helper.m; sourceTree = "<group>"; };
+		B8B7667D21A94F58000E6ABA /* pathNmoduleMap.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = pathNmoduleMap.plist; sourceTree = "<group>"; };
+		B8B7667F21A9981D000E6ABA /* YFLocalCSVConvetConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YFLocalCSVConvetConfig.h; sourceTree = "<group>"; };
+		B8B7668021A9981D000E6ABA /* YFLocalCSVConvetConfig.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YFLocalCSVConvetConfig.m; sourceTree = "<group>"; };
+		B8B7668221A9982D000E6ABA /* YFLocalCSVConvertHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YFLocalCSVConvertHelper.h; sourceTree = "<group>"; };
+		B8B7668321A9982D000E6ABA /* YFLocalCSVConvertHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YFLocalCSVConvertHelper.m; sourceTree = "<group>"; };
 		E57502938B854DD711E7B64C /* Pods-LocalizableStringGen.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LocalizableStringGen.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LocalizableStringGen/Pods-LocalizableStringGen.debug.xcconfig"; sourceTree = "<group>"; };
 		F50041756B98D1F6E0AF472B /* Pods-LocalizableStringGen.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LocalizableStringGen.release.xcconfig"; path = "Pods/Target Support Files/Pods-LocalizableStringGen/Pods-LocalizableStringGen.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -162,6 +182,10 @@
 		B8B7666D21A9286B000E6ABA /* substitute */ = {
 			isa = PBXGroup;
 			children = (
+				B8B7667F21A9981D000E6ABA /* YFLocalCSVConvetConfig.h */,
+				B8B7668021A9981D000E6ABA /* YFLocalCSVConvetConfig.m */,
+				B8B7668221A9982D000E6ABA /* YFLocalCSVConvertHelper.h */,
+				B8B7668321A9982D000E6ABA /* YFLocalCSVConvertHelper.m */,
 			);
 			path = substitute;
 			sourceTree = "<group>";
@@ -169,8 +193,33 @@
 		B8B7666E21A9286D000E6ABA /* group */ = {
 			isa = PBXGroup;
 			children = (
+				B8B7667621A94780000E6ABA /* module */,
+				B8B7667521A94771000E6ABA /* csv */,
 			);
 			path = group;
+			sourceTree = "<group>";
+		};
+		B8B7667521A94771000E6ABA /* csv */ = {
+			isa = PBXGroup;
+			children = (
+				B8B7666F21A92CFD000E6ABA /* YFLocalGroupConfig.h */,
+				B8B7667021A92CFD000E6ABA /* YFLocalGroupConfig.m */,
+				B8B7667221A92D0D000E6ABA /* YFLocalGroupHelper.h */,
+				B8B7667321A92D0D000E6ABA /* YFLocalGroupHelper.m */,
+			);
+			path = csv;
+			sourceTree = "<group>";
+		};
+		B8B7667621A94780000E6ABA /* module */ = {
+			isa = PBXGroup;
+			children = (
+				B8B7667721A947E4000E6ABA /* YFLocalGroup2Config.h */,
+				B8B7667821A947E4000E6ABA /* YFLocalGroup2Config.m */,
+				B8B7667A21A947F0000E6ABA /* YFLocalGroup2Helper.h */,
+				B8B7667B21A947F0000E6ABA /* YFLocalGroup2Helper.m */,
+				B8B7667D21A94F58000E6ABA /* pathNmoduleMap.plist */,
+			);
+			path = module;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -233,6 +282,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B8B7665221A7A44F000E6ABA /* LaunchScreen.storyboard in Resources */,
+				B8B7667E21A94F58000E6ABA /* pathNmoduleMap.plist in Resources */,
 				B8B7664F21A7A44F000E6ABA /* Assets.xcassets in Resources */,
 				B8B7664D21A7A44E000E6ABA /* Main.storyboard in Resources */,
 			);
@@ -295,11 +345,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				B8B7664A21A7A44E000E6ABA /* ViewController.m in Sources */,
+				B8B7667921A947E4000E6ABA /* YFLocalGroup2Config.m in Sources */,
 				B8B7665521A7A44F000E6ABA /* main.m in Sources */,
 				B8B7666721A7F701000E6ABA /* YFLocalizedHelper.m in Sources */,
+				B8B7667421A92D0D000E6ABA /* YFLocalGroupHelper.m in Sources */,
 				B8B7666321A7A622000E6ABA /* YFLocalizeConfig.m in Sources */,
+				B8B7668421A9982D000E6ABA /* YFLocalCSVConvertHelper.m in Sources */,
+				B8B7667C21A947F0000E6ABA /* YFLocalGroup2Helper.m in Sources */,
+				B8B7667121A92CFD000E6ABA /* YFLocalGroupConfig.m in Sources */,
 				B8B7666A21A82509000E6ABA /* YFUtil.m in Sources */,
 				B8B7664721A7A44E000E6ABA /* AppDelegate.m in Sources */,
+				B8B7668121A9981D000E6ABA /* YFLocalCSVConvetConfig.m in Sources */,
 				B8B7666021A7A614000E6ABA /* YFLocalizeUtil.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

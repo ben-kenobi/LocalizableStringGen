@@ -9,8 +9,8 @@
 #import "YFLocalizeConfig.h"
 
 //static NSString *const LOCALIZE_RE=@"NSLocalizedString.*?\\(.*?@\"(.+)\".*?,.*?\\)(?=.+NSLocalizedString)|NSLocalizedString.*?\\(.*?@\"(.+)\".*?,.*?\\)";
-static NSString *const LOCALIZE_RE = @"NSLocalizedString\\s*?\\(\\s*?@\"(.+?)\"\\s*?,\\s*?(?:NULL|nil|0)\\s*?\\)";
-///total 1645
+NSString *const LOCALIZE_RE = @"NSLocalizedString\\s*?\\(\\s*?@\"(.+?)\"\\s*?,\\s*?(?:NULL|nil|0)\\s*?\\)";
+///total 1442
 @implementation YFLocalizeConfig
 -(instancetype)init{
     if(self = [super init]){
