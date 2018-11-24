@@ -12,9 +12,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface YFLocalizeUtil : NSObject
 +(void)append:(NSMutableString *)mstr key:(NSString *)key val:(NSString *)val;
+
++(NSString *)handleCheckResult:(NSTextCheckingResult *)result srcStr:(NSString *)srcStr range:(NSRange *)orange;
+
++(void)write:(NSString *)destStr to:(NSString *)file dir:(NSString *)dir;
+
++(NSString *)strFromValidFile:(NSString *)file dir:(NSString *)dir fileExts:(NSArray *)fileExts excludeFiles:(NSArray *)excludeFiles;
+
+
 +(NSMutableDictionary *)localStringDictFrom:(NSString *)localstringFile;
-
-
 /**
 将字典的key lowercase
  */

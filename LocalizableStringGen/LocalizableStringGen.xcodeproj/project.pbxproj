@@ -100,6 +100,7 @@
 				B8B7665B21A7A590000E6ABA /* main */,
 				B8B7664821A7A44E000E6ABA /* ViewController.h */,
 				B8B7664921A7A44E000E6ABA /* ViewController.m */,
+				B8B7666B21A92842000E6ABA /* modules */,
 			);
 			path = LocalizableStringGen;
 			sourceTree = "<group>";
@@ -133,12 +134,43 @@
 				B8B7666421A7A7A5000E6ABA /* PrefixHeader.pch */,
 				B8B7665E21A7A614000E6ABA /* YFLocalizeUtil.h */,
 				B8B7665F21A7A614000E6ABA /* YFLocalizeUtil.m */,
+			);
+			path = utils;
+			sourceTree = "<group>";
+		};
+		B8B7666B21A92842000E6ABA /* modules */ = {
+			isa = PBXGroup;
+			children = (
+				B8B7666E21A9286D000E6ABA /* group */,
+				B8B7666D21A9286B000E6ABA /* substitute */,
+				B8B7666C21A92865000E6ABA /* gen */,
+			);
+			path = modules;
+			sourceTree = "<group>";
+		};
+		B8B7666C21A92865000E6ABA /* gen */ = {
+			isa = PBXGroup;
+			children = (
 				B8B7666121A7A622000E6ABA /* YFLocalizeConfig.h */,
 				B8B7666221A7A622000E6ABA /* YFLocalizeConfig.m */,
 				B8B7666521A7F701000E6ABA /* YFLocalizedHelper.h */,
 				B8B7666621A7F701000E6ABA /* YFLocalizedHelper.m */,
 			);
-			path = utils;
+			path = gen;
+			sourceTree = "<group>";
+		};
+		B8B7666D21A9286B000E6ABA /* substitute */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = substitute;
+			sourceTree = "<group>";
+		};
+		B8B7666E21A9286D000E6ABA /* group */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = group;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -415,7 +447,10 @@
 				DEVELOPMENT_TEAM = 6U96F6BXWV;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/LocalizableStringGen/utils/PrefixHeader.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/LocalizableStringGen/info/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.yf.LocalizableStringGen;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -431,7 +466,10 @@
 				DEVELOPMENT_TEAM = 6U96F6BXWV;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/LocalizableStringGen/utils/PrefixHeader.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/LocalizableStringGen/info/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.yf.LocalizableStringGen;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";

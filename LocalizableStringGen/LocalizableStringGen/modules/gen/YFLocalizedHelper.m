@@ -51,7 +51,7 @@
     runOnGlobal(^{
         [self startGenStrByConfig];
         [self startReplaceStrKeyByValue];
-        [self exportDestNLeft];
+        [self exportStrings];
         runOnMain(^{
            if(self.compCB)
                self.compCB();
@@ -76,11 +76,11 @@
 }
 
 -(void)extractStringsFrom:(NSString *)srcfile dir:(NSString *)dir {
-    NSString *srcStr = [self strFromValidFile:srcfile dir:dir];
+    NSString *srcStr = [YFLocalizeUtil strFromValidFile:srcfile dir:dir fileExts:self.config.fileExts  excludeFiles:self.config.excludeFiles];
     if(emptyStr(srcStr))return;
     [self.RE enumerateMatchesInString:srcStr options:0 range:NSMakeRange(0, srcStr.length) usingBlock:^(NSTextCheckingResult * _Nullable result, NSMatchingFlags flags, BOOL * _Nonnull stop) {
         //处理项目中匹配到的字符串
-        NSString *key = [self handleCheckResult:result srcStr:srcStr range:nil];
+        NSString *key = [YFLocalizeUtil handleCheckResult:result srcStr:srcStr range:nil];
         
         NSString *val = self.srcLocalizedStringDict[key];
         if(emptyStr(val)){
@@ -98,28 +98,60 @@
 
 
 
--(NSString *)strFromValidFile:(NSString *)file dir:(NSString *)dir{
-    NSString *path = iFormatStr(@"%@%@",dir,file);
-    
-    BOOL isDir = NO;
-    BOOL exist = [iFm fileExistsAtPath:path isDirectory:&isDir];
-    if(!exist||isDir)return nil;
-    
-    if([self.config.excludeFiles containsObject:path])return nil;
-    
-    BOOL valid = NO;
-    for(NSString *ext in self.config.fileExts){
-        if([path hasSuffix:ext]){
-            valid=YES;
-            break;
+
+
+
+#pragma mark - replasce
+-(void)startReplaceStrKeyByValue{
+    for(NSString *dir in self.config.srcDirs){
+        BOOL isdir = NO;
+        BOOL exist = [iFm fileExistsAtPath:dir isDirectory:&isdir];
+        if(!exist) continue;
+        if(isdir){
+            NSArray *ary = [iFm subpathsAtPath:dir];
+            for(NSString *file in ary){
+                [self extractNReplaceStringsFrom:file dir:dir];
+            }
+        }else{
+            [self extractNReplaceStringsFrom:dir dir:@""];
         }
     }
-    if(!valid)return nil;
-    return [NSString stringWithContentsOfFile:path encoding:4 error:0];
 }
+
+//使用
+-(void)extractNReplaceStringsFrom:(NSString *)srcfile dir:(NSString *)dir {
+    NSString *srcStr = [YFLocalizeUtil strFromValidFile:srcfile dir:dir fileExts:self.config.fileExts  excludeFiles:self.config.excludeFiles];
+    if(emptyStr(srcStr))return;
+    NSArray *ary = [self.RE matchesInString:srcStr options:0 range:NSMakeRange(0, srcStr.length)];
+    
+    if(ary.count<=0) return;
+    
+    NSString  *destStr = srcStr;
+    BOOL hasSubstitute=NO;
+    for(NSInteger i=ary.count-1;i>=0;i--){
+        NSTextCheckingResult *result = ary[i];
+        NSRange range={0};
+        NSString *key = [YFLocalizeUtil handleCheckResult:result srcStr:srcStr range:&range];
+        
+        NSString *val = self.destLocalizedStringDict[key];
+        
+        if(![val isEqualToString:key]){
+            [self.substitutedLocalizedStringDict setObject:val forKey:key];
+            hasSubstitute=YES;
+            destStr = [destStr stringByReplacingCharactersInRange:range withString:val];
+        }
+    }
+    
+    if(hasSubstitute)
+       [YFLocalizeUtil write:destStr to:srcfile dir:dir];
+}
+
+
+
+
 #pragma mark - export dest string N left string
 
--(void)exportDestNLeft{
+-(void)exportStrings{
     for(NSString *key in self.destLocalizedStringDict.allKeys){
         NSString *val = self.destLocalizedStringDict[key];
         [YFLocalizeUtil append:self.destMStr key:key val:val];
@@ -143,70 +175,4 @@
 }
 
 
-#pragma mark - replasce
--(void)startReplaceStrKeyByValue{
-    for(NSString *dir in self.config.srcDirs){
-        BOOL isdir = NO;
-        BOOL exist = [iFm fileExistsAtPath:dir isDirectory:&isdir];
-        if(!exist) continue;
-        if(isdir){
-            NSArray *ary = [iFm subpathsAtPath:dir];
-            for(NSString *file in ary){
-                [self extractNReplaceStringsFrom:file dir:dir];
-            }
-        }else{
-            [self extractNReplaceStringsFrom:dir dir:@""];
-        }
-    }
-}
-
-//使用
--(void)extractNReplaceStringsFrom:(NSString *)srcfile dir:(NSString *)dir {
-    NSString *srcStr = [self strFromValidFile:srcfile dir:dir];
-    if(emptyStr(srcStr))return;
-    NSArray *ary = [self.RE matchesInString:srcStr options:0 range:NSMakeRange(0, srcStr.length)];
-    
-    if(ary.count<=0) return;
-    
-    NSString  *destStr = srcStr;
-    BOOL hasSubstitute=NO;
-    for(NSInteger i=ary.count-1;i>=0;i--){
-        NSTextCheckingResult *result = ary[i];
-        NSRange range={0};
-        NSString *key = [self handleCheckResult:result srcStr:srcStr range:&range];
-        
-        NSString *val = self.destLocalizedStringDict[key];
-        
-        if(![val isEqualToString:key]){
-            [self.substitutedLocalizedStringDict setObject:val forKey:key];
-            hasSubstitute=YES;
-            destStr = [destStr stringByReplacingCharactersInRange:range withString:val];
-        }
-    }
-    
-    if(hasSubstitute)
-       [self write:destStr to:srcfile dir:dir];
-}
-
--(void)write:(NSString *)destStr to:(NSString *)file dir:(NSString *)dir{
-    if(emptyStr(destStr))return;
-    NSString *path = iFormatStr(@"%@%@",dir,file);
-    [destStr writeToFile:path atomically:YES encoding:4 error:0];
-}
-
-
-
-#pragma mark - Utils
--(NSString *)handleCheckResult:(NSTextCheckingResult *)result srcStr:(NSString *)srcStr range:(NSRange *)orange{
-    for(int i=1;i<result.numberOfRanges;i++){
-        NSRange range = [result rangeAtIndex:i];
-        if(range.location!=NSNotFound){
-            if(orange)
-                *orange=range;
-            return [srcStr substringWithRange:range];
-        }
-    }
-    NSAssert(NO, @"----wrong matching range-----");
-    return @"";
-}
 @end

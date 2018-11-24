@@ -20,6 +20,46 @@
     [mstr appendFormat:@"\"%@\" = \"%@\";\n",key,val];
 }
 
++(NSString *)handleCheckResult:(NSTextCheckingResult *)result srcStr:(NSString *)srcStr range:(NSRange *)orange{
+    for(int i=1;i<result.numberOfRanges;i++){
+        NSRange range = [result rangeAtIndex:i];
+        if(range.location!=NSNotFound){
+            if(orange)
+                *orange=range;
+            return [srcStr substringWithRange:range];
+        }
+    }
+    NSAssert(NO, @"----wrong matching range-----");
+    return @"";
+}
+
++(void)write:(NSString *)destStr to:(NSString *)file dir:(NSString *)dir{
+    if(emptyStr(destStr))return;
+    NSString *path = iFormatStr(@"%@%@",dir,file);
+    [destStr writeToFile:path atomically:YES encoding:4 error:0];
+}
+
+
++(NSString *)strFromValidFile:(NSString *)file dir:(NSString *)dir fileExts:(NSArray *)fileExts excludeFiles:(NSArray *)excludeFiles{
+    NSString *path = iFormatStr(@"%@%@",dir,file);
+    
+    BOOL isDir = NO;
+    BOOL exist = [iFm fileExistsAtPath:path isDirectory:&isDir];
+    if(!exist||isDir)return nil;
+    
+    if([excludeFiles containsObject:path])return nil;
+    
+    BOOL valid = NO;
+    for(NSString *ext in fileExts){
+        if([path hasSuffix:ext]){
+            valid=YES;
+            break;
+        }
+    }
+    if(!valid)return nil;
+    return [NSString stringWithContentsOfFile:path encoding:4 error:0];
+}
+
 +(NSMutableDictionary *)localStringDictWithLowerKeyFrom:(NSString *)localstringFile{
     NSString *ostr = [NSString stringWithContentsOfFile:localstringFile encoding:4 error:0];
     NSArray *ary = [ostr componentsSeparatedByString:@"\";"];
