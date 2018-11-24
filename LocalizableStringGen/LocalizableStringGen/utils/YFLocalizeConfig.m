@@ -17,6 +17,7 @@ static NSString *const LOCALIZE_RE = @"NSLocalizedString\\s*?\\(\\s*?@\"(.+?)\"\
         self.searchRE=LOCALIZE_RE;
         //文件夹需要 / 结尾
         self.srcDirs=@[
+//        @"/Users/yf/Desktop/temp/",
            @"/Users/yf/Desktop/IOS/batterycam/ios/BatteryCam/BatteryCam/",
                        @"/Users/yf/Desktop/IOS/batterycam/ios/BatteryCam/Pods/",
            @"/Users/yf/Desktop/IOS/batterycam/ios/BatteryCam/BCExtensionsCommonKit/"
@@ -29,6 +30,7 @@ static NSString *const LOCALIZE_RE = @"NSLocalizedString\\s*?\\(\\s*?@\"(.+?)\"\
         self.leftLocalizedStringFile=@"/Users/yf/Desktop/Localizable_left.strings";
         self.destLocalizedStringFile=@"/Users/yf/Desktop/Localizable_dest.strings";
         self.originDestLocalizedStringFile=@"/Users/yf/Desktop/Localizable_dest_origin.strings";
+        self.substitutedLocalizedStringFile=@"/Users/yf/Desktop/Localizable_substitute.strings";
     }
     return self;
 }
