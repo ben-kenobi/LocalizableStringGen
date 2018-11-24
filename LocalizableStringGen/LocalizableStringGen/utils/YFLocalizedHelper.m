@@ -8,9 +8,17 @@
 
 #import "YFLocalizedHelper.h"
 @interface YFLocalizedHelper()
-@property (nonatomic,strong)NSMutableDictionary *srcLocalizedStringDict;
+@property (nonatomic,strong)NSMutableDictionary *srcLocalizedStringDict;//从.strings文件中读取的key value
+@property (nonatomic,strong)NSMutableDictionary *leftLocalizedStringDict;//同样是从.strings文件中读取的key value,但是删除被匹配后的key value后得到的剩余未匹配的key value
+
+@property (nonatomic,strong)NSMutableDictionary *destLocalizedStringDict;//将迭代项目中的所有key 和 .string文件的value匹配后存放的dict，如果没有value，则value = key
+@property (nonatomic,strong)NSMutableString *destMStr;//将destdict转换成strings文件形式的字串
+@property (nonatomic,strong)NSMutableString *originDestMStr;//将匹配到的所有字串按顺序转换成strings文件形式的字串
+
+@property (nonatomic,strong)NSMutableString *leftMStr;//将leftdict转换成strings文件形式的字串
+
+
 @property (nonatomic,strong)NSRegularExpression *RE;
-@property (nonatomic,strong)NSMutableString *destMStr;
 @property (nonatomic,strong)YFLocalizeConfig *config;
 @property (nonatomic,copy)void(^compCB)(void);
 @end
@@ -21,8 +29,13 @@
     YFLocalizedHelper *helper = [[YFLocalizedHelper alloc]init];
     helper.config=config;
     helper.srcLocalizedStringDict=[YFLocalizeUtil localStringDictFrom:helper.config.srcLocalizedStringFile];
+    helper.leftLocalizedStringDict=[NSMutableDictionary dictionaryWithDictionary:helper.srcLocalizedStringDict];
+    
+    helper.destLocalizedStringDict=[NSMutableDictionary dictionary];
     helper.RE=[NSRegularExpression regularExpressionWithPattern:helper.config.searchRE options:0 error:0];
     helper.destMStr = [NSMutableString string];
+    helper.leftMStr = [NSMutableString string];
+    helper.originDestMStr = [NSMutableString string];
     helper.compCB = compCB;
     [helper start];
     return helper;
@@ -31,6 +44,7 @@
 -(void)start{
     runOnGlobal(^{
         [self startGenStrByConfig];
+        [self exportDestNLeft];
         [self startReplaceStrByConfig];
         runOnMain(^{
            if(self.compCB)
@@ -54,14 +68,26 @@
         }
     }
 }
+
 -(void)extractStringsFrom:(NSString *)srcfile dir:(NSString *)dir {
     NSString *srcStr = [self strFromValidFile:srcfile dir:dir];
     if(emptyStr(srcStr))return;
     [self.RE enumerateMatchesInString:srcStr options:0 range:NSMakeRange(0, srcStr.length) usingBlock:^(NSTextCheckingResult * _Nullable result, NSMatchingFlags flags, BOOL * _Nonnull stop) {
+        //处理项目中匹配到的字符串
         NSString *key = [self handleCheckResult:result srcStr:srcStr];
-        [YFLocalizeUtil append:self.destMStr key:key val:key];
+        
+        NSString *val = self.srcLocalizedStringDict[key];
+        if(emptyStr(val)){
+            val = key;
+        }
+        
+        [self.destLocalizedStringDict setObject:val forKey:key];
+        [self.leftLocalizedStringDict removeObjectForKey:key];
+        
+        
+        [YFLocalizeUtil append:self.originDestMStr key:key val:val];
     }];
-    [self.destMStr writeToFile:self.config.destLocalizedStringFile atomically:YES encoding:4 error:0];
+   
 }
 
 
@@ -85,7 +111,23 @@
     if(!valid)return nil;
     return [NSString stringWithContentsOfFile:path encoding:4 error:0];
 }
+#pragma mark - export dest string N left string
 
+-(void)exportDestNLeft{
+    for(NSString *key in self.destLocalizedStringDict.allKeys){
+        NSString *val = self.destLocalizedStringDict[key];
+        [YFLocalizeUtil append:self.destMStr key:key val:val];
+    }
+    [self.destMStr writeToFile:self.config.destLocalizedStringFile atomically:YES encoding:4 error:0];
+    
+    for(NSString *key in self.leftLocalizedStringDict.allKeys){
+        NSString *val = self.leftLocalizedStringDict[key];
+        [YFLocalizeUtil append:self.leftMStr key:key val:val];
+    }
+    [self.leftMStr writeToFile:self.config.leftLocalizedStringFile atomically:YES encoding:4 error:0];
+    
+    [self.originDestMStr writeToFile:self.config.originDestLocalizedStringFile atomically:YES encoding:4 error:0];
+}
 
 #pragma mark - replasce
 

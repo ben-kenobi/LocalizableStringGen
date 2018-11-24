@@ -26,7 +26,9 @@ static NSString *const LOCALIZE_RE = @"NSLocalizedString\\s*?\\(\\s*?@\"(.+?)\"\
                             ];
         self.fileExts=@[@".m",@".mm"];
         self.srcLocalizedStringFile=@"/Users/yf/Desktop/Localizable.strings";
+        self.leftLocalizedStringFile=@"/Users/yf/Desktop/Localizable_left.strings";
         self.destLocalizedStringFile=@"/Users/yf/Desktop/Localizable_dest.strings";
+        self.originDestLocalizedStringFile=@"/Users/yf/Desktop/Localizable_dest_origin.strings";
     }
     return self;
 }
