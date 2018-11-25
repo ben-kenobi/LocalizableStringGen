@@ -20,6 +20,7 @@
 
 @property (nonatomic,strong)UISwitch *conflictSiwtch;
 @property (nonatomic,strong)UISwitch *strToCSVSiwtch;
+@property (nonatomic,strong)UISwitch *revertReplaceSwitch;
 @end
 
 @implementation ViewController
@@ -45,7 +46,9 @@
 }
 -(void)replace{
     [iPop showProg];
-    self.genHelper=[YFLocalizedHelper startWithConfig:[[YFLocalizeConfig alloc]init] gen:NO compCB:^{
+    YFLocalizeConfig *config = [[YFLocalizeConfig alloc]init];
+    config.revertReplace=self.revertReplaceSwitch.on;
+    self.genHelper=[YFLocalizedHelper startWithConfig:config gen:NO compCB:^{
         [iPop dismProg];
     }];
 }
@@ -92,10 +95,11 @@
     [UIUtil commonTexBtn:subbtn tar:self action:@selector(convet)];
     
     
-    
     self.conflictSiwtch=[[UISwitch alloc]init];
     
     self.strToCSVSiwtch=[[UISwitch alloc]init];
+    
+    self.revertReplaceSwitch=[[UISwitch alloc]init];
 
     //---layout ----
     
@@ -106,6 +110,7 @@
     [self.view addSubview:replaceBtn];
     [self.view addSubview:self.conflictSiwtch];
     [self.view addSubview:self.strToCSVSiwtch];
+    [self.view addSubview:self.revertReplaceSwitch];
     [genbtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(@150);
         make.centerX.equalTo(@0);
@@ -115,6 +120,10 @@
     [replaceBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(genbtn.mas_bottom).offset(40);
         make.height.width.centerX.equalTo(genbtn);
+    }];
+    [self.revertReplaceSwitch mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(replaceBtn);
+        make.leading.equalTo(replaceBtn.mas_trailing).offset(15);
     }];
     [groupBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(replaceBtn.mas_bottom).offset(40);

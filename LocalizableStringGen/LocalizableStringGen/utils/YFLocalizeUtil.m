@@ -82,6 +82,11 @@
 }
 
 +(NSMutableDictionary *)localStringDictFrom:(NSString *)localstringFile{
+    return [self localStringDictFrom:localstringFile revert:NO];
+}
+
+//revert:YES  key 与value位置互换  ,NO 正常key value
++(NSMutableDictionary *)localStringDictFrom:(NSString *)localstringFile  revert:(BOOL)revert{
     NSString *ostr = [NSString stringWithContentsOfFile:localstringFile encoding:4 error:0];
     NSArray *ary = [ostr componentsSeparatedByString:@"\";"];
     NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:ary.count];
@@ -97,7 +102,10 @@
         //        NSString *val = [dict valueForKey:key];
         //        if(val)
         //            [mary addObject:iFormatStr(@"%@ = %@",key,val)];
-        [dict setObject:sary[1] forKey:key] ;
+        if(revert)
+            [dict setObject:key forKey:sary[1]] ;
+        else
+            [dict setObject:sary[1] forKey:key] ;
     }
     return dict;
 }

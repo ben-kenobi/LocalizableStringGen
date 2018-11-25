@@ -21,6 +21,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 +(NSMutableDictionary *)localStringDictFrom:(NSString *)localstringFile;
+
+//revert:YES  key 与value位置互换  ,NO 正常key value
++(NSMutableDictionary *)localStringDictFrom:(NSString *)localstringFile  revert:(BOOL)revert;
+
 /**
 将字典的key lowercase
  */

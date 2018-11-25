@@ -20,6 +20,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,strong)NSString *originDestLocalizedStringFile;
 @property (nonatomic,strong)NSString *searchRE;
 @property (nonatomic,strong)NSArray<NSString *> *fileExts;
+
+//替换时是否在strings文件转字典时候需要key value对调
+@property (nonatomic,assign)BOOL revertReplace;
 @end
 
 NS_ASSUME_NONNULL_END

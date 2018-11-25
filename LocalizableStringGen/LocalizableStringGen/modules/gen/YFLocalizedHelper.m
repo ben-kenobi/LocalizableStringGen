@@ -57,7 +57,7 @@
 
 -(void)startReplace{
     runOnGlobal(^{
-        self.destLocalizedStringDict=[YFLocalizeUtil localStringDictFrom:self.config.destLocalizedStringFile];
+        self.destLocalizedStringDict=[YFLocalizeUtil localStringDictFrom:self.config.destLocalizedStringFile revert:self.config.revertReplace];
         [self startReplaceStrKeyByValue];
         [self exportStrings];
         runOnMain(^{
