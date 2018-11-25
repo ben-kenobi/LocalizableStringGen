@@ -19,6 +19,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,strong)NSString *conflictDestFile;//存在与两个或以上模块中的字串导出文件
 @property (nonatomic,assign)BOOL diposeConflict;//如果发现字串存在与两个或更多模块，则只导出到第一个模块,默认为NO，则全部模块都保留一份
 
+@property (nonatomic,assign)BOOL onlyKeepStringsExistInStringsFile;//只保留存在.strings文件中的字串
+
 @property (nonatomic,strong)NSArray<NSString *> *fileExts;
 @property (nonatomic,strong)NSArray<NSString *>*excludeFiles;
 @property (nonatomic,strong)NSString *searchRE;

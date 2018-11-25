@@ -80,6 +80,8 @@
 
         NSString *val = self.srcLocalizedStringDict[key];
         if(emptyStr(val)){
+            if(self.config.onlyKeepStringsExistInStringsFile)
+                return;
             val = key;
         }
         [self.leftLocalizedStringDict removeObjectForKey:key];

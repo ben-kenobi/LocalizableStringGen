@@ -14,10 +14,13 @@
 -(instancetype)init{
     if(self = [super init]){
         //文件夹需要 / 结尾
-        self.groupCSVDir=@"/Users/yf/Desktop/cvsgroup/";
-        self.fileExts=@[@".csv"];
-        self.srcLocalizedStringFile=@"/Users/yf/Desktop/Localizable.strings";
-        self.leftLocalizedStringFile=@"/Users/yf/Desktop/Localizable_left.strings";
+        self.groupTSVDir=@"/Users/hui/Desktop/tsvGroup/";
+        self.fileExts=@[@".tsv"];
+        self.srcLocalizedStringFile=@"/Users/hui/Desktop/Localizable.strings";
+        self.leftLocalizedStringFile=@"/Users/hui/Desktop/Localizable_left.strings";
+        
+        self.keyIdx=0;
+        self.valIdx=1;
     }
     return self;
 }

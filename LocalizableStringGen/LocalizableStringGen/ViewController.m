@@ -12,15 +12,19 @@
 #import "YFUtil.h"
 #import "YFLocalGroup2Helper.h"
 #import "YFLocalCSVConvertHelper.h"
+#import "YFLocalTSVConvertHelper.h"
+
 @interface ViewController ()
 @property (nonatomic,strong)YFLocalizedHelper *genHelper;
-@property (nonatomic,strong)YFLocalGroupHelper *groupHelper;
-@property (nonatomic,strong)YFLocalGroup2Helper *groupHelper2;
-@property (nonatomic,strong)YFLocalCSVConvertHelper *convertHelper;
+@property (nonatomic,strong)YFLocalGroupHelper *groupTSVHelper;
+@property (nonatomic,strong)YFLocalGroup2Helper *groupProjectHelper;
+@property (nonatomic,strong)YFLocalCSVConvertHelper *csvConvertHelper;
+@property (nonatomic,strong)YFLocalTSVConvertHelper *tsvConvertHelper;
 
 @property (nonatomic,strong)UISwitch *conflictSiwtch;
 @property (nonatomic,strong)UISwitch *strToCSVSiwtch;
 @property (nonatomic,strong)UISwitch *revertReplaceSwitch;
+@property (nonatomic,strong)UISwitch *strToTSVSwitch;
 @end
 
 @implementation ViewController
@@ -52,9 +56,13 @@
         [iPop dismProg];
     }];
 }
--(void)groupFromCSV{
+-(void)groupFromTSV{
     [iPop showProg];
-    self.groupHelper=[YFLocalGroupHelper startWithConfig:[[YFLocalGroupConfig alloc]init] compCB:^{
+    YFLocalGroupConfig *config = [[YFLocalGroupConfig alloc]init];
+    //根据tsv文件值的位置
+    config.keyIdx=0;
+    config.valIdx=2;
+    self.groupTSVHelper=[YFLocalGroupHelper startWithConfig:config compCB:^{
         [iPop dismProg];
     }];
 }
@@ -63,7 +71,8 @@
     [iPop showProg];
     YFLocalGroup2Config *config = [[YFLocalGroup2Config alloc]init];
     config.diposeConflict=self.conflictSiwtch.on;
-    self.groupHelper2=[YFLocalGroup2Helper startWithConfig:config compCB:^{
+    config.onlyKeepStringsExistInStringsFile=YES;//是否只处理存在于.strings文件中的串
+    self.groupProjectHelper=[YFLocalGroup2Helper startWithConfig:config compCB:^{
         [iPop dismProg];
     }];
 }
@@ -72,7 +81,21 @@
     [iPop showProg];
     YFLocalCSVConvetConfig *config = [[YFLocalCSVConvetConfig alloc]init];
     config.revert=self.strToCSVSiwtch.on;
-    self.convertHelper=[YFLocalCSVConvertHelper startWithConfig:config compCB:^{
+    self.csvConvertHelper=[YFLocalCSVConvertHelper startWithConfig:config compCB:^{
+        [iPop dismProg];
+    }];
+}
+
+-(void)tsvConvert{
+    [iPop showProg];
+    YFLovslTSVConvertConfig *config = [[YFLovslTSVConvertConfig alloc]init];
+    config.revert=self.strToTSVSwitch.on;
+    
+    //根据tsv文件值的位置
+    config.keyIdx=0;
+    config.valIdx=2;
+    
+    self.tsvConvertHelper=[YFLocalTSVConvertHelper startWithConfig:config compCB:^{
         [iPop dismProg];
     }];
 }
@@ -86,13 +109,16 @@
     UIButton *replaceBtn = [IProUtil commonTextBtn:iFont(18) color:iColor(0xff, 0xff, 0xff, 1) title:@"Replace"];
     [UIUtil commonTexBtn:replaceBtn tar:self action:@selector(replace)];
     
-    UIButton *groupBtn = [IProUtil commonTextBtn:iFont(18) color:iColor(0xff, 0xff, 0xff, 1) title:@"Group CSV"];
-    [UIUtil commonTexBtn:groupBtn tar:self action:@selector(groupFromCSV)];
+    UIButton *groupBtn = [IProUtil commonTextBtn:iFont(18) color:iColor(0xff, 0xff, 0xff, 1) title:@"Group TSV"];
+    [UIUtil commonTexBtn:groupBtn tar:self action:@selector(groupFromTSV)];
     UIButton *groupBtn2 = [IProUtil commonTextBtn:iFont(18) color:iColor(0xff, 0xff, 0xff, 1) title:@"Group Project"];
     [UIUtil commonTexBtn:groupBtn2 tar:self action:@selector(groupFromProject)];
     
-    UIButton *subbtn = [IProUtil commonTextBtn:iFont(18) color:iColor(0xff, 0xff, 0xff, 1) title:@"Strings->CSV"];
-    [UIUtil commonTexBtn:subbtn tar:self action:@selector(convet)];
+    UIButton *csvbtn = [IProUtil commonTextBtn:iFont(18) color:iColor(0xff, 0xff, 0xff, 1) title:@"Strings->CSV"];
+    [UIUtil commonTexBtn:csvbtn tar:self action:@selector(convet)];
+    
+    UIButton *tsvbtn = [IProUtil commonTextBtn:iFont(18) color:iColor(0xff, 0xff, 0xff, 1) title:@"Strings->TSV"];
+    [UIUtil commonTexBtn:tsvbtn tar:self action:@selector(tsvConvert)];
     
     
     self.conflictSiwtch=[[UISwitch alloc]init];
@@ -100,17 +126,22 @@
     self.strToCSVSiwtch=[[UISwitch alloc]init];
     
     self.revertReplaceSwitch=[[UISwitch alloc]init];
-
+    
+    self.strToTSVSwitch=[[UISwitch alloc]init];
+    
     //---layout ----
     
     [self.view addSubview:groupBtn];
     [self.view addSubview:groupBtn2];
-    [self.view addSubview:subbtn];
+    [self.view addSubview:csvbtn];
     [self.view addSubview:genbtn];
     [self.view addSubview:replaceBtn];
     [self.view addSubview:self.conflictSiwtch];
     [self.view addSubview:self.strToCSVSiwtch];
     [self.view addSubview:self.revertReplaceSwitch];
+    [self.view addSubview:tsvbtn];
+    [self.view addSubview:self.strToTSVSwitch];
+    
     [genbtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(@150);
         make.centerX.equalTo(@0);
@@ -138,15 +169,23 @@
         make.leading.equalTo(groupBtn2.mas_trailing).offset(15);
     }];
     
-    [subbtn mas_makeConstraints:^(MASConstraintMaker *make) {
+    [csvbtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(groupBtn2.mas_bottom).offset(40);
         make.height.width.centerX.equalTo(genbtn);
     }];
     [self.strToCSVSiwtch mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(subbtn);
-        make.leading.equalTo(subbtn.mas_trailing).offset(15);
+        make.centerY.equalTo(csvbtn);
+        make.leading.equalTo(csvbtn.mas_trailing).offset(15);
     }];
     
+    [tsvbtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(csvbtn.mas_bottom).offset(40);
+        make.height.width.centerX.equalTo(genbtn);
+    }];
+    [self.strToTSVSwitch mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(tsvbtn);
+        make.leading.equalTo(tsvbtn.mas_trailing).offset(15);
+    }];
    
 }
 

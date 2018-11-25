@@ -12,7 +12,7 @@
 
 @interface YFLocalGroupHelper()
 {
-    NSInteger csvValCount;
+    NSInteger tsvValCount;
     NSInteger matchCount;
 }
 
@@ -29,7 +29,7 @@
     YFLocalGroupHelper *helper = [[YFLocalGroupHelper alloc]init];
     helper.config=config;
     
-    helper.srcLocalizedStringDict=[YFLocalizeUtil localStringDictFrom:helper.config.srcLocalizedStringFile];
+    helper.srcLocalizedStringDict=[YFLocalizeUtil localStringDictFrom:helper.config.srcLocalizedStringFile revert:YES];
     helper.leftLocalizedStringDict=[NSMutableDictionary dictionaryWithDictionary:helper.srcLocalizedStringDict];
     helper.compCB = compCB;
     [helper start];
@@ -38,6 +38,7 @@
 -(void)start{
     runOnGlobal(^{
         [self matchByGroup];
+        [self exportStrings];
         runOnMain(^{
             if(self.compCB)
                 self.compCB();
@@ -49,7 +50,7 @@
 #pragma mark - group
 -(void)matchByGroup{
     BOOL isdir=NO;
-    NSString *dir = self.config.groupCSVDir;
+    NSString *dir = self.config.groupTSVDir;
     BOOL exist = [iFm fileExistsAtPath:dir isDirectory:&isdir];
     NSAssert(exist, @"-----file not exists-----");
     if(isdir){
@@ -62,25 +63,46 @@
     }
 }
 -(void)compareStringsWithFile:(NSString *)file dir:(NSString *)dir{
-    NSString *csvStr = [YFLocalizeUtil strFromValidFile:file dir:dir fileExts:self.config.fileExts  excludeFiles:self.config.excludeFiles];
-    if(emptyStr(csvStr))return;
-    NSArray *csvary = [csvStr componentsSeparatedByCharactersInSet:NSCharacterSet.newlineCharacterSet];
-    for(int i=1;i<csvary.count;i++){
-        NSString *enval = [self parseCSV:csvary[i]];
-        if(!enval)continue;
-        csvValCount++;
-        NSString *strval = self.srcLocalizedStringDict[enval];
-        if(strval){
+    NSString *tsvStr = [YFLocalizeUtil strFromValidFile:file dir:dir fileExts:self.config.fileExts  excludeFiles:self.config.excludeFiles];
+    if(emptyStr(tsvStr))return;
+    NSArray *tsvary = [tsvStr componentsSeparatedByCharactersInSet:NSCharacterSet.newlineCharacterSet];
+    NSMutableString *newtsvstr=[NSMutableString string];
+    [newtsvstr appendFormat:@"%@\n",tsvary[0]];
+    for(int i=1;i<tsvary.count;i++){//首行为标题，不处理
+        NSString *enval = [self parseTSV:tsvary[i]];
+        NSString *strkey=nil;
+        if(enval){
+            strkey=self.srcLocalizedStringDict[enval];
+            tsvValCount++;
+        }
+        if(strkey){
             matchCount++;
             [self.leftLocalizedStringDict removeObjectForKey:enval];
+            [newtsvstr appendFormat:@"%@%@\n",strkey,tsvary[i]];
+        }else{
+            [newtsvstr appendFormat:@"%@\n",tsvary[i]];
         }
     }
-}
--(NSString *)parseCSV:(NSString *)csv{
 
-    NSArray *ary = [csv componentsSeparatedByString:@","];
-    if(ary.count>=3)return ary[2];
+    [newtsvstr writeToFile:iFormatStr(@"%@%@",dir,file) atomically:YES encoding:4 error:nil];
+}
+-(NSString *)parseTSV:(NSString *)csv{
+
+    NSArray *ary = [csv componentsSeparatedByString:@"\t"];
+    if(ary.count>self.config.valIdx)return ary[self.config.valIdx];
     return nil;
 }
 
+
+#pragma mark - export
+-(void)exportStrings{
+    
+    NSMutableString *leftMStr = [NSMutableString string];
+    for(NSString *key in self.leftLocalizedStringDict.allKeys){
+        NSString *val = self.leftLocalizedStringDict[key];
+        [YFLocalizeUtil append:leftMStr key:key val:val];
+    }
+    [leftMStr writeToFile:self.config.leftLocalizedStringFile atomically:YES encoding:4 error:0];
+    
+}
 @end

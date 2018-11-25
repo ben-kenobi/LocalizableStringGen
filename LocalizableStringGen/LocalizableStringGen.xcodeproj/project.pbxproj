@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		8E78AD8475A81949762F042E /* Pods_LocalizableStringGen.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF9B17955390079A7CA85F77 /* Pods_LocalizableStringGen.framework */; };
+		A59DDD5021AA41FF005F1EAF /* YFLovslTSVConvertConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = A59DDD4F21AA41FF005F1EAF /* YFLovslTSVConvertConfig.m */; };
+		A59DDD5321AA420F005F1EAF /* YFLocalTSVConvertHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = A59DDD5221AA420F005F1EAF /* YFLocalTSVConvertHelper.m */; };
 		B8B7664721A7A44E000E6ABA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B8B7664621A7A44E000E6ABA /* AppDelegate.m */; };
 		B8B7664A21A7A44E000E6ABA /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B8B7664921A7A44E000E6ABA /* ViewController.m */; };
 		B8B7664D21A7A44E000E6ABA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B8B7664B21A7A44E000E6ABA /* Main.storyboard */; };
@@ -28,6 +30,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A59DDD4E21AA41FF005F1EAF /* YFLovslTSVConvertConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YFLovslTSVConvertConfig.h; sourceTree = "<group>"; };
+		A59DDD4F21AA41FF005F1EAF /* YFLovslTSVConvertConfig.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YFLovslTSVConvertConfig.m; sourceTree = "<group>"; };
+		A59DDD5121AA420F005F1EAF /* YFLocalTSVConvertHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YFLocalTSVConvertHelper.h; sourceTree = "<group>"; };
+		A59DDD5221AA420F005F1EAF /* YFLocalTSVConvertHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YFLocalTSVConvertHelper.m; sourceTree = "<group>"; };
 		AF9B17955390079A7CA85F77 /* Pods_LocalizableStringGen.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LocalizableStringGen.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8B7664221A7A44E000E6ABA /* LocalizableStringGen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LocalizableStringGen.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8B7664521A7A44E000E6ABA /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -92,6 +98,28 @@
 				AF9B17955390079A7CA85F77 /* Pods_LocalizableStringGen.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A59DDD4C21AA4196005F1EAF /* csv */ = {
+			isa = PBXGroup;
+			children = (
+				B8B7667F21A9981D000E6ABA /* YFLocalCSVConvetConfig.h */,
+				B8B7668021A9981D000E6ABA /* YFLocalCSVConvetConfig.m */,
+				B8B7668221A9982D000E6ABA /* YFLocalCSVConvertHelper.h */,
+				B8B7668321A9982D000E6ABA /* YFLocalCSVConvertHelper.m */,
+			);
+			path = csv;
+			sourceTree = "<group>";
+		};
+		A59DDD4D21AA419D005F1EAF /* tsv */ = {
+			isa = PBXGroup;
+			children = (
+				A59DDD4E21AA41FF005F1EAF /* YFLovslTSVConvertConfig.h */,
+				A59DDD4F21AA41FF005F1EAF /* YFLovslTSVConvertConfig.m */,
+				A59DDD5121AA420F005F1EAF /* YFLocalTSVConvertHelper.h */,
+				A59DDD5221AA420F005F1EAF /* YFLocalTSVConvertHelper.m */,
+			);
+			path = tsv;
 			sourceTree = "<group>";
 		};
 		B8B7663921A7A44E000E6ABA = {
@@ -182,10 +210,8 @@
 		B8B7666D21A9286B000E6ABA /* substitute */ = {
 			isa = PBXGroup;
 			children = (
-				B8B7667F21A9981D000E6ABA /* YFLocalCSVConvetConfig.h */,
-				B8B7668021A9981D000E6ABA /* YFLocalCSVConvetConfig.m */,
-				B8B7668221A9982D000E6ABA /* YFLocalCSVConvertHelper.h */,
-				B8B7668321A9982D000E6ABA /* YFLocalCSVConvertHelper.m */,
+				A59DDD4D21AA419D005F1EAF /* tsv */,
+				A59DDD4C21AA4196005F1EAF /* csv */,
 			);
 			path = substitute;
 			sourceTree = "<group>";
@@ -194,12 +220,12 @@
 			isa = PBXGroup;
 			children = (
 				B8B7667621A94780000E6ABA /* module */,
-				B8B7667521A94771000E6ABA /* csv */,
+				B8B7667521A94771000E6ABA /* tsv */,
 			);
 			path = group;
 			sourceTree = "<group>";
 		};
-		B8B7667521A94771000E6ABA /* csv */ = {
+		B8B7667521A94771000E6ABA /* tsv */ = {
 			isa = PBXGroup;
 			children = (
 				B8B7666F21A92CFD000E6ABA /* YFLocalGroupConfig.h */,
@@ -207,7 +233,7 @@
 				B8B7667221A92D0D000E6ABA /* YFLocalGroupHelper.h */,
 				B8B7667321A92D0D000E6ABA /* YFLocalGroupHelper.m */,
 			);
-			path = csv;
+			path = tsv;
 			sourceTree = "<group>";
 		};
 		B8B7667621A94780000E6ABA /* module */ = {
@@ -346,7 +372,9 @@
 			files = (
 				B8B7664A21A7A44E000E6ABA /* ViewController.m in Sources */,
 				B8B7667921A947E4000E6ABA /* YFLocalGroup2Config.m in Sources */,
+				A59DDD5321AA420F005F1EAF /* YFLocalTSVConvertHelper.m in Sources */,
 				B8B7665521A7A44F000E6ABA /* main.m in Sources */,
+				A59DDD5021AA41FF005F1EAF /* YFLovslTSVConvertConfig.m in Sources */,
 				B8B7666721A7F701000E6ABA /* YFLocalizedHelper.m in Sources */,
 				B8B7667421A92D0D000E6ABA /* YFLocalGroupHelper.m in Sources */,
 				B8B7666321A7A622000E6ABA /* YFLocalizeConfig.m in Sources */,
