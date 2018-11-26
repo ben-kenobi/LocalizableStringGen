@@ -13,6 +13,7 @@
 #import "YFLocalGroup2Helper.h"
 #import "YFLocalCSVConvertHelper.h"
 #import "YFLocalTSVConvertHelper.h"
+#import "YFStringsExchangeHelper.h"
 
 @interface ViewController ()
 @property (nonatomic,strong)YFLocalizedHelper *genHelper;
@@ -20,7 +21,7 @@
 @property (nonatomic,strong)YFLocalGroup2Helper *groupProjectHelper;
 @property (nonatomic,strong)YFLocalCSVConvertHelper *csvConvertHelper;
 @property (nonatomic,strong)YFLocalTSVConvertHelper *tsvConvertHelper;
-
+@property (nonatomic,strong)YFStringsExchangeHelper *stringExchangeHelper;
 @property (nonatomic,strong)UISwitch *conflictSiwtch;
 @property (nonatomic,strong)UISwitch *strToCSVSiwtch;
 @property (nonatomic,strong)UISwitch *revertReplaceSwitch;
@@ -99,6 +100,14 @@
         [iPop dismProg];
     }];
 }
+-(void)exchange{
+    [iPop showProg];
+    YFStringExchangeConfig *config = [[YFStringExchangeConfig alloc]init];
+    
+    self.stringExchangeHelper=[YFStringsExchangeHelper startWithConfig:config compCB:^{
+        [iPop dismProg];
+    }];
+}
 
 #pragma mark - UI
 -(void)initUI{
@@ -121,6 +130,9 @@
     [UIUtil commonTexBtn:tsvbtn tar:self action:@selector(tsvConvert)];
     
     
+    UIButton *exchangebtn = [IProUtil commonTextBtn:iFont(18) color:iColor(0xff, 0xff, 0xff, 1) title:@"StringsExchange"];
+    [UIUtil commonTexBtn:exchangebtn tar:self action:@selector(exchange)];
+    
     self.conflictSiwtch=[[UISwitch alloc]init];
     
     self.strToCSVSiwtch=[[UISwitch alloc]init];
@@ -136,6 +148,7 @@
     [self.view addSubview:csvbtn];
     [self.view addSubview:genbtn];
     [self.view addSubview:replaceBtn];
+    [self.view addSubview:exchangebtn];
     [self.view addSubview:self.conflictSiwtch];
     [self.view addSubview:self.strToCSVSiwtch];
     [self.view addSubview:self.revertReplaceSwitch];
@@ -185,6 +198,10 @@
     [self.strToTSVSwitch mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(tsvbtn);
         make.leading.equalTo(tsvbtn.mas_trailing).offset(15);
+    }];
+    [exchangebtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(tsvbtn.mas_bottom).offset(40);
+        make.height.width.centerX.equalTo(genbtn);
     }];
    
 }

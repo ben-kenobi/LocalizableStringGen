@@ -9,7 +9,7 @@
 	<key>/Users/yf/Desktop/IOS/batterycam/ios/BatteryCam/BatteryCam/src/modules/scene</key>
 	<string>mode</string>
 	<key>/Users/yf/Desktop/IOS/batterycam/ios/BatteryCam/BatteryCam/src/modules/devices</key>
-	<string>homebasesetting</string>
+	<string>devicesetting</string>
 	<key>/Users/yf/Desktop/IOS/batterycam/ios/BatteryCam/BatteryCam/src/modules/storage</key>
 	<string>cloud</string>
 	<key>/Users/yf/Desktop/IOS/batterycam/ios/BatteryCam/BatteryCam/src/modules/AI</key>
@@ -19,7 +19,7 @@
 	<key>/Users/yf/Desktop/IOS/batterycam/ios/BatteryCam/BatteryCam/src/modules/login</key>
 	<string>account</string>
 	<key>/Users/yf/Desktop/IOS/batterycam/ios/BatteryCam/BatteryCam/src/modules/overall</key>
-	<string>homebasesetting</string>
+	<string>devicesetting</string>
 	<key>/Users/yf/Desktop/IOS/batterycam/ios/BatteryCam/BatteryCam/src/modules/camera</key>
 	<string>devices</string>
 	<key>/Users/yf/Desktop/IOS/batterycam/ios/BatteryCam/BatteryCam/src/modules/download</key>

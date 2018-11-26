@@ -26,7 +26,6 @@
 +(instancetype)startWithConfig:(YFLocalizeConfig *)config gen:(BOOL)gen compCB:(void(^)(void))compCB{
     YFLocalizedHelper *helper = [[YFLocalizedHelper alloc]init];
     helper.config=config;
-    helper.leftLocalizedStringDict=[NSMutableDictionary dictionaryWithDictionary:helper.srcLocalizedStringDict];
     
     helper.destLocalizedStringDict=[NSMutableDictionary dictionary];
     helper.RE=[NSRegularExpression regularExpressionWithPattern:helper.config.searchRE options:0 error:0];
@@ -46,6 +45,7 @@
 -(void)startGen{
     runOnGlobal(^{
         self.srcLocalizedStringDict=[YFLocalizeUtil localStringDictFrom:self.config.srcLocalizedStringFile];
+        self.leftLocalizedStringDict=[NSMutableDictionary dictionaryWithDictionary:self.srcLocalizedStringDict];
         [self startGenStrByConfig];
         [self exportStrings];
         runOnMain(^{
@@ -58,6 +58,7 @@
 -(void)startReplace{
     runOnGlobal(^{
         self.destLocalizedStringDict=[YFLocalizeUtil localStringDictFrom:self.config.destLocalizedStringFile revert:self.config.revertReplace];
+        self.leftLocalizedStringDict=[NSMutableDictionary dictionaryWithDictionary:self.destLocalizedStringDict];
         [self startReplaceStrKeyByValue];
         [self exportStrings];
         runOnMain(^{
@@ -148,6 +149,7 @@
             [self.substitutedLocalizedStringDict setObject:val forKey:key];
             hasSubstitute=YES;
             destStr = [destStr stringByReplacingCharactersInRange:range withString:val];
+            [self.leftLocalizedStringDict removeObjectForKey:key];
         }
     }
     

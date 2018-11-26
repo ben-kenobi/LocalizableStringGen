@@ -14,10 +14,10 @@
 -(instancetype)init{
     if(self = [super init]){
         //文件夹需要 / 结尾
-        self.groupTSVDir=@"/Users/hui/Desktop/tsvGroup/";
+        self.groupTSVDir=@"/Users/yf/Desktop/tsvGroup/";
         self.fileExts=@[@".tsv"];
-        self.srcLocalizedStringFile=@"/Users/hui/Desktop/Localizable.strings";
-        self.leftLocalizedStringFile=@"/Users/hui/Desktop/Localizable_left.strings";
+        self.srcLocalizedStringFile=@"/Users/yf/Desktop/Localizable.strings";
+        self.leftLocalizedStringFile=@"/Users/yf/Desktop/Localizable_left.strings";
         
         self.keyIdx=0;
         self.valIdx=1;
