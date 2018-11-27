@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface YFStringExchangeConfig : NSObject
 @property (nonatomic,strong)NSString *srcLocalizedStringFile;
 @property (nonatomic,strong)NSString *destLocalizedStringFile;
+@property (nonatomic,strong)NSString *multiOccuredDestLocalizedStringFile;
 @end
 
 NS_ASSUME_NONNULL_END

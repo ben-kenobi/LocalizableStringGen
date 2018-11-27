@@ -30,6 +30,8 @@
 		B8B7668621AB94D6000E6ABA /* tsvFileNModuleMap.plist in Resources */ = {isa = PBXBuildFile; fileRef = B8B7668521AB94D6000E6ABA /* tsvFileNModuleMap.plist */; };
 		B8B7668A21ABB0D1000E6ABA /* YFStringExchangeConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = B8B7668921ABB0D1000E6ABA /* YFStringExchangeConfig.m */; };
 		B8B7668D21ABB0DE000E6ABA /* YFStringsExchangeHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B8B7668C21ABB0DE000E6ABA /* YFStringsExchangeHelper.m */; };
+		B8B7669421ACF49D000E6ABA /* YFStringsMergeOrDisperseConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = B8B7669321ACF49D000E6ABA /* YFStringsMergeOrDisperseConfig.m */; };
+		B8B7669721ACF59A000E6ABA /* YFStringMergeNDisperseHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B8B7669621ACF59A000E6ABA /* YFStringMergeNDisperseHelper.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -75,6 +77,10 @@
 		B8B7668921ABB0D1000E6ABA /* YFStringExchangeConfig.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YFStringExchangeConfig.m; sourceTree = "<group>"; };
 		B8B7668B21ABB0DE000E6ABA /* YFStringsExchangeHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YFStringsExchangeHelper.h; sourceTree = "<group>"; };
 		B8B7668C21ABB0DE000E6ABA /* YFStringsExchangeHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YFStringsExchangeHelper.m; sourceTree = "<group>"; };
+		B8B7669221ACF49D000E6ABA /* YFStringsMergeOrDisperseConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YFStringsMergeOrDisperseConfig.h; sourceTree = "<group>"; };
+		B8B7669321ACF49D000E6ABA /* YFStringsMergeOrDisperseConfig.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YFStringsMergeOrDisperseConfig.m; sourceTree = "<group>"; };
+		B8B7669521ACF59A000E6ABA /* YFStringMergeNDisperseHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YFStringMergeNDisperseHelper.h; sourceTree = "<group>"; };
+		B8B7669621ACF59A000E6ABA /* YFStringMergeNDisperseHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YFStringMergeNDisperseHelper.m; sourceTree = "<group>"; };
 		E57502938B854DD711E7B64C /* Pods-LocalizableStringGen.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LocalizableStringGen.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LocalizableStringGen/Pods-LocalizableStringGen.debug.xcconfig"; sourceTree = "<group>"; };
 		F50041756B98D1F6E0AF472B /* Pods-LocalizableStringGen.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LocalizableStringGen.release.xcconfig"; path = "Pods/Target Support Files/Pods-LocalizableStringGen/Pods-LocalizableStringGen.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -126,7 +132,6 @@
 				A59DDD4F21AA41FF005F1EAF /* YFLovslTSVConvertConfig.m */,
 				A59DDD5121AA420F005F1EAF /* YFLocalTSVConvertHelper.h */,
 				A59DDD5221AA420F005F1EAF /* YFLocalTSVConvertHelper.m */,
-				B8B7668521AB94D6000E6ABA /* tsvFileNModuleMap.plist */,
 			);
 			path = tsv;
 			sourceTree = "<group>";
@@ -198,6 +203,7 @@
 		B8B7666B21A92842000E6ABA /* modules */ = {
 			isa = PBXGroup;
 			children = (
+				B8B7669021ACF47A000E6ABA /* mergeNdisperse */,
 				B8B7668721ABB0B9000E6ABA /* exchange */,
 				B8B7666E21A9286D000E6ABA /* group */,
 				B8B7666D21A9286B000E6ABA /* substitute */,
@@ -242,6 +248,7 @@
 				B8B7667021A92CFD000E6ABA /* YFLocalGroupConfig.m */,
 				B8B7667221A92D0D000E6ABA /* YFLocalGroupHelper.h */,
 				B8B7667321A92D0D000E6ABA /* YFLocalGroupHelper.m */,
+				B8B7668521AB94D6000E6ABA /* tsvFileNModuleMap.plist */,
 			);
 			path = tsv;
 			sourceTree = "<group>";
@@ -267,6 +274,17 @@
 				B8B7668C21ABB0DE000E6ABA /* YFStringsExchangeHelper.m */,
 			);
 			path = exchange;
+			sourceTree = "<group>";
+		};
+		B8B7669021ACF47A000E6ABA /* mergeNdisperse */ = {
+			isa = PBXGroup;
+			children = (
+				B8B7669221ACF49D000E6ABA /* YFStringsMergeOrDisperseConfig.h */,
+				B8B7669321ACF49D000E6ABA /* YFStringsMergeOrDisperseConfig.m */,
+				B8B7669521ACF59A000E6ABA /* YFStringMergeNDisperseHelper.h */,
+				B8B7669621ACF59A000E6ABA /* YFStringMergeNDisperseHelper.m */,
+			);
+			path = mergeNdisperse;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -400,10 +418,12 @@
 				A59DDD5021AA41FF005F1EAF /* YFLovslTSVConvertConfig.m in Sources */,
 				B8B7666721A7F701000E6ABA /* YFLocalizedHelper.m in Sources */,
 				B8B7667421A92D0D000E6ABA /* YFLocalGroupHelper.m in Sources */,
+				B8B7669421ACF49D000E6ABA /* YFStringsMergeOrDisperseConfig.m in Sources */,
 				B8B7666321A7A622000E6ABA /* YFLocalizeConfig.m in Sources */,
 				B8B7668421A9982D000E6ABA /* YFLocalCSVConvertHelper.m in Sources */,
 				B8B7667C21A947F0000E6ABA /* YFLocalGroup2Helper.m in Sources */,
 				B8B7667121A92CFD000E6ABA /* YFLocalGroupConfig.m in Sources */,
+				B8B7669721ACF59A000E6ABA /* YFStringMergeNDisperseHelper.m in Sources */,
 				B8B7666A21A82509000E6ABA /* YFUtil.m in Sources */,
 				B8B7664721A7A44E000E6ABA /* AppDelegate.m in Sources */,
 				B8B7668121A9981D000E6ABA /* YFLocalCSVConvetConfig.m in Sources */,

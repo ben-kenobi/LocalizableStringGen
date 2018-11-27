@@ -9,7 +9,10 @@
 
 #import "YFLocalGroup2Config.h"
 extern  NSString *const LOCALIZE_RE;
+
 @implementation YFLocalGroup2Config
+
+
 -(instancetype)init{
     if(self = [super init]){
         self.searchRE=LOCALIZE_RE;
@@ -26,9 +29,8 @@ extern  NSString *const LOCALIZE_RE;
         self.conflictDestFile=@"/Users/yf/Desktop/Localizable_conflict.strings";
         self.pathNModuleDict=iRes4dict(@"pathNmoduleMap.plist");
         
-        self.commonAry=@[@"YES",@"Yes",@"NO",@"No",@"no",@"yes",@"All",@"ALL",@"Ok",@"Edit",@"Edit",@"Save",@"Sure",@"Confirm",@"OK",@"Cancel",@"Retry",@"Send",@"Help",@"Email",@"Next",@"Reminder",@"Nickname",@"Delete",@"Medium",@"Low",@"High",@"Alert",@"Warning",@"Got it",@"Not Now",@"Don't show again",@"Password",@"Try again",@"Close",@"Camera",@"Continue",@"Settings",@"Name",@"Finish",@"Back",@"Loading",@"From",@"To",@"Day",@"OPEN",@"Open",@"CLOSE",@"Close",@"Mail",@"Sending",@"Accept",@"Resend",@"Reset"
-                         ];
-        
+        self.commonAry=[YFLocalGroup2Config commonStrAry];
+        self.appendModulePrefix=NO;
     }
     return self;
 }
@@ -43,5 +45,8 @@ extern  NSString *const LOCALIZE_RE;
     }
     
     return iFormatStr(@"%@%@.strings",self.destDir,module);
+}
++(NSArray *)commonStrAry{
+    return @[@"YES",@"Yes",@"NO",@"No",@"no",@"yes",@"All",@"ALL",@"Ok",@"Edit",@"Edit",@"Save",@"Sure",@"Confirm",@"OK",@"Cancel",@"Retry",@"Send",@"Help",@"Email",@"Next",@"Reminder",@"Nickname",@"Delete",@"Medium",@"Low",@"High",@"Alert",@"Warning",@"Got it",@"Not Now",@"Don't show again",@"Password",@"Try again",@"Close",@"Camera",@"Continue",@"Settings",@"Name",@"Finish",@"Back",@"Loading",@"From",@"To",@"Day",@"OPEN",@"Open",@"CLOSE",@"Close",@"Mail",@"Sending",@"Accept",@"Resend",@"Reset",@"Floodlight Cam",@"eufyCam E",@"Entry Sensor",@"eufyCam",@"HomeBase",@"Floodlight Cam",@"About",@"eufy Security",@"Min",@"Max"];
 }
 @end

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Account.tsv</key>
+	<string>account</string>
+	<key>Bind.tsv</key>
+	<string>bind</string>
+	<key>Common.tsv</key>
+	<string>common</string>
+	<key>Devices.tsv</key>
+	<string>devices</string>
+	<key>DeviceSetting.tsv</key>
+	<string>devicesetting</string>
+	<key>DrawerSettings.tsv</key>
+	<string>menu</string>
+	<key>Events.tsv</key>
+	<string>event</string>
+	<key>Exception.tsv</key>
+	<string>exception</string>
+	<key>Family.tsv</key>
+	<string>family</string>
+	<key>Mode.tsv</key>
+	<string>mode</string>
+	<key>Player.tsv</key>
+	<string>Player</string>
+	<key>SmartDetection.tsv</key>
+	<string>smartdetect</string>
+    <key>Cloud.tsv</key>
+    <string>cloud</string>
+</dict>
+</plist>

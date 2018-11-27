@@ -14,18 +14,15 @@
 #import "YFLocalCSVConvertHelper.h"
 #import "YFLocalTSVConvertHelper.h"
 #import "YFStringsExchangeHelper.h"
+#import "YFStringMergeNDisperseHelper.h"
 
 @interface ViewController ()
-@property (nonatomic,strong)YFLocalizedHelper *genHelper;
-@property (nonatomic,strong)YFLocalGroupHelper *groupTSVHelper;
-@property (nonatomic,strong)YFLocalGroup2Helper *groupProjectHelper;
-@property (nonatomic,strong)YFLocalCSVConvertHelper *csvConvertHelper;
-@property (nonatomic,strong)YFLocalTSVConvertHelper *tsvConvertHelper;
-@property (nonatomic,strong)YFStringsExchangeHelper *stringExchangeHelper;
+@property (nonatomic,strong)id helper;
 @property (nonatomic,strong)UISwitch *conflictSiwtch;
 @property (nonatomic,strong)UISwitch *strToCSVSiwtch;
 @property (nonatomic,strong)UISwitch *revertReplaceSwitch;
 @property (nonatomic,strong)UISwitch *strToTSVSwitch;
+@property (nonatomic,strong)UISwitch *mergeOrdisperseSwitch;
 @end
 
 @implementation ViewController
@@ -45,7 +42,7 @@
 #pragma mark - actions
 -(void)gen{
     [iPop showProg];
-    self.genHelper=[YFLocalizedHelper startWithConfig:[[YFLocalizeConfig alloc]init] gen:YES compCB:^{
+    self.helper=[YFLocalizedHelper startWithConfig:[[YFLocalizeConfig alloc]init] gen:YES compCB:^{
         [iPop dismProg];
     }];
 }
@@ -53,7 +50,7 @@
     [iPop showProg];
     YFLocalizeConfig *config = [[YFLocalizeConfig alloc]init];
     config.revertReplace=self.revertReplaceSwitch.on;
-    self.genHelper=[YFLocalizedHelper startWithConfig:config gen:NO compCB:^{
+    self.helper=[YFLocalizedHelper startWithConfig:config gen:NO compCB:^{
         [iPop dismProg];
     }];
 }
@@ -63,7 +60,7 @@
     //根据tsv文件值的位置
     config.keyIdx=0;
     config.valIdx=2;
-    self.groupTSVHelper=[YFLocalGroupHelper startWithConfig:config compCB:^{
+    self.helper=[YFLocalGroupHelper startWithConfig:config compCB:^{
         [iPop dismProg];
     }];
 }
@@ -73,7 +70,7 @@
     YFLocalGroup2Config *config = [[YFLocalGroup2Config alloc]init];
     config.diposeConflict=self.conflictSiwtch.on;
     config.onlyKeepStringsExistInStringsFile=YES;//是否只处理存在于.strings文件中的串
-    self.groupProjectHelper=[YFLocalGroup2Helper startWithConfig:config compCB:^{
+    self.helper=[YFLocalGroup2Helper startWithConfig:config compCB:^{
         [iPop dismProg];
     }];
 }
@@ -82,7 +79,7 @@
     [iPop showProg];
     YFLocalCSVConvetConfig *config = [[YFLocalCSVConvetConfig alloc]init];
     config.revert=self.strToCSVSiwtch.on;
-    self.csvConvertHelper=[YFLocalCSVConvertHelper startWithConfig:config compCB:^{
+    self.helper=[YFLocalCSVConvertHelper startWithConfig:config compCB:^{
         [iPop dismProg];
     }];
 }
@@ -96,7 +93,7 @@
     config.keyIdx=0;
     config.valIdx=2;
     
-    self.tsvConvertHelper=[YFLocalTSVConvertHelper startWithConfig:config compCB:^{
+    self.helper=[YFLocalTSVConvertHelper startWithConfig:config compCB:^{
         [iPop dismProg];
     }];
 }
@@ -104,7 +101,15 @@
     [iPop showProg];
     YFStringExchangeConfig *config = [[YFStringExchangeConfig alloc]init];
     
-    self.stringExchangeHelper=[YFStringsExchangeHelper startWithConfig:config compCB:^{
+    self.helper=[YFStringsExchangeHelper startWithConfig:config compCB:^{
+        [iPop dismProg];
+    }];
+}
+-(void)mergeOrdisperse{
+    [iPop showProg];
+    YFStringsMergeOrDisperseConfig *config = [[YFStringsMergeOrDisperseConfig alloc]init];
+    config.reverse=self.mergeOrdisperseSwitch.on;
+    self.helper=[YFStringMergeNDisperseHelper startWithConfig:config compCB:^{
         [iPop dismProg];
     }];
 }
@@ -133,6 +138,9 @@
     UIButton *exchangebtn = [IProUtil commonTextBtn:iFont(18) color:iColor(0xff, 0xff, 0xff, 1) title:@"StringsExchange"];
     [UIUtil commonTexBtn:exchangebtn tar:self action:@selector(exchange)];
     
+    UIButton *mergeOrDispersebtn = [IProUtil commonTextBtn:iFont(18) color:iColor(0xff, 0xff, 0xff, 1) title:@"MergeOrDisperse"];
+    [UIUtil commonTexBtn:mergeOrDispersebtn tar:self action:@selector(mergeOrdisperse)];
+    
     self.conflictSiwtch=[[UISwitch alloc]init];
     
     self.strToCSVSiwtch=[[UISwitch alloc]init];
@@ -140,6 +148,8 @@
     self.revertReplaceSwitch=[[UISwitch alloc]init];
     
     self.strToTSVSwitch=[[UISwitch alloc]init];
+    
+    self.mergeOrdisperseSwitch=[[UISwitch alloc]init];
     
     //---layout ----
     
@@ -154,15 +164,17 @@
     [self.view addSubview:self.revertReplaceSwitch];
     [self.view addSubview:tsvbtn];
     [self.view addSubview:self.strToTSVSwitch];
-    
+    [self.view addSubview:mergeOrDispersebtn];
+    [self.view addSubview:self.mergeOrdisperseSwitch];
+    CGFloat gap=30;
     [genbtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(@150);
+        make.top.equalTo(@80);
         make.centerX.equalTo(@0);
         make.height.equalTo(@58);
         make.width.equalTo(@200);
     }];
     [replaceBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(genbtn.mas_bottom).offset(40);
+        make.top.equalTo(genbtn.mas_bottom).offset(gap);
         make.height.width.centerX.equalTo(genbtn);
     }];
     [self.revertReplaceSwitch mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -170,11 +182,11 @@
         make.leading.equalTo(replaceBtn.mas_trailing).offset(15);
     }];
     [groupBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(replaceBtn.mas_bottom).offset(40);
+        make.top.equalTo(replaceBtn.mas_bottom).offset(gap);
         make.height.width.centerX.equalTo(genbtn);
     }];
     [groupBtn2 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(groupBtn.mas_bottom).offset(40);
+        make.top.equalTo(groupBtn.mas_bottom).offset(gap);
         make.height.width.centerX.equalTo(genbtn);
     }];
     [self.conflictSiwtch mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -183,7 +195,7 @@
     }];
     
     [csvbtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(groupBtn2.mas_bottom).offset(40);
+        make.top.equalTo(groupBtn2.mas_bottom).offset(gap);
         make.height.width.centerX.equalTo(genbtn);
     }];
     [self.strToCSVSiwtch mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -192,7 +204,7 @@
     }];
     
     [tsvbtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(csvbtn.mas_bottom).offset(40);
+        make.top.equalTo(csvbtn.mas_bottom).offset(gap);
         make.height.width.centerX.equalTo(genbtn);
     }];
     [self.strToTSVSwitch mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -200,10 +212,20 @@
         make.leading.equalTo(tsvbtn.mas_trailing).offset(15);
     }];
     [exchangebtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(tsvbtn.mas_bottom).offset(40);
+        make.top.equalTo(tsvbtn.mas_bottom).offset(gap);
         make.height.width.centerX.equalTo(genbtn);
     }];
    
+    
+    [mergeOrDispersebtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(exchangebtn.mas_bottom).offset(gap);
+        make.height.width.centerX.equalTo(genbtn);
+    }];
+    [self.mergeOrdisperseSwitch mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(mergeOrDispersebtn);
+        make.leading.equalTo(tsvbtn.mas_trailing).offset(15);
+    }];
+    
 }
 
 

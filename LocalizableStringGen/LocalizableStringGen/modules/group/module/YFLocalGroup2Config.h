@@ -30,7 +30,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,strong)NSDictionary *pathNModuleDict;
 @property (nonatomic,strong)NSArray *commonAry;//公共字串
 
+@property (nonatomic,assign)BOOL appendModulePrefix;//是否增加模块前缀
+
 -(NSString *)destPathByModule:(NSString *)module;
+
++(NSArray *)commonStrAry;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -20,6 +20,9 @@
 @property (nonatomic,strong)NSMutableDictionary *leftLocalizedStringDict;//同样是从.strings文件中读取的key value,但是删除被group文件匹配的key value后得到的剩余未匹配的key value
 
 
+@property (nonatomic,strong)NSMutableDictionary *matchedLocalizedStringDict;//匹配到的字串，并且根据模块修改了key
+
+
 @property (nonatomic,strong)YFLocalGroupConfig *config;
 @property (nonatomic,copy)void(^compCB)(void);
 @end
@@ -30,7 +33,8 @@
     helper.config=config;
     
     helper.srcLocalizedStringDict=[YFLocalizeUtil localStringDictFrom:helper.config.srcLocalizedStringFile revert:YES];
-    helper.leftLocalizedStringDict=[NSMutableDictionary dictionaryWithDictionary:helper.srcLocalizedStringDict];
+    helper.leftLocalizedStringDict=[YFLocalizeUtil localStringDictFrom:helper.config.srcLocalizedStringFile revert:NO];
+    helper.matchedLocalizedStringDict=[NSMutableDictionary dictionary];
     helper.compCB = compCB;
     [helper start];
     return helper;
@@ -65,9 +69,11 @@
 -(void)compareStringsWithFile:(NSString *)file dir:(NSString *)dir{
     NSString *tsvStr = [YFLocalizeUtil strFromValidFile:file dir:dir fileExts:self.config.fileExts  excludeFiles:self.config.excludeFiles];
     if(emptyStr(tsvStr))return;
-    NSArray *tsvary = [tsvStr componentsSeparatedByCharactersInSet:NSCharacterSet.newlineCharacterSet];
+    NSString *module = [self.config moduleBy:file];
+    NSAssert(module!=nil, @"----module not found----");
+    NSArray *tsvary = [tsvStr componentsSeparatedByString:@"\r\n"];
     NSMutableString *newtsvstr=[NSMutableString string];
-    [newtsvstr appendFormat:@"%@\n",tsvary[0]];
+    [newtsvstr appendFormat:@"%@\r\n",tsvary[0]];
     for(int i=1;i<tsvary.count;i++){//首行为标题，不处理
         NSString *enval = [self parseTSV:tsvary[i]];
         NSString *strkey=nil;
@@ -75,12 +81,24 @@
             strkey=self.srcLocalizedStringDict[enval];
             tsvValCount++;
         }
-        if(strkey){
+        NSString *strwithoutFirstCol = tsvary[i];
+        if(!emptyStr(tsvary[i]))
+            strwithoutFirstCol=[tsvary[i] substringFromIndex:[tsvary[i] rangeOfString:@"\t"].location];
+        if(strkey&&![self.config.commonAry containsObject:enval]){
             matchCount++;
-            [self.leftLocalizedStringDict removeObjectForKey:enval];
-            [newtsvstr appendFormat:@"%@%@\n",strkey,tsvary[i]];
+            [self.leftLocalizedStringDict removeObjectForKey:strkey];
+            
+            NSString *newkey = @"";
+            if(self.config.appendModulePrefix)
+                newkey = iFormatStr(@"bc.%@.%@",module,strkey.lowercaseString);
+            else
+                newkey = strkey;
+            
+            [newtsvstr appendFormat:@"%@%@\r\n",newkey,strwithoutFirstCol];
+            [self.matchedLocalizedStringDict setObject:enval forKey:strkey];
+            
         }else{
-            [newtsvstr appendFormat:@"%@\n",tsvary[i]];
+            [newtsvstr appendFormat:@"%@\r\n",strwithoutFirstCol];
         }
     }
 
@@ -103,6 +121,13 @@
         [YFLocalizeUtil append:leftMStr key:key val:val];
     }
     [leftMStr writeToFile:self.config.leftLocalizedStringFile atomically:YES encoding:4 error:0];
+    
+    NSMutableString *matchedMStr = [NSMutableString string];
+    for(NSString *key in self.matchedLocalizedStringDict.allKeys){
+        NSString *val = self.matchedLocalizedStringDict[key];
+        [YFLocalizeUtil append:matchedMStr key:key val:val];
+    }
+    [matchedMStr writeToFile:self.config.matchedLocalizedStringFile atomically:YES encoding:4 error:0];
     
 }
 @end

@@ -14,6 +14,8 @@
     if(self = [super init]){
         self.srcLocalizedStringFile=@"/Users/yf/Desktop/Localizable_dest.strings";
         self.destLocalizedStringFile=@"/Users/yf/Desktop/Localizable_dest_exchanged.strings";
+        self.multiOccuredDestLocalizedStringFile=@"/Users/yf/Desktop/Localizable_multy.strings";
+
     }
     return self;
 }

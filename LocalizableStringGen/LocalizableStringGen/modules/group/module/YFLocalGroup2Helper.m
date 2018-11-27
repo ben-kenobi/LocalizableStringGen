@@ -89,12 +89,13 @@
         
         if(self.config.diposeConflict){
             //检查是否字串已经存在与另一个模块
-            NSString *curmodule = self.strNmoduleMap[val];
+            NSString *curmodule = self.strNmoduleMap[key];
             if(!curmodule){
-                NSString *module = [self addStringToGroup:val file:srcfile dir:dir];
+                NSString *module = [self addStringToGroup:val key:key file:srcfile dir:dir];
+                [self.strNmoduleMap setObject:module forKey:key];
             }
         }else{
-            NSString *module = [self addStringToGroup:val file:srcfile dir:dir];
+            NSString *module = [self addStringToGroup:val key:key file:srcfile dir:dir];
             
             
             //检查是否字串已经存在与另一个模块
@@ -144,7 +145,7 @@
 }
 
 #pragma mark - Utils
--(NSString *)addStringToGroup:(NSString *)str file:(NSString *)file dir:(NSString *)dir{
+-(NSString *)addStringToGroup:(NSString *)str key:(NSString *)key file:(NSString *)file dir:(NSString *)dir{
     NSString *path = iFormatStr(@"%@%@",dir,file);
     NSString *module = @"other";
     
@@ -158,16 +159,19 @@
             }
         }
     }
-    [self addStringToGroup:str module:module];
+    [self addStringToGroup:str key:key module:module];
     return module;
 }
--(void)addStringToGroup:(NSString *)str module:(NSString *)module{
+-(void)addStringToGroup:(NSString *)str key:(NSString *)key module:(NSString *)module{
     NSMutableDictionary *mdict = self.groupedDicts[module];
     if(!mdict){
         mdict=[NSMutableDictionary dictionary];
         [self.groupedDicts setObject:mdict forKey:module];
     }
-    [mdict setObject:str forKey:iFormatStr(@"bc.%@.%@",module,str.lowercaseString)];
+    if(self.config.appendModulePrefix)
+        [mdict setObject:str forKey:iFormatStr(@"bc.%@.%@",module,key.lowercaseString)];
+    else
+        [mdict setObject:str forKey:key];
 }
 
 

@@ -87,6 +87,12 @@
 
 //revert:YES  key 与value位置互换  ,NO 正常key value
 +(NSMutableDictionary *)localStringDictFrom:(NSString *)localstringFile  revert:(BOOL)revert{
+    return [self localStringDictFrom:localstringFile revert:revert multiOccuredString:nil];
+}
+
+
+//revert:YES  key 与value位置互换  ,NO 正常key value
++(NSMutableDictionary *)localStringDictFrom:(NSString *)localstringFile  revert:(BOOL)revert multiOccuredString:(NSMutableString *)multiMstr{
     NSString *ostr = [NSString stringWithContentsOfFile:localstringFile encoding:4 error:0];
     NSArray *ary = [ostr componentsSeparatedByString:@"\";"];
     NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:ary.count];
@@ -102,14 +108,22 @@
         //        NSString *val = [dict valueForKey:key];
         //        if(val)
         //            [mary addObject:iFormatStr(@"%@ = %@",key,val)];
-        if(revert)
-            [dict setObject:key forKey:sary[1]] ;
-        else
-            [dict setObject:sary[1] forKey:key] ;
+        NSString *actkey ,*actval;
+        
+        if(revert){
+            actkey=sary[1];
+            actval=key;
+        }else{
+            actval=sary[1];
+            actkey=key;
+        }
+        if(multiMstr && dict[actkey]){
+            [self append:multiMstr key:actkey val:actval];
+        }else
+            [dict setObject:actval forKey:actkey];
     }
     return dict;
 }
-
 
 +(NSMutableDictionary *)newDict{
     return [NSMutableDictionary dictionaryWithDictionary:[NSDictionary dictionaryWithContentsOfFile:@"/Users/yf/Desktop/LocalizableDict"]];

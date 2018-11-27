@@ -16,6 +16,10 @@
 
 @property (nonatomic,strong)NSMutableDictionary *substitutedLocalizedStringDict;//项目中被替换的字串
 
+@property (nonatomic,strong)NSMutableDictionary *addedLocalizedStringDict;//项目中新增的字串，不在原.strings文件中的
+
+@property (nonatomic,strong)NSMutableString *multiOccuredString;
+
 @property (nonatomic,strong)NSRegularExpression *RE;
 @property (nonatomic,strong)YFLocalizeConfig *config;
 @property (nonatomic,copy)void(^compCB)(void);
@@ -32,7 +36,8 @@
     helper.originDestMStr = [NSMutableString string];
     
     helper.substitutedLocalizedStringDict=[NSMutableDictionary dictionary];
-    
+    helper.addedLocalizedStringDict=[NSMutableDictionary dictionary];
+    helper.multiOccuredString=[NSMutableString string];
     helper.compCB = compCB;
     
     if(gen)
@@ -57,7 +62,7 @@
 
 -(void)startReplace{
     runOnGlobal(^{
-        self.destLocalizedStringDict=[YFLocalizeUtil localStringDictFrom:self.config.destLocalizedStringFile revert:self.config.revertReplace];
+        self.destLocalizedStringDict=[YFLocalizeUtil localStringDictFrom:self.config.destLocalizedStringFile revert:self.config.revertReplace multiOccuredString:self.multiOccuredString];
         self.leftLocalizedStringDict=[NSMutableDictionary dictionaryWithDictionary:self.destLocalizedStringDict];
         [self startReplaceStrKeyByValue];
         [self exportStrings];
@@ -95,6 +100,7 @@
         NSString *val = self.srcLocalizedStringDict[key];
         if(emptyStr(val)){
             val = key;
+            [self.addedLocalizedStringDict setObject:val forKey:key];
         }
         
         [self.destLocalizedStringDict setObject:val forKey:key];
@@ -170,14 +176,19 @@
     }
     [destMstr writeToFile:self.config.destLocalizedStringFile atomically:YES encoding:4 error:0];
     
-    
+    [self.multiOccuredString writeToFile:self.config.multiOccuredDestLocalizedStringFile atomically:YES encoding:4 error:0];
     NSMutableString *leftMStr = [NSMutableString string];
     for(NSString *key in self.leftLocalizedStringDict.allKeys){
         NSString *val = self.leftLocalizedStringDict[key];
         [YFLocalizeUtil append:leftMStr key:key val:val];
     }
     [leftMStr writeToFile:self.config.leftLocalizedStringFile atomically:YES encoding:4 error:0];
-    
+    NSMutableString *addedMStr = [NSMutableString string];
+    for(NSString *key in self.addedLocalizedStringDict.allKeys){
+        NSString *val = self.addedLocalizedStringDict[key];
+        [YFLocalizeUtil append:addedMStr key:key val:val];
+    }
+    [addedMStr writeToFile:self.config.addedLocalizedStringFile atomically:YES encoding:4 error:0];
     
     NSMutableString *substitutedMStr = [NSMutableString string];
     for(NSString *key in self.substitutedLocalizedStringDict.allKeys){

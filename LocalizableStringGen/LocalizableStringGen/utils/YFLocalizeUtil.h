@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-NS_ASSUME_NONNULL_BEGIN
 
 @interface YFLocalizeUtil : NSObject
 +(void)append:(NSMutableString *)mstr key:(NSString *)key val:(NSString *)val;
@@ -24,11 +23,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 //revert:YES  key 与value位置互换  ,NO 正常key value
 +(NSMutableDictionary *)localStringDictFrom:(NSString *)localstringFile  revert:(BOOL)revert;
-
++(NSMutableDictionary *)localStringDictFrom:(NSString *)localstringFile  revert:(BOOL)revert multiOccuredString:(NSMutableString *)multiMstr;
 /**
 将字典的key lowercase
  */
 +(NSMutableDictionary *)localStringDictWithLowerKeyFrom:(NSString *)localstringFile;
 @end
 
-NS_ASSUME_NONNULL_END
