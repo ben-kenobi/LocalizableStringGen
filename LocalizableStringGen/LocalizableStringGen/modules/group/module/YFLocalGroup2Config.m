@@ -18,15 +18,15 @@ extern  NSString *const LOCALIZE_RE;
         self.searchRE=LOCALIZE_RE;
         //文件夹需要 / 结尾
         self.srcDirs=@[
-           @"/Users/yf/Desktop/IOS/batterycam/ios/BatteryCam/BatteryCam/",
-           @"/Users/yf/Desktop/IOS/batterycam/ios/BatteryCam/Pods/",
-           @"/Users/yf/Desktop/IOS/batterycam/ios/BatteryCam/BCExtensionsCommonKit/"
+                       projectPath(@"BatteryCam/"),
+                       projectPath(@"Pods/"),
+                       projectPath(@"BCExtensionsCommonKit/")
                        ];
-        self.destDir=@"/Users/yf/Desktop/stringsDir/";
+        self.destDir=workingPath(@"stringsDir/");
         self.fileExts=@[@".m",@".mm"];
-        self.srcLocalizedStringFile=@"/Users/yf/Desktop/Localizable.strings";
-        self.leftLocalizedStringFile=@"/Users/yf/Desktop/Localizable_left.strings";
-        self.conflictDestFile=@"/Users/yf/Desktop/Localizable_conflict.strings";
+        self.srcLocalizedStringFile=workingPath(@"Localizable.strings");
+        self.leftLocalizedStringFile=workingPath(@"Localizable_left.strings");
+        self.conflictDestFile=workingPath(@"Localizable_conflict.strings");
         self.pathNModuleDict=iRes4dict(@"pathNmoduleMap.plist");
         
         self.commonAry=[YFLocalGroup2Config commonStrAry];

@@ -14,6 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,strong)NSString *dispersedStringDir;
 @property (nonatomic,strong)NSString *mergedStringFile;
 @property (nonatomic,assign)BOOL reverse;//NO:merge  YES:disperse
+-(NSString *)dispsersedPathByModule:(NSString *)module;
+-(NSString *)moduleByKey:(NSString *)stringKey;
 @end
 
 NS_ASSUME_NONNULL_END

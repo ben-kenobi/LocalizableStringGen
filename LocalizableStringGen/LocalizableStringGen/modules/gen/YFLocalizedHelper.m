@@ -101,6 +101,7 @@
         if(emptyStr(val)){
             val = key;
             [self.addedLocalizedStringDict setObject:val forKey:key];
+            NSLog(@"%@---------",srcfile);
         }
         
         [self.destLocalizedStringDict setObject:val forKey:key];

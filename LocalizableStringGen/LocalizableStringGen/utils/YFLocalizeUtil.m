@@ -97,7 +97,7 @@
     NSArray *ary = [ostr componentsSeparatedByString:@"\";"];
     NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:ary.count];
     //    NSMutableArray *mary = [NSMutableArray array];
-    for(int i=0;i<ary.count-1;i++){
+    for(NSInteger i=0;i<ary.count-1;i++){
         NSString *str = ary[i];
         NSRange range = [str rangeOfString:@"\"\\s*=\\s*\"" options:(NSRegularExpressionSearch) range:NSMakeRange(0, str.length)];
         
@@ -172,3 +172,10 @@
 
 
 @end
+
+NSString *workingPath(NSString *path){
+    return iFormatStr(@"%@%@",YF_LOCALIZE_BASE_WORKING_DIR,path);
+}
+NSString *projectPath(NSString *path){
+    return iFormatStr(@"%@%@",YF_LOCALIZE_BASE_PROJECT_DIR,path);
+}

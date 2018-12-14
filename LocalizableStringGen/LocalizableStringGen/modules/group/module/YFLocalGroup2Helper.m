@@ -153,7 +153,7 @@
         module=@"common";
     }else{
         for(NSString *key in self.config.pathNModuleDict.allKeys){
-            if([path hasPrefix:key]){
+            if([path hasPrefix:projectPath(key)]){
                 module=self.config.pathNModuleDict[key];
                 break;
             }

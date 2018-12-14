@@ -2,37 +2,37 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>/Users/yf/Desktop/IOS/batterycam/ios/BatteryCam/BatteryCam/src/modules/security</key>
+	<key>BatteryCam/src/modules/security</key>
 	<string>mode</string>
-	<key>/Users/yf/Desktop/IOS/batterycam/ios/BatteryCam/BatteryCam/src/modules/cloud</key>
+	<key>BatteryCam/src/modules/cloud</key>
 	<string>cloud</string>
-	<key>/Users/yf/Desktop/IOS/batterycam/ios/BatteryCam/BatteryCam/src/modules/scene</key>
+	<key>BatteryCam/src/modules/scene</key>
 	<string>mode</string>
-	<key>/Users/yf/Desktop/IOS/batterycam/ios/BatteryCam/BatteryCam/src/modules/devices</key>
+	<key>BatteryCam/src/modules/devices</key>
 	<string>devicesetting</string>
-	<key>/Users/yf/Desktop/IOS/batterycam/ios/BatteryCam/BatteryCam/src/modules/storage</key>
+	<key>BatteryCam/src/modules/storage</key>
 	<string>cloud</string>
-	<key>/Users/yf/Desktop/IOS/batterycam/ios/BatteryCam/BatteryCam/src/modules/AI</key>
+	<key>BatteryCam/src/modules/AI</key>
 	<string>smartdetect</string>
-	<key>/Users/yf/Desktop/IOS/batterycam/ios/BatteryCam/BatteryCam/src/modules/binding</key>
+	<key>BatteryCam/src/modules/binding</key>
 	<string>bind</string>
-	<key>/Users/yf/Desktop/IOS/batterycam/ios/BatteryCam/BatteryCam/src/modules/login</key>
+	<key>BatteryCam/src/modules/login</key>
 	<string>account</string>
-	<key>/Users/yf/Desktop/IOS/batterycam/ios/BatteryCam/BatteryCam/src/modules/overall</key>
+	<key>BatteryCam/src/modules/overall</key>
 	<string>devicesetting</string>
-	<key>/Users/yf/Desktop/IOS/batterycam/ios/BatteryCam/BatteryCam/src/modules/camera</key>
+	<key>BatteryCam/src/modules/camera</key>
 	<string>devices</string>
-	<key>/Users/yf/Desktop/IOS/batterycam/ios/BatteryCam/BatteryCam/src/modules/download</key>
+	<key>BatteryCam/src/modules/download</key>
 	<string>event</string>
-	<key>/Users/yf/Desktop/IOS/batterycam/ios/BatteryCam/BatteryCam/src/modules/family</key>
+	<key>BatteryCam/src/modules/family</key>
 	<string>family</string>
-	<key>/Users/yf/Desktop/IOS/batterycam/ios/BatteryCam/BatteryCam/src/modules/history</key>
+	<key>BatteryCam/src/modules/history</key>
 	<string>event</string>
-	<key>/Users/yf/Desktop/IOS/batterycam/ios/BatteryCam/BatteryCam/src/modules/menu</key>
+	<key>BatteryCam/src/modules/menu</key>
 	<string>menu</string>
-	<key>/Users/yf/Desktop/IOS/batterycam/ios/BatteryCam/BatteryCam/src/modules/player</key>
+	<key>BatteryCam/src/modules/player</key>
 	<string>player</string>
-	<key>/Users/yf/Desktop/IOS/batterycam/ios/BatteryCam/BatteryCam/src/main/common/comctrl/BCErrorCodeDescVM.m</key>
+	<key>BatteryCam/src/main/common/comctrl/BCErrorCodeDescVM.m</key>
 	<string>exception</string>
 </dict>
 </plist>

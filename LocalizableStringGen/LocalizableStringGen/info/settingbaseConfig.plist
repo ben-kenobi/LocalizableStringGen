@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>title</key>
+		<string>Resolution ratio</string>
+		<key>footerTitle</key>
+		<string></string>
+		<key>datas</key>
+		<array>
+			<dict>
+				<key>title</key>
+				<string>Wifi Network</string>
+				<key>detail</key>
+				<string></string>
+				<key>textColor</key>
+				<string></string>
+				<key>switchView</key>
+				<false/>
+				<key>hasDetail</key>
+				<false/>
+				<key>on</key>
+				<false/>
+				<key>vc</key>
+				<string></string>
+				<key>method</key>
+				<string></string>
+				<key>selectMod</key>
+				<false/>
+				<key>selected</key>
+				<false/>
+				<key>img</key>
+				<string>user_default_con</string>
+				<key>editable</key>
+				<true/>
+				<key>hasEdit</key>
+				<true/>
+				<key>editMethod</key>
+				<string>edit:</string>
+				<key>bold</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>title</key>
+				<string>Battery Level</string>
+				<key>hasDetail</key>
+				<true/>
+				<key>vc</key>
+				<string>BCCameraBatteryLevelVC</string>
+			</dict>
+		</array>
+	</dict>
+	<array>
+		<dict>
+			<key>title</key>
+			<string>Wifi Network</string>
+			<key>detail</key>
+			<string></string>
+			<key>textColor</key>
+			<string></string>
+			<key>switchView</key>
+			<false/>
+			<key>hasDetail</key>
+			<false/>
+			<key>on</key>
+			<false/>
+			<key>vc</key>
+			<string></string>
+			<key>method</key>
+			<string></string>
+			<key>selectMod</key>
+			<false/>
+			<key>selected</key>
+			<false/>
+			<key>img</key>
+			<string>user_default_con</string>
+			<key>editable</key>
+			<true/>
+			<key>hasEdit</key>
+			<true/>
+			<key>bold</key>
+			<false/>
+			<key>extraData</key>
+			<string>XXXXX</string>
+		</dict>
+		<dict>
+			<key>title</key>
+			<string>Battery Level</string>
+			<key>hasDetail</key>
+			<true/>
+			<key>vc</key>
+			<string>BCCameraBatteryLevelVC</string>
+		</dict>
+	</array>
+</array>
+</plist>

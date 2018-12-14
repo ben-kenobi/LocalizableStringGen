@@ -12,9 +12,9 @@
 @implementation YFStringExchangeConfig
 -(instancetype)init{
     if(self = [super init]){
-        self.srcLocalizedStringFile=@"/Users/yf/Desktop/Localizable_dest.strings";
-        self.destLocalizedStringFile=@"/Users/yf/Desktop/Localizable_dest_exchanged.strings";
-        self.multiOccuredDestLocalizedStringFile=@"/Users/yf/Desktop/Localizable_multy.strings";
+        self.srcLocalizedStringFile=workingPath(@"Localizable_dest.strings");
+        self.destLocalizedStringFile=workingPath(@"Localizable_dest_exchanged.strings");
+        self.multiOccuredDestLocalizedStringFile=workingPath(@"Localizable_multy.strings");
 
     }
     return self;

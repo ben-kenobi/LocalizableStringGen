@@ -13,8 +13,8 @@
 -(instancetype)init{
     if(self = [super init]){
         //文件夹需要 / 结尾
-        self.csvDir=@"/Users/yf/Desktop/cvsDir/";
-        self.stringsDir=@"/Users/yf/Desktop/stringsDir/";
+        self.csvDir=workingPath(@"cvsDir/");
+        self.stringsDir=workingPath(@"stringsDir/");
     }
     return self;
 }

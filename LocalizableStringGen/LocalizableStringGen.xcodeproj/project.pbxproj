@@ -11,7 +11,6 @@
 		A59DDD5021AA41FF005F1EAF /* YFLovslTSVConvertConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = A59DDD4F21AA41FF005F1EAF /* YFLovslTSVConvertConfig.m */; };
 		A59DDD5321AA420F005F1EAF /* YFLocalTSVConvertHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = A59DDD5221AA420F005F1EAF /* YFLocalTSVConvertHelper.m */; };
 		B8B7664721A7A44E000E6ABA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B8B7664621A7A44E000E6ABA /* AppDelegate.m */; };
-		B8B7664A21A7A44E000E6ABA /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B8B7664921A7A44E000E6ABA /* ViewController.m */; };
 		B8B7664D21A7A44E000E6ABA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B8B7664B21A7A44E000E6ABA /* Main.storyboard */; };
 		B8B7664F21A7A44F000E6ABA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B8B7664E21A7A44F000E6ABA /* Assets.xcassets */; };
 		B8B7665221A7A44F000E6ABA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B8B7665021A7A44F000E6ABA /* LaunchScreen.storyboard */; };
@@ -32,6 +31,16 @@
 		B8B7668D21ABB0DE000E6ABA /* YFStringsExchangeHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B8B7668C21ABB0DE000E6ABA /* YFStringsExchangeHelper.m */; };
 		B8B7669421ACF49D000E6ABA /* YFStringsMergeOrDisperseConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = B8B7669321ACF49D000E6ABA /* YFStringsMergeOrDisperseConfig.m */; };
 		B8B7669721ACF59A000E6ABA /* YFStringMergeNDisperseHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B8B7669621ACF59A000E6ABA /* YFStringMergeNDisperseHelper.m */; };
+		B8DB529721C205C700FEF363 /* settingbaseConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = B8DB529621C205C700FEF363 /* settingbaseConfig.plist */; };
+		B8DB529A21C20EC200FEF363 /* BCSettingBaseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B8DB529821C20EC200FEF363 /* BCSettingBaseVC.m */; };
+		B8DB529D21C20F0300FEF363 /* BCCommonSettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B8DB529B21C20F0300FEF363 /* BCCommonSettingCell.m */; };
+		B8DB52A021C20F6500FEF363 /* BCCommonTvModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B8DB529E21C20F6500FEF363 /* BCCommonTvModel.m */; };
+		B8DB52A321C20FA200FEF363 /* BCCameraSettingMod.m in Sources */ = {isa = PBXBuildFile; fileRef = B8DB52A221C20FA200FEF363 /* BCCameraSettingMod.m */; };
+		B8DB52A621C20FF600FEF363 /* YFStringsUtilVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B8DB52A521C20FF600FEF363 /* YFStringsUtilVC.m */; };
+		B8DB52A821C2105A00FEF363 /* YFStringsUtilVC.plist in Resources */ = {isa = PBXBuildFile; fileRef = B8DB52A721C2105A00FEF363 /* YFStringsUtilVC.plist */; };
+		B8DB52AB21C27FA800FEF363 /* BCCameraSettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B8DB52A921C27FA800FEF363 /* BCCameraSettingCell.m */; };
+		B8DD0CE221C362D200E904BB /* YFStringsDiffConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = B8DD0CE121C362D200E904BB /* YFStringsDiffConfig.m */; };
+		B8DD0CE521C3646400E904BB /* YFStringsDiffHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B8DD0CE421C3646400E904BB /* YFStringsDiffHelper.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,8 +52,6 @@
 		B8B7664221A7A44E000E6ABA /* LocalizableStringGen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LocalizableStringGen.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8B7664521A7A44E000E6ABA /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		B8B7664621A7A44E000E6ABA /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		B8B7664821A7A44E000E6ABA /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		B8B7664921A7A44E000E6ABA /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		B8B7664C21A7A44E000E6ABA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B8B7664E21A7A44F000E6ABA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B8B7665121A7A44F000E6ABA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -81,6 +88,24 @@
 		B8B7669321ACF49D000E6ABA /* YFStringsMergeOrDisperseConfig.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YFStringsMergeOrDisperseConfig.m; sourceTree = "<group>"; };
 		B8B7669521ACF59A000E6ABA /* YFStringMergeNDisperseHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YFStringMergeNDisperseHelper.h; sourceTree = "<group>"; };
 		B8B7669621ACF59A000E6ABA /* YFStringMergeNDisperseHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YFStringMergeNDisperseHelper.m; sourceTree = "<group>"; };
+		B8DB529621C205C700FEF363 /* settingbaseConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = settingbaseConfig.plist; sourceTree = "<group>"; };
+		B8DB529821C20EC200FEF363 /* BCSettingBaseVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCSettingBaseVC.m; sourceTree = "<group>"; };
+		B8DB529921C20EC200FEF363 /* BCSettingBaseVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCSettingBaseVC.h; sourceTree = "<group>"; };
+		B8DB529B21C20F0300FEF363 /* BCCommonSettingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCCommonSettingCell.m; sourceTree = "<group>"; };
+		B8DB529C21C20F0300FEF363 /* BCCommonSettingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCCommonSettingCell.h; sourceTree = "<group>"; };
+		B8DB529E21C20F6500FEF363 /* BCCommonTvModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCCommonTvModel.m; sourceTree = "<group>"; };
+		B8DB529F21C20F6500FEF363 /* BCCommonTvModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCCommonTvModel.h; sourceTree = "<group>"; };
+		B8DB52A121C20FA200FEF363 /* BCCameraSettingMod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCCameraSettingMod.h; sourceTree = "<group>"; };
+		B8DB52A221C20FA200FEF363 /* BCCameraSettingMod.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCCameraSettingMod.m; sourceTree = "<group>"; };
+		B8DB52A421C20FF600FEF363 /* YFStringsUtilVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YFStringsUtilVC.h; sourceTree = "<group>"; };
+		B8DB52A521C20FF600FEF363 /* YFStringsUtilVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YFStringsUtilVC.m; sourceTree = "<group>"; };
+		B8DB52A721C2105A00FEF363 /* YFStringsUtilVC.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = YFStringsUtilVC.plist; sourceTree = "<group>"; };
+		B8DB52A921C27FA800FEF363 /* BCCameraSettingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCCameraSettingCell.m; sourceTree = "<group>"; };
+		B8DB52AA21C27FA800FEF363 /* BCCameraSettingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCCameraSettingCell.h; sourceTree = "<group>"; };
+		B8DD0CE021C362D200E904BB /* YFStringsDiffConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YFStringsDiffConfig.h; sourceTree = "<group>"; };
+		B8DD0CE121C362D200E904BB /* YFStringsDiffConfig.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YFStringsDiffConfig.m; sourceTree = "<group>"; };
+		B8DD0CE321C3646400E904BB /* YFStringsDiffHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YFStringsDiffHelper.h; sourceTree = "<group>"; };
+		B8DD0CE421C3646400E904BB /* YFStringsDiffHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YFStringsDiffHelper.m; sourceTree = "<group>"; };
 		E57502938B854DD711E7B64C /* Pods-LocalizableStringGen.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LocalizableStringGen.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LocalizableStringGen/Pods-LocalizableStringGen.debug.xcconfig"; sourceTree = "<group>"; };
 		F50041756B98D1F6E0AF472B /* Pods-LocalizableStringGen.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LocalizableStringGen.release.xcconfig"; path = "Pods/Target Support Files/Pods-LocalizableStringGen/Pods-LocalizableStringGen.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -160,8 +185,6 @@
 				B8B7665D21A7A59F000E6ABA /* utils */,
 				B8B7665C21A7A59A000E6ABA /* info */,
 				B8B7665B21A7A590000E6ABA /* main */,
-				B8B7664821A7A44E000E6ABA /* ViewController.h */,
-				B8B7664921A7A44E000E6ABA /* ViewController.m */,
 				B8B7666B21A92842000E6ABA /* modules */,
 			);
 			path = LocalizableStringGen;
@@ -170,6 +193,10 @@
 		B8B7665B21A7A590000E6ABA /* main */ = {
 			isa = PBXGroup;
 			children = (
+				B8DB529521C2059900FEF363 /* O */,
+				B8DB529421C2059500FEF363 /* C */,
+				B8DB529321C2059100FEF363 /* V */,
+				B8DB529221C2058B00FEF363 /* M */,
 			);
 			path = main;
 			sourceTree = "<group>";
@@ -177,6 +204,7 @@
 		B8B7665C21A7A59A000E6ABA /* info */ = {
 			isa = PBXGroup;
 			children = (
+				B8DB529621C205C700FEF363 /* settingbaseConfig.plist */,
 				B8B7664521A7A44E000E6ABA /* AppDelegate.h */,
 				B8B7664621A7A44E000E6ABA /* AppDelegate.m */,
 				B8B7664B21A7A44E000E6ABA /* Main.storyboard */,
@@ -203,6 +231,7 @@
 		B8B7666B21A92842000E6ABA /* modules */ = {
 			isa = PBXGroup;
 			children = (
+				B8DD0CDF21C362B400E904BB /* diff */,
 				B8B7669021ACF47A000E6ABA /* mergeNdisperse */,
 				B8B7668721ABB0B9000E6ABA /* exchange */,
 				B8B7666E21A9286D000E6ABA /* group */,
@@ -287,6 +316,58 @@
 			path = mergeNdisperse;
 			sourceTree = "<group>";
 		};
+		B8DB529221C2058B00FEF363 /* M */ = {
+			isa = PBXGroup;
+			children = (
+				B8DB52A121C20FA200FEF363 /* BCCameraSettingMod.h */,
+				B8DB52A221C20FA200FEF363 /* BCCameraSettingMod.m */,
+				B8DB529F21C20F6500FEF363 /* BCCommonTvModel.h */,
+				B8DB529E21C20F6500FEF363 /* BCCommonTvModel.m */,
+			);
+			path = M;
+			sourceTree = "<group>";
+		};
+		B8DB529321C2059100FEF363 /* V */ = {
+			isa = PBXGroup;
+			children = (
+				B8DB52AA21C27FA800FEF363 /* BCCameraSettingCell.h */,
+				B8DB52A921C27FA800FEF363 /* BCCameraSettingCell.m */,
+				B8DB529C21C20F0300FEF363 /* BCCommonSettingCell.h */,
+				B8DB529B21C20F0300FEF363 /* BCCommonSettingCell.m */,
+			);
+			path = V;
+			sourceTree = "<group>";
+		};
+		B8DB529421C2059500FEF363 /* C */ = {
+			isa = PBXGroup;
+			children = (
+				B8DB529921C20EC200FEF363 /* BCSettingBaseVC.h */,
+				B8DB529821C20EC200FEF363 /* BCSettingBaseVC.m */,
+				B8DB52A421C20FF600FEF363 /* YFStringsUtilVC.h */,
+				B8DB52A521C20FF600FEF363 /* YFStringsUtilVC.m */,
+			);
+			path = C;
+			sourceTree = "<group>";
+		};
+		B8DB529521C2059900FEF363 /* O */ = {
+			isa = PBXGroup;
+			children = (
+				B8DB52A721C2105A00FEF363 /* YFStringsUtilVC.plist */,
+			);
+			path = O;
+			sourceTree = "<group>";
+		};
+		B8DD0CDF21C362B400E904BB /* diff */ = {
+			isa = PBXGroup;
+			children = (
+				B8DD0CE021C362D200E904BB /* YFStringsDiffConfig.h */,
+				B8DD0CE121C362D200E904BB /* YFStringsDiffConfig.m */,
+				B8DD0CE321C3646400E904BB /* YFStringsDiffHelper.h */,
+				B8DD0CE421C3646400E904BB /* YFStringsDiffHelper.m */,
+			);
+			path = diff;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -348,8 +429,10 @@
 			files = (
 				B8B7665221A7A44F000E6ABA /* LaunchScreen.storyboard in Resources */,
 				B8B7667E21A94F58000E6ABA /* pathNmoduleMap.plist in Resources */,
+				B8DB52A821C2105A00FEF363 /* YFStringsUtilVC.plist in Resources */,
 				B8B7668621AB94D6000E6ABA /* tsvFileNModuleMap.plist in Resources */,
 				B8B7664F21A7A44F000E6ABA /* Assets.xcassets in Resources */,
+				B8DB529721C205C700FEF363 /* settingbaseConfig.plist in Resources */,
 				B8B7664D21A7A44E000E6ABA /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -410,25 +493,32 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B8B7664A21A7A44E000E6ABA /* ViewController.m in Sources */,
 				B8B7667921A947E4000E6ABA /* YFLocalGroup2Config.m in Sources */,
 				B8B7668A21ABB0D1000E6ABA /* YFStringExchangeConfig.m in Sources */,
+				B8DB529D21C20F0300FEF363 /* BCCommonSettingCell.m in Sources */,
 				A59DDD5321AA420F005F1EAF /* YFLocalTSVConvertHelper.m in Sources */,
 				B8B7665521A7A44F000E6ABA /* main.m in Sources */,
 				A59DDD5021AA41FF005F1EAF /* YFLovslTSVConvertConfig.m in Sources */,
+				B8DD0CE221C362D200E904BB /* YFStringsDiffConfig.m in Sources */,
 				B8B7666721A7F701000E6ABA /* YFLocalizedHelper.m in Sources */,
 				B8B7667421A92D0D000E6ABA /* YFLocalGroupHelper.m in Sources */,
+				B8DB52A321C20FA200FEF363 /* BCCameraSettingMod.m in Sources */,
+				B8DD0CE521C3646400E904BB /* YFStringsDiffHelper.m in Sources */,
 				B8B7669421ACF49D000E6ABA /* YFStringsMergeOrDisperseConfig.m in Sources */,
 				B8B7666321A7A622000E6ABA /* YFLocalizeConfig.m in Sources */,
 				B8B7668421A9982D000E6ABA /* YFLocalCSVConvertHelper.m in Sources */,
 				B8B7667C21A947F0000E6ABA /* YFLocalGroup2Helper.m in Sources */,
+				B8DB52AB21C27FA800FEF363 /* BCCameraSettingCell.m in Sources */,
 				B8B7667121A92CFD000E6ABA /* YFLocalGroupConfig.m in Sources */,
 				B8B7669721ACF59A000E6ABA /* YFStringMergeNDisperseHelper.m in Sources */,
+				B8DB52A021C20F6500FEF363 /* BCCommonTvModel.m in Sources */,
 				B8B7666A21A82509000E6ABA /* YFUtil.m in Sources */,
 				B8B7664721A7A44E000E6ABA /* AppDelegate.m in Sources */,
 				B8B7668121A9981D000E6ABA /* YFLocalCSVConvetConfig.m in Sources */,
+				B8DB52A621C20FF600FEF363 /* YFStringsUtilVC.m in Sources */,
 				B8B7668D21ABB0DE000E6ABA /* YFStringsExchangeHelper.m in Sources */,
 				B8B7666021A7A614000E6ABA /* YFLocalizeUtil.m in Sources */,
+				B8DB529A21C20EC200FEF363 /* BCSettingBaseVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

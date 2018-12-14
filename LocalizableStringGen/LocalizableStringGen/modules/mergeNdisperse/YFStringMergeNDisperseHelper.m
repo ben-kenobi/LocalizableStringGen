@@ -10,9 +10,6 @@
 #import "YFStringMergeNDisperseHelper.h"
 
 @interface YFStringMergeNDisperseHelper()
-@property (nonatomic,strong)NSMutableDictionary *srcLocalizedStringDict;//从.strings文件中读取的key value
-@property (nonatomic,strong)NSMutableDictionary *destLocalizedStringDict;
-
 @property (nonatomic,strong)YFStringsMergeOrDisperseConfig *config;
 @property (nonatomic,copy)void(^compCB)(void);
 
@@ -41,13 +38,25 @@
 
 #pragma mark - disperse
 -(void)disperStrings{
-//    NSMutableString *destMstr = [NSMutableString string];
-//    for(NSString *key in self.destLocalizedStringDict.allKeys){
-//        NSString *val = self.destLocalizedStringDict[key];
-//        [YFLocalizeUtil append:destMstr key:key val:val];
-//    }
-//    [destMstr writeToFile:self.config.destLocalizedStringFile atomically:YES encoding:4 error:0];
+    NSMutableDictionary *mergedLocalizedStringDict=[YFLocalizeUtil localStringDictFrom:self.config.mergedStringFile];
     
+    NSMutableDictionary<NSString *,NSMutableString *> *dispersedStringDict = [NSMutableDictionary dictionary];
+    
+    for(NSString *key in mergedLocalizedStringDict.allKeys){
+        NSString *module = [self.config moduleByKey:key];
+        NSMutableString *mstr = dispersedStringDict[module];
+        if(!mstr){
+            mstr = [NSMutableString string];
+            dispersedStringDict[module] = mstr;
+        }
+        NSString *val = mergedLocalizedStringDict[key];
+        [YFLocalizeUtil append:mstr key:key val:val];
+    }
+    
+    for(NSString *module in dispersedStringDict.allKeys){
+        NSMutableString *mstr = dispersedStringDict[module];
+        [mstr writeToFile:[self.config dispsersedPathByModule:module] atomically:YES encoding:4 error:0];
+    }
 }
 
 
@@ -68,20 +77,22 @@
     }
     [mstr writeToFile:self.config.mergedStringFile atomically:YES encoding:4 error:0];
 }
+
 -(void)mergeStrings:(NSString *)file dir:(NSString *)dir mstr:(NSMutableString *)mstr{
     NSString *srcStr = [YFLocalizeUtil strFromValidFile:file dir:dir fileExts:@[@".strings"]  excludeFiles:nil];
     if(!srcStr)return;
-    NSArray *ary = [srcStr componentsSeparatedByString:@"\";"];
-    for(int i=0;i<ary.count-1;i++){
-        NSString *str = ary[i];
-        NSRange range = [str rangeOfString:@"\"\\s*=\\s*\"" options:(NSRegularExpressionSearch) range:NSMakeRange(0, str.length)];
-        
-        NSAssert(range.location!=NSNotFound, @"----- Range not found ----- ");
-        
-        NSArray *sary = @[[str substringToIndex:range.location],[str substringFromIndex:range.location+range.length]];
-        NSString *key = [sary[0] substringFromIndex:[sary[0] rangeOfString:@"\""].location+1];
-        [YFLocalizeUtil append:mstr key:key val:sary[1]];
-    }
+    [mstr appendFormat:@"%@\n",srcStr];
+//    NSArray *ary = [srcStr componentsSeparatedByString:@"\";"];
+//    for(int i=0;i<ary.count-1;i++){
+//        NSString *str = ary[i];
+//        NSRange range = [str rangeOfString:@"\"\\s*=\\s*\"" options:(NSRegularExpressionSearch) range:NSMakeRange(0, str.length)];
+//
+//        NSAssert(range.location!=NSNotFound, @"----- Range not found -----");
+//
+//        NSArray *sary = @[[str substringToIndex:range.location],[str substringFromIndex:range.location+range.length]];
+//        NSString *key = [sary[0] substringFromIndex:[sary[0] rangeOfString:@"\""].location+1];
+//        [YFLocalizeUtil append:mstr key:key val:sary[1]];
+//    }
 }
 
 

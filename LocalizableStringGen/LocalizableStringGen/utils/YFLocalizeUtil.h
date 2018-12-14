@@ -8,6 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
+extern NSString *const YF_LOCALIZE_BASE_WORKING_DIR;
+extern NSString *const YF_LOCALIZE_BASE_PROJECT_DIR;
+
+NSString *workingPath(NSString *path);
+NSString *projectPath(NSString *path);
+
 
 @interface YFLocalizeUtil : NSObject
 +(void)append:(NSMutableString *)mstr key:(NSString *)key val:(NSString *)val;

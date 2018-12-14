@@ -12,11 +12,12 @@
 -(instancetype)init{
     if(self = [super init]){
         //文件夹需要 / 结尾
-        self.tsvDir=@"/Users/yf/Desktop/tsvgenDir/";
-        self.stringsDir=@"/Users/yf/Desktop/stringsDir/";
+        self.tsvDir=workingPath(@"tsvgenDir/");
+        self.stringsDir=workingPath(@"stringsDir/");
         
+        //根据tsv文件值的位置
         self.keyIdx=0;
-        self.valIdx=1;
+        self.valIdx=3;
 
 
     }
