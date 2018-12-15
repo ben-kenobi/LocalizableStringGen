@@ -17,6 +17,7 @@
 #import "YFStringsExchangeHelper.h"
 #import "YFStringMergeNDisperseHelper.h"
 #import "YFStringsDiffHelper.h"
+#import "YFStringUpdateHelper.h"
 
 @interface YFStringsUtilVC ()
 @property (nonatomic,strong)id helper;
@@ -109,6 +110,13 @@
     [iPop showProg];
     YFStringsDiffConfig *config = [[YFStringsDiffConfig alloc]init];
     self.helper=[YFStringsDiffHelper startWithConfig:config compCB:^{
+        [iPop dismProg];
+    }];
+}
+-(void)updateStringsByStrings:(NSIndexPath *)idxpath{
+    [iPop showProg];
+    YFStringsUpddateConfig *config = [[YFStringsUpddateConfig alloc]init];
+    self.helper=[YFStringUpdateHelper startWithConfig:config compCB:^{
         [iPop dismProg];
     }];
 }

@@ -87,6 +87,22 @@
 				<key>extraData</key>
 				<string>XXXXX</string>
 			</dict>
+			<dict>
+				<key>title</key>
+				<string>UpdateStringsByStrings</string>
+				<key>detail</key>
+				<string> 将新strings文件中的串替换掉原strings中的串，不在原strings中的就新增</string>
+				<key>switchView</key>
+				<false/>
+				<key>editable</key>
+				<true/>
+				<key>hasEdit</key>
+				<true/>
+				<key>editMethod</key>
+				<string>updateStringsByStrings:</string>
+				<key>extraData</key>
+				<string>XXXXX</string>
+			</dict>
 		</array>
 	</dict>
 	<dict>
