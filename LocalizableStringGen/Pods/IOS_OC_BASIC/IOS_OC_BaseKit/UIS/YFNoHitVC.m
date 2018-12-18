@@ -10,12 +10,23 @@
 
 #import "YFNoHitVC.h"
 #import "YFNoHitView.h"
+#import "YFCate.h"
 
 
 @implementation YFNoHitVC
 
 -(void)loadView{
     self.view = [[YFNoHitView alloc]init];
+}
+
+
+#pragma mark - ratation
+-(BOOL)shouldAutorotate {
+    return UIViewController.topVC.shouldAutorotate;
+}
+-(UIInterfaceOrientationMask)supportedInterfaceOrientations {
+    return UIViewController.topVC.supportedInterfaceOrientations;
+    
 }
 
 @end
