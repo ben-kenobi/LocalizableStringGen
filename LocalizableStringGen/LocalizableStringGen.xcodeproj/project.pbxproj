@@ -10,6 +10,7 @@
 		8E78AD8475A81949762F042E /* Pods_LocalizableStringGen.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF9B17955390079A7CA85F77 /* Pods_LocalizableStringGen.framework */; };
 		A59DDD5021AA41FF005F1EAF /* YFLovslTSVConvertConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = A59DDD4F21AA41FF005F1EAF /* YFLovslTSVConvertConfig.m */; };
 		A59DDD5321AA420F005F1EAF /* YFLocalTSVConvertHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = A59DDD5221AA420F005F1EAF /* YFLocalTSVConvertHelper.m */; };
+		B81FC68521D610520074A0FC /* ExportOptions.plist in Resources */ = {isa = PBXBuildFile; fileRef = B81FC68421D610520074A0FC /* ExportOptions.plist */; };
 		B8B7664721A7A44E000E6ABA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B8B7664621A7A44E000E6ABA /* AppDelegate.m */; };
 		B8B7664D21A7A44E000E6ABA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B8B7664B21A7A44E000E6ABA /* Main.storyboard */; };
 		B8B7664F21A7A44F000E6ABA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B8B7664E21A7A44F000E6ABA /* Assets.xcassets */; };
@@ -51,6 +52,7 @@
 		A59DDD5121AA420F005F1EAF /* YFLocalTSVConvertHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YFLocalTSVConvertHelper.h; sourceTree = "<group>"; };
 		A59DDD5221AA420F005F1EAF /* YFLocalTSVConvertHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YFLocalTSVConvertHelper.m; sourceTree = "<group>"; };
 		AF9B17955390079A7CA85F77 /* Pods_LocalizableStringGen.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LocalizableStringGen.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B81FC68421D610520074A0FC /* ExportOptions.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ExportOptions.plist; sourceTree = "<group>"; };
 		B8B7664221A7A44E000E6ABA /* LocalizableStringGen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LocalizableStringGen.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8B7664521A7A44E000E6ABA /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		B8B7664621A7A44E000E6ABA /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -210,6 +212,7 @@
 		B8B7665C21A7A59A000E6ABA /* info */ = {
 			isa = PBXGroup;
 			children = (
+				B81FC68421D610520074A0FC /* ExportOptions.plist */,
 				B8DB529621C205C700FEF363 /* settingbaseConfig.plist */,
 				B8B7664521A7A44E000E6ABA /* AppDelegate.h */,
 				B8B7664621A7A44E000E6ABA /* AppDelegate.m */,
@@ -448,6 +451,7 @@
 				B8B7665221A7A44F000E6ABA /* LaunchScreen.storyboard in Resources */,
 				B8B7667E21A94F58000E6ABA /* pathNmoduleMap.plist in Resources */,
 				B8DB52A821C2105A00FEF363 /* YFStringsUtilVC.plist in Resources */,
+				B81FC68521D610520074A0FC /* ExportOptions.plist in Resources */,
 				B8B7668621AB94D6000E6ABA /* tsvFileNModuleMap.plist in Resources */,
 				B8B7664F21A7A44F000E6ABA /* Assets.xcassets in Resources */,
 				B8DB529721C205C700FEF363 /* settingbaseConfig.plist in Resources */,
