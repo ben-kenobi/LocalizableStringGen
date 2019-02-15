@@ -13,7 +13,7 @@
 @implementation YFStringsMergeOrDisperseConfig
 -(instancetype)init{
     if(self = [super init]){
-        self.dispersedStringDir=workingPath(@"key_adjusted_strings/");
+        self.dispersedStringDir=workingPath(@"stringsDir/");
         self.mergedStringFile=workingPath(@"key_adjusted_strings_merged.strings");
     }
     return self;

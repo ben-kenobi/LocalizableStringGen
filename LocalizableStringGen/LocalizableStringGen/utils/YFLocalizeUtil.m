@@ -87,7 +87,8 @@
 
 //revert:YES  key 与value位置互换  ,NO 正常key value
 +(NSMutableDictionary *)localStringDictFrom:(NSString *)localstringFile  revert:(BOOL)revert{
-    return [self localStringDictFrom:localstringFile revert:revert multiOccuredString:nil];
+    NSMutableString *mstr = [NSMutableString string];
+    return [self localStringDictFrom:localstringFile revert:revert multiOccuredString:mstr];
 }
 
 
@@ -119,8 +120,9 @@
         }
         if(multiMstr && dict[actkey]){
             [self append:multiMstr key:actkey val:actval];
-        }else
+        }else{
             [dict setObject:actval forKey:actkey];
+        }
     }
     return dict;
 }

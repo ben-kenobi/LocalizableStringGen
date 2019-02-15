@@ -42,6 +42,7 @@
     NSMutableString *unchangeMstr = [NSMutableString string];
     NSMutableString *addedMstr = [NSMutableString string];
     NSMutableString *updatedMstr = [NSMutableString string];
+    NSMutableString *notransMstr = [NSMutableString string];
     NSMutableDictionary *deleteLocalizedDict=[NSMutableDictionary dictionaryWithDictionary:srcLocalizedDict];
     [deleteLocalizedDict removeObjectsForKeys:tarLocalizedDict.allKeys];
     
@@ -50,9 +51,11 @@
         NSString *tarval = tarLocalizedDict[key];
         if(srcVal){
             if([srcVal isEqualToString:tarval]){
-                [YFLocalizeUtil append:unchangeMstr key:key val:tarval];
-            }else{
+                [YFLocalizeUtil append:unchangeMstr key:key val:srcVal];
+            }else if(!emptyStr(tarval)){
                 [YFLocalizeUtil append:updatedMstr key:key val:tarval];
+            }else{
+               [YFLocalizeUtil append:notransMstr key:key val:srcVal];
             }
         }else{
             [YFLocalizeUtil append:addedMstr key:key val:tarval];
@@ -69,6 +72,7 @@
     [updatedMstr writeToFile:self.config.substitutedLocalizedStringFile atomically:YES encoding:4 error:0];
     [addedMstr writeToFile:self.config.addedLocalizedStringFile atomically:YES encoding:4 error:0];
     [unchangeMstr writeToFile:self.config.unchangedLocalizedStringFile atomically:YES encoding:4 error:0];
+    [notransMstr writeToFile:self.config.noTranslatedLocalizedStringFile atomically:YES encoding:4 error:0];
 }
 
 @end
