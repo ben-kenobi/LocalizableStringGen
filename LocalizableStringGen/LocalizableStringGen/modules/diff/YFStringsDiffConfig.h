@@ -18,7 +18,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,strong)NSString *substitutedLocalizedStringFile;//比原始文件中更新字串
 @property (nonatomic,strong)NSString *unchangedLocalizedStringFile;//原始文件中不变的字串
 @property (nonatomic,strong)NSString *noTranslatedLocalizedStringFile;//原始文件中没有翻译的字串
-
+@property (nonatomic,strong)NSString *ignoreLocalizedStringFile;//不需要翻译的串
+@property (nonatomic,strong)NSDictionary *ignoreKeyDict;
 @end
 
 NS_ASSUME_NONNULL_END

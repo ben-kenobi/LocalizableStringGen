@@ -43,6 +43,7 @@
     NSMutableString *addedMstr = [NSMutableString string];
     NSMutableString *updatedMstr = [NSMutableString string];
     NSMutableString *notransMstr = [NSMutableString string];
+    NSMutableString *ignoreMstr = [NSMutableString string];
     NSMutableDictionary *deleteLocalizedDict=[NSMutableDictionary dictionaryWithDictionary:srcLocalizedDict];
     [deleteLocalizedDict removeObjectsForKeys:tarLocalizedDict.allKeys];
     
@@ -61,6 +62,16 @@
             [YFLocalizeUtil append:addedMstr key:key val:tarval];
         }
     }
+    NSDictionary *delDictCopy = [NSDictionary dictionaryWithDictionary:deleteLocalizedDict];
+    for(NSString *key in delDictCopy.allKeys){
+        NSString *srcVal = delDictCopy[key];
+        if(self.config.ignoreKeyDict[key]){
+            [deleteLocalizedDict removeObjectForKey:key];
+            [YFLocalizeUtil append:ignoreMstr key:key val:srcVal];
+        }
+        
+    }
+    
     
     // export
     NSMutableString *deleteMstr = [NSMutableString string];
@@ -68,11 +79,18 @@
         NSString *val = deleteLocalizedDict[key];
         [YFLocalizeUtil append:deleteMstr key:key val:val];
     }
-    [deleteMstr writeToFile:self.config.deletedLocalizedStringFile atomically:YES encoding:4 error:0];
-    [updatedMstr writeToFile:self.config.substitutedLocalizedStringFile atomically:YES encoding:4 error:0];
-    [addedMstr writeToFile:self.config.addedLocalizedStringFile atomically:YES encoding:4 error:0];
-    [unchangeMstr writeToFile:self.config.unchangedLocalizedStringFile atomically:YES encoding:4 error:0];
-    [notransMstr writeToFile:self.config.noTranslatedLocalizedStringFile atomically:YES encoding:4 error:0];
+    if(!emptyStr(deleteMstr))
+        [deleteMstr writeToFile:self.config.deletedLocalizedStringFile atomically:YES encoding:4 error:0];
+    if(!emptyStr(updatedMstr))
+        [updatedMstr writeToFile:self.config.substitutedLocalizedStringFile atomically:YES encoding:4 error:0];
+    if(!emptyStr(addedMstr))
+        [addedMstr writeToFile:self.config.addedLocalizedStringFile atomically:YES encoding:4 error:0];
+    if(!emptyStr(unchangeMstr))
+         [unchangeMstr writeToFile:self.config.unchangedLocalizedStringFile atomically:YES encoding:4 error:0];
+    if(!emptyStr(notransMstr))
+        [notransMstr writeToFile:self.config.noTranslatedLocalizedStringFile atomically:YES encoding:4 error:0];
+    if(!emptyStr(ignoreMstr))
+        [ignoreMstr writeToFile:self.config.ignoreLocalizedStringFile atomically:YES encoding:4 error:0];
 }
 
 @end
