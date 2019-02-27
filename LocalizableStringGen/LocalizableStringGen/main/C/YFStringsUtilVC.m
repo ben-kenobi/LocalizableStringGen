@@ -18,6 +18,8 @@
 #import "YFStringMergeNDisperseHelper.h"
 #import "YFStringsDiffHelper.h"
 #import "YFStringUpdateHelper.h"
+#import "YFTimezoneListHelper.h"
+#import "YFTimezoneListConfig.h"
 
 @interface YFStringsUtilVC ()
 @property (nonatomic,strong)id helper;
@@ -117,6 +119,13 @@
     [iPop showProg];
     YFStringsUpddateConfig *config = [[YFStringsUpddateConfig alloc]init];
     self.helper=[YFStringUpdateHelper startWithConfig:config compCB:^{
+        [iPop dismProg];
+    }];
+}
+-(void)timezoneUpdate:(NSIndexPath *)idxpath{
+    [iPop showProg];
+    YFTimezoneListConfig *config = [[YFTimezoneListConfig alloc]init];
+    self.helper=[YFTimezoneListHelper startWithConfig:config compCB:^{
         [iPop dismProg];
     }];
 }

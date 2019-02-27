@@ -192,5 +192,7 @@
 	<string>cl</string>
 	<key>bc.bind.terminate_setup_tip</key>
 	<string>fl</string>
+	<key>bc.devices.battery_info</key>
+	<string>o</string>
 </dict>
 </plist>
