@@ -25,6 +25,7 @@
     self.substitutedLocalizedStringFile=workingPath(@"Localizable_update.strings");
     self.unchangedLocalizedStringFile=workingPath(@"Localizable_unchanged.strings");
     self.noTranslatedLocalizedStringFile=workingPath(@"Localizable_notranslated.strings");
+    self.mergedFile = workingPath(@"Localizable_merged.strings");
     self.ignoreLocalizedStringFile = workingPath(@"Localizable_ignore.strings");
 
 }

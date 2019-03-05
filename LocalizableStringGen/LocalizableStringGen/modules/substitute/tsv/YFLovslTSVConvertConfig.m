@@ -17,7 +17,7 @@
         
         //根据tsv文件值的位置
         self.keyIdx=0;
-        self.valIdx=4;
+        self.valIdx=7;
 
 
     }

@@ -9,6 +9,22 @@
 		<array>
 			<dict>
 				<key>title</key>
+				<string>Common Flow</string>
+				<key>detail</key>
+				<string>标准合并字串工作流，先将tsv转化成strings，再将strings.文件合并，最后跟localizable.string比较并合并</string>
+				<key>switchView</key>
+				<false/>
+				<key>editable</key>
+				<true/>
+				<key>hasEdit</key>
+				<true/>
+				<key>editMethod</key>
+				<string>commonFlow:</string>
+				<key>extraData</key>
+				<string>XXXXX</string>
+			</dict>
+			<dict>
+				<key>title</key>
 				<string>Group TSV</string>
 				<key>detail</key>
 				<string> 语言本地话工具，用于将分组后的语言tsv文件与未分组的strings文件进行比较,匹配上的添加到tsv文件中，并导出一份未匹配列表</string>
@@ -38,6 +54,8 @@
 				<string>tsvConvert:</string>
 				<key>extraData</key>
 				<string>XXXXX</string>
+				<key>on</key>
+				<true/>
 			</dict>
 			<dict>
 				<key>title</key>

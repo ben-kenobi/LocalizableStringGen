@@ -11,6 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface YFStringsDiffConfig : NSObject
+@property (nonatomic,assign)BOOL onlyExportMerged;//是否只导出merged文件
 @property (nonatomic,strong)NSString *srcLocalizedStringFile;//原始文件
 @property (nonatomic,strong)NSString *tarLocalizedStringFile;//被比较文件
 @property (nonatomic,strong)NSString *addedLocalizedStringFile;//比原始文件中新增的字串
@@ -19,6 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,strong)NSString *unchangedLocalizedStringFile;//原始文件中不变的字串
 @property (nonatomic,strong)NSString *noTranslatedLocalizedStringFile;//原始文件中没有翻译的字串
 @property (nonatomic,strong)NSString *ignoreLocalizedStringFile;//不需要翻译的串
+@property (nonatomic,strong)NSString *mergedFile;//最后合成的串
 @property (nonatomic,strong)NSDictionary *ignoreKeyDict;
 @end
 

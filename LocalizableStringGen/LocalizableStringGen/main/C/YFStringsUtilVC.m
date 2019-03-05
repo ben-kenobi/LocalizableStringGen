@@ -41,6 +41,32 @@
 
 
 #pragma mark - actions
+
+-(void)commonFlow:(NSIndexPath *)idxpath{
+    
+    [iPop showProg];
+    
+    // tsv -> strings
+    YFLovslTSVConvertConfig *config = [[YFLovslTSVConvertConfig alloc]init];
+    config.revert=YES;
+    
+    self.helper=[YFLocalTSVConvertHelper startWithConfig:config compCB:^{
+        // merge strings files to single file
+        YFStringsMergeOrDisperseConfig *config = [[YFStringsMergeOrDisperseConfig alloc]init];
+        config.reverse=NO;
+        self.helper=[YFStringMergeNDisperseHelper startWithConfig:config compCB:^{
+            // diff two strings file and only reserve merged file
+            YFStringsDiffConfig *config = [[YFStringsDiffConfig alloc]init];
+            config.onlyExportMerged = YES;
+            self.helper=[YFStringsDiffHelper startWithConfig:config compCB:^{
+                [iPop dismProg];
+            }];
+            
+        }];
+    }];
+
+}
+
 -(void)gen:(NSIndexPath *)idxpath{
     [iPop showProg];
     self.helper=[YFLocalizedHelper startWithConfig:[[YFLocalizeConfig alloc]init] gen:YES compCB:^{

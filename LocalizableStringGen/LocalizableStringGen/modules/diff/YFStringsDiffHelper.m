@@ -59,7 +59,10 @@
                [YFLocalizeUtil append:notransMstr key:key val:srcVal];
             }
         }else{
-            [YFLocalizeUtil append:addedMstr key:key val:tarval];
+            //如果是新增字串，却被忽略了，则不新增
+            if(self.config.ignoreKeyDict[key] == nil)
+                [YFLocalizeUtil append:addedMstr key:key val:tarval];
+            
         }
     }
     NSDictionary *delDictCopy = [NSDictionary dictionaryWithDictionary:deleteLocalizedDict];
@@ -74,11 +77,21 @@
     
     
     // export
+    
     NSMutableString *deleteMstr = [NSMutableString string];
     for(NSString *key in deleteLocalizedDict.allKeys){
         NSString *val = deleteLocalizedDict[key];
         [YFLocalizeUtil append:deleteMstr key:key val:val];
     }
+    
+    
+    NSString *mergedStr = iFormatStr(@"%@\n\n//updated\n%@\n\n//ignored\n%@\n\n//notrans\n%@\n\n//added\n%@\n\n//deleted\n%@\n",unchangeMstr,updatedMstr,ignoreMstr,notransMstr,addedMstr,deleteMstr);
+    [mergedStr writeToFile:self.config.mergedFile atomically:YES encoding:4 error:0];
+    
+   
+    if(self.config.onlyExportMerged) return;
+    
+    
     if(!emptyStr(deleteMstr))
         [deleteMstr writeToFile:self.config.deletedLocalizedStringFile atomically:YES encoding:4 error:0];
     if(!emptyStr(updatedMstr))

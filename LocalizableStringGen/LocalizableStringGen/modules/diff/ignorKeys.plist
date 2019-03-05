@@ -194,5 +194,37 @@
 	<string>fl</string>
 	<key>bc.devices.battery_info</key>
 	<string>o</string>
+	<key></key>
+	<string>o</string>
+	<key>Automatic search</key>
+	<string>o</string>
+	<key>bc.html.bind_step3_tip1</key>
+	<string>o</string>
+	<key>Select Server</key>
+	<string>o</string>
+	<key>Qa Server</key>
+	<string>o</string>
+	<key>bc.html.bind_camera_step1_tip1</key>
+	<string>o</string>
+	<key>bc.html.bind_step1_tip2</key>
+	<string>o</string>
+	<key>Server List</key>
+	<string>o</string>
+	<key>Us Server</key>
+	<string>o</string>
+	<key>bc.html.bind_step2_tip1</key>
+	<string>o</string>
+	<key>Ci Server</key>
+	<string>o</string>
+	<key>Eu Server</key>
+	<string>o</string>
+	<key>ios暂时没有此功能</key>
+	<string>o</string>
+	<key>bc.html.bind_sensor_step2_tip1</key>
+	<string>o</string>
+	<key>bc.html.bind_step1_tip1</key>
+	<string>o</string>
+	<key>bc.html.bind_step4_tip1</key>
+	<string>o</string>
 </dict>
 </plist>
