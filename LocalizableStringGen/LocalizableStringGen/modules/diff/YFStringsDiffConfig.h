@@ -6,22 +6,36 @@
 //  Copyright © 2018 yf. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import "YFBaseConfig.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface YFStringsDiffConfig : NSObject
+@interface YFStringsDiffConfig : YFBaseConfig
 @property (nonatomic,assign)BOOL onlyExportMerged;//是否只导出merged文件
-@property (nonatomic,strong)NSString *srcLocalizedStringFile;//原始文件
-@property (nonatomic,strong)NSString *tarLocalizedStringFile;//被比较文件
-@property (nonatomic,strong)NSString *addedLocalizedStringFile;//比原始文件中新增的字串
-@property (nonatomic,strong)NSString *deletedLocalizedStringFile;//比原始文件中减少的字串
-@property (nonatomic,strong)NSString *substitutedLocalizedStringFile;//比原始文件中更新字串
-@property (nonatomic,strong)NSString *unchangedLocalizedStringFile;//原始文件中不变的字串
-@property (nonatomic,strong)NSString *noTranslatedLocalizedStringFile;//原始文件中没有翻译的字串
-@property (nonatomic,strong)NSString *ignoreLocalizedStringFile;//不需要翻译的串
-@property (nonatomic,strong)NSString *mergedFile;//最后合成的串
+@property (nonatomic,copy)NSArray<NSString *> *srcLocalizedStringFiles;//原始文件
+
+
+
+
+/**
+ 需要忽略的串，忽略的串处理方式为：1.在源文件中，则保留 2.不在源文件中，则直接丢弃
+ */
 @property (nonatomic,strong)NSDictionary *ignoreKeyDict;
+
+
+-(NSString *)tarLocalizedStringFileBy:(NSInteger)idx;
+-(NSString *)addedLocalizedStringFileBy:(NSInteger)idx;
+-(NSString *)deletedLocalizedStringFileBy:(NSInteger)idx;
+-(NSString *)substitutedLocalizedStringFileBy:(NSInteger)idx;
+-(NSString *)unchangedLocalizedStringFileBy:(NSInteger)idx;
+-(NSString *)noTranslatedLocalizedStringFileBy:(NSInteger)idx;
+
+
+-(NSString *)ignoreLocalizedStringFileBy:(NSInteger)idx;
+
+-(NSString *)destFileBy:(NSInteger)idx;
+-(NSString *)destDir;
+
 @end
 
 NS_ASSUME_NONNULL_END

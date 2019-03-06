@@ -11,25 +11,39 @@
 #import "YFStringsMergeOrDisperseConfig.h"
 
 @implementation YFStringsMergeOrDisperseConfig
--(instancetype)init{
-    if(self = [super init]){
-        self.dispersedStringDir=workingPath(@"stringsDir/");
-        self.mergedStringFile=workingPath(@"key_adjusted_strings_merged.strings");
+
+-(void)initData{
+    NSMutableArray *mary = [NSMutableArray array];
+    BOOL isdir=NO;
+    NSString *dispersedDir =[self fullOutputPath:@""];
+    BOOL exist = [iFm fileExistsAtPath:dispersedDir isDirectory:&isdir];
+    NSAssert(exist, @"-----dir not exists -----");
+    NSAssert(isdir, @"----- not dir -----");
+    NSArray *ary = [iFm subpathsAtPath:dispersedDir];
+    for(NSString *file in ary){
+        NSString *tdir = iFormatStr(@"%@%@/%@",dispersedDir,file,@"stringsDir/");
+        BOOL isStrDir = NO;
+        BOOL strDirExist = [iFm fileExistsAtPath:tdir isDirectory:&isStrDir];
+        if(!strDirExist || !isStrDir) continue;
+        [mary addObject:tdir];
     }
-    return self;
+    self.dispersedStringsDirs=mary;
+
+    self.mergedStringFile=workingPath(@"strings_merged_Localizable.strings");
 }
 
 -(NSString *)dispsersedPathByModule:(NSString *)module{
+    NSString *dir = workingPath(@"stringsDir");
     BOOL isDir = NO;
-    BOOL exist = [iFm fileExistsAtPath:self.dispersedStringDir isDirectory:&isDir];
+    BOOL exist = [iFm fileExistsAtPath:dir isDirectory:&isDir];
     
     NSAssert(!exist||isDir, @"-----Not a directory-----");
     
     if(!exist){
-        [iFm createDirectoryAtPath:self.dispersedStringDir withIntermediateDirectories:YES attributes:0 error:0];
+        [iFm createDirectoryAtPath:dir withIntermediateDirectories:YES attributes:0 error:0];
     }
     
-    return iFormatStr(@"%@%@.strings",self.dispersedStringDir,module);
+    return iFormatStr(@"%@%@.strings",dir,module);
 }
 -(NSString *)moduleByKey:(NSString *)stringKey{
     NSArray * arr = [stringKey componentsSeparatedByString:@"."];

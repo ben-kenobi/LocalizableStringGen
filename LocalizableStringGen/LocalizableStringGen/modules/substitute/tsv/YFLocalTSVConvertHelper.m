@@ -72,24 +72,26 @@
     }
     deststr = [re stringByReplacingMatchesInString:deststr options:0 range:NSMakeRange(0, deststr.length) withTemplate:tab];
     deststr=iFormatStr(@"\t\t\n%@",deststr);
-    [deststr writeToFile:[self.config destPathBySrcfile:file] atomically:YES encoding:4 error:0];
+    [deststr writeToFile:[self.config tsvDestPathBySrcfile:file] atomically:YES encoding:4 error:0];
 }
 
 
 #pragma mark - revert convert
 
 -(void)convertToStrings{
-    BOOL isdir=NO;
-    NSString *dir = self.config.tsvDir;
-    BOOL exist = [iFm fileExistsAtPath:dir isDirectory:&isdir];
-    NSAssert(exist, @"-----file not exists-----");
-    if(isdir){
-        NSArray *ary = [iFm subpathsAtPath:dir];
-        for(NSString *file in ary){
-            [self convertTSVtoStrings:file dir:dir];
+    for(int i=0;i<self.config.tsvDirs.count;i++){
+        BOOL isdir=NO;
+        NSString *dir = self.config.tsvDirs[i];
+        BOOL exist = [iFm fileExistsAtPath:dir isDirectory:&isdir];
+        NSAssert(exist, @"-----file not exists-----");
+        if(isdir){
+            NSArray *ary = [iFm subpathsAtPath:dir];
+            for(NSString *file in ary){
+                [self convertTSVtoStrings:file dir:dir];
+            }
+        }else{
+            [self convertTSVtoStrings:dir dir:@""];
         }
-    }else{
-        [self convertTSVtoStrings:dir dir:@""];
     }
 }
 -(void)convertTSVtoStrings:(NSString *)file dir:(NSString *)dir{
@@ -102,7 +104,7 @@
         if(!enval)continue;
         [YFLocalizeUtil append:destmstr key:enval[0] val:enval[1]];
     }
-    [destmstr writeToFile:[self.config destPathBySrcfile:file] atomically:YES encoding:4 error:0];
+    [destmstr writeToFile:[self.config stringDestPathBySrcfile:file dir:dir] atomically:YES encoding:4 error:0];
 }
 -(NSArray<NSString *> *)parseTSV:(NSString *)tsv{
     

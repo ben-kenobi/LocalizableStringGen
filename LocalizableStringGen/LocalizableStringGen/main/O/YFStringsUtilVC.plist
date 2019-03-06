@@ -9,6 +9,22 @@
 		<array>
 			<dict>
 				<key>title</key>
+				<string>GenFlow Prepare</string>
+				<key>detail</key>
+				<string>将需要转换的strings文件放到srcDir中，然后点击此功能，在tsvDir生成对应模块的tsv文件夹，方便将tsv文件归类到相应位置</string>
+				<key>switchView</key>
+				<false/>
+				<key>editable</key>
+				<true/>
+				<key>hasEdit</key>
+				<true/>
+				<key>editMethod</key>
+				<string>genFlowPrepare:</string>
+				<key>extraData</key>
+				<string>XXXXX</string>
+			</dict>
+			<dict>
+				<key>title</key>
 				<string>Common Flow</string>
 				<key>detail</key>
 				<string>标准合并字串工作流，先将tsv转化成strings，再将strings.文件合并，最后跟localizable.string比较并合并</string>

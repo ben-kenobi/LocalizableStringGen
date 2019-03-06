@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @interface YFStringMergeNDisperseHelper : NSObject
 +(instancetype)startWithConfig:(YFStringsMergeOrDisperseConfig *)config compCB:(void(^)(void))compCB;
-
++(void)mergeDir:(NSString *)dir toFile:(NSString *)file;
 @end
 
 NS_ASSUME_NONNULL_END

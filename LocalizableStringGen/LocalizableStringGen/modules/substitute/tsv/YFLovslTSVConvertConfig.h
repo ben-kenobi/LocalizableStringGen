@@ -6,15 +6,20 @@
 //  Copyright © 2018 yf. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import "YFBaseConfig.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface YFLovslTSVConvertConfig : NSObject
-@property (nonatomic,strong)NSString *stringsDir;
-@property (nonatomic,strong)NSString *tsvDir;
+@interface YFLovslTSVConvertConfig : YFBaseConfig
+@property (nonatomic,strong)NSString *stringsDir;//需要转成tsv的  strings 文件的文件夹
+@property (nonatomic,copy)NSArray<NSString *> *tsvDirs;//需要c转成strings文件的tsv文件夹数组
 @property (nonatomic,assign)BOOL revert;//NO:string->tsv,YES:tsv->strings
--(NSString *)destPathBySrcfile:(NSString *)path;
+
+
+//tsv - > strings
+-(NSString *)stringDestPathBySrcfile:(NSString *)path dir:(NSString *)idir;
+//string - > tsv
+-(NSString *)tsvDestPathBySrcfile:(NSString *)path;
 
 
 

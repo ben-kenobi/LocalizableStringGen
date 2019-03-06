@@ -14,6 +14,8 @@
 		B8169C3822261F4400197CFF /* YFTimezoneListConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = B8169C3722261F4400197CFF /* YFTimezoneListConfig.m */; };
 		B8169C3B22261F5700197CFF /* YFTimezoneListHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B8169C3A22261F5700197CFF /* YFTimezoneListHelper.m */; };
 		B81FC68521D610520074A0FC /* ExportOptions.plist in Resources */ = {isa = PBXBuildFile; fileRef = B81FC68421D610520074A0FC /* ExportOptions.plist */; };
+		B872ABA2222F5E4A00C5A33B /* YFBaseConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = B872ABA1222F5E4A00C5A33B /* YFBaseConfig.m */; };
+		B872ABA6222FA8EF00C5A33B /* YFFlowPrepareConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = B872ABA5222FA8EF00C5A33B /* YFFlowPrepareConfig.m */; };
 		B8B7664721A7A44E000E6ABA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B8B7664621A7A44E000E6ABA /* AppDelegate.m */; };
 		B8B7664D21A7A44E000E6ABA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B8B7664B21A7A44E000E6ABA /* Main.storyboard */; };
 		B8B7664F21A7A44F000E6ABA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B8B7664E21A7A44F000E6ABA /* Assets.xcassets */; };
@@ -61,6 +63,10 @@
 		B8169C3922261F5700197CFF /* YFTimezoneListHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YFTimezoneListHelper.h; sourceTree = "<group>"; };
 		B8169C3A22261F5700197CFF /* YFTimezoneListHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YFTimezoneListHelper.m; sourceTree = "<group>"; };
 		B81FC68421D610520074A0FC /* ExportOptions.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ExportOptions.plist; sourceTree = "<group>"; };
+		B872ABA0222F5E4A00C5A33B /* YFBaseConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YFBaseConfig.h; sourceTree = "<group>"; };
+		B872ABA1222F5E4A00C5A33B /* YFBaseConfig.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YFBaseConfig.m; sourceTree = "<group>"; };
+		B872ABA4222FA8EF00C5A33B /* YFFlowPrepareConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YFFlowPrepareConfig.h; sourceTree = "<group>"; };
+		B872ABA5222FA8EF00C5A33B /* YFFlowPrepareConfig.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YFFlowPrepareConfig.m; sourceTree = "<group>"; };
 		B8B7664221A7A44E000E6ABA /* LocalizableStringGen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LocalizableStringGen.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8B7664521A7A44E000E6ABA /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		B8B7664621A7A44E000E6ABA /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -188,6 +194,15 @@
 			path = timezonelistSubstitute;
 			sourceTree = "<group>";
 		};
+		B872ABA3222FA8AA00C5A33B /* flowPrepare */ = {
+			isa = PBXGroup;
+			children = (
+				B872ABA4222FA8EF00C5A33B /* YFFlowPrepareConfig.h */,
+				B872ABA5222FA8EF00C5A33B /* YFFlowPrepareConfig.m */,
+			);
+			path = flowPrepare;
+			sourceTree = "<group>";
+		};
 		B8B7663921A7A44E000E6ABA = {
 			isa = PBXGroup;
 			children = (
@@ -259,6 +274,7 @@
 		B8B7666B21A92842000E6ABA /* modules */ = {
 			isa = PBXGroup;
 			children = (
+				B872ABA3222FA8AA00C5A33B /* flowPrepare */,
 				B8169C3522261EFA00197CFF /* timezonelistSubstitute */,
 				B8DD0CE621C4F1D300E904BB /* update */,
 				B8DD0CDF21C362B400E904BB /* diff */,
@@ -353,6 +369,8 @@
 				B8DB52A221C20FA200FEF363 /* BCCameraSettingMod.m */,
 				B8DB529F21C20F6500FEF363 /* BCCommonTvModel.h */,
 				B8DB529E21C20F6500FEF363 /* BCCommonTvModel.m */,
+				B872ABA0222F5E4A00C5A33B /* YFBaseConfig.h */,
+				B872ABA1222F5E4A00C5A33B /* YFBaseConfig.m */,
 			);
 			path = M;
 			sourceTree = "<group>";
@@ -549,6 +567,7 @@
 				B8B7666721A7F701000E6ABA /* YFLocalizedHelper.m in Sources */,
 				B8B7667421A92D0D000E6ABA /* YFLocalGroupHelper.m in Sources */,
 				B8DB52A321C20FA200FEF363 /* BCCameraSettingMod.m in Sources */,
+				B872ABA6222FA8EF00C5A33B /* YFFlowPrepareConfig.m in Sources */,
 				B8DD0CE521C3646400E904BB /* YFStringsDiffHelper.m in Sources */,
 				B8B7669421ACF49D000E6ABA /* YFStringsMergeOrDisperseConfig.m in Sources */,
 				B8169C3822261F4400197CFF /* YFTimezoneListConfig.m in Sources */,
@@ -562,6 +581,7 @@
 				B8B7666A21A82509000E6ABA /* YFUtil.m in Sources */,
 				B8B7664721A7A44E000E6ABA /* AppDelegate.m in Sources */,
 				B8B7668121A9981D000E6ABA /* YFLocalCSVConvetConfig.m in Sources */,
+				B872ABA2222F5E4A00C5A33B /* YFBaseConfig.m in Sources */,
 				B8DB52A621C20FF600FEF363 /* YFStringsUtilVC.m in Sources */,
 				B8B7668D21ABB0DE000E6ABA /* YFStringsExchangeHelper.m in Sources */,
 				B8B7666021A7A614000E6ABA /* YFLocalizeUtil.m in Sources */,

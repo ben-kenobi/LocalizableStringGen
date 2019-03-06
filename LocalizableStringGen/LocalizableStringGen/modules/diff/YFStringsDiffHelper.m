@@ -9,6 +9,8 @@
 //
 
 #import "YFStringsDiffHelper.h"
+#import "YFStringMergeNDisperseHelper.h"
+
 @interface YFStringsDiffHelper()
 @property (nonatomic,strong)YFStringsDiffConfig *config;
 @property (nonatomic,copy)void(^compCB)(void);
@@ -35,75 +37,87 @@
 #pragma mark - actions
 
 -(void)diff{
-    NSMutableDictionary *srcLocalizedDict=[YFLocalizeUtil localStringDictFrom:self.config.srcLocalizedStringFile];
-    
-    NSMutableDictionary *tarLocalizedDict=[YFLocalizeUtil localStringDictFrom:self.config.tarLocalizedStringFile];
-    
-    NSMutableString *unchangeMstr = [NSMutableString string];
-    NSMutableString *addedMstr = [NSMutableString string];
-    NSMutableString *updatedMstr = [NSMutableString string];
-    NSMutableString *notransMstr = [NSMutableString string];
-    NSMutableString *ignoreMstr = [NSMutableString string];
-    NSMutableDictionary *deleteLocalizedDict=[NSMutableDictionary dictionaryWithDictionary:srcLocalizedDict];
-    [deleteLocalizedDict removeObjectsForKeys:tarLocalizedDict.allKeys];
-    
-    for(NSString *key in tarLocalizedDict.allKeys){
-        NSString *srcVal = srcLocalizedDict[key];
-        NSString *tarval = tarLocalizedDict[key];
-        if(srcVal){
-            if([srcVal isEqualToString:tarval]){
-                [YFLocalizeUtil append:unchangeMstr key:key val:srcVal];
-            }else if(!emptyStr(tarval)){
-                [YFLocalizeUtil append:updatedMstr key:key val:tarval];
+    for(int i=0;i<self.config.srcLocalizedStringFiles.count;i++){
+        NSMutableDictionary *srcLocalizedDict=[YFLocalizeUtil localStringDictFrom:self.config.srcLocalizedStringFiles[i]];
+        
+        NSMutableDictionary *tarLocalizedDict=[YFLocalizeUtil localStringDictFrom:[self.config tarLocalizedStringFileBy:i]];
+        
+        NSMutableString *unchangeMstr = [NSMutableString string];
+        NSMutableString *addedMstr = [NSMutableString string];
+        NSMutableString *updatedMstr = [NSMutableString string];
+        NSMutableString *notransMstr = [NSMutableString string];
+        NSMutableString *ignoreMstr = [NSMutableString string];
+        NSMutableDictionary *deleteLocalizedDict=[NSMutableDictionary dictionaryWithDictionary:srcLocalizedDict];
+        [deleteLocalizedDict removeObjectsForKeys:tarLocalizedDict.allKeys];
+        
+        for(NSString *key in tarLocalizedDict.allKeys){
+            NSString *srcVal = srcLocalizedDict[key];
+            NSString *tarval = tarLocalizedDict[key];
+            if(srcVal){
+                if([srcVal isEqualToString:tarval]){
+                    [YFLocalizeUtil append:unchangeMstr key:key val:srcVal];
+                }else if(!emptyStr(tarval)){
+                    [YFLocalizeUtil append:updatedMstr key:key val:tarval];
+                }else{
+                    [YFLocalizeUtil append:notransMstr key:key val:srcVal];
+                }
             }else{
-               [YFLocalizeUtil append:notransMstr key:key val:srcVal];
+                //如果是新增字串，却被忽略了，则不新增
+                if(self.config.ignoreKeyDict[key] == nil)
+                    [YFLocalizeUtil append:addedMstr key:key val:tarval];
+                
             }
-        }else{
-            //如果是新增字串，却被忽略了，则不新增
-            if(self.config.ignoreKeyDict[key] == nil)
-                [YFLocalizeUtil append:addedMstr key:key val:tarval];
+        }
+        NSDictionary *delDictCopy = [NSDictionary dictionaryWithDictionary:deleteLocalizedDict];
+        for(NSString *key in delDictCopy.allKeys){
+            NSString *srcVal = delDictCopy[key];
+            if(self.config.ignoreKeyDict[key]){
+                [deleteLocalizedDict removeObjectForKey:key];
+                [YFLocalizeUtil append:ignoreMstr key:key val:srcVal];
+            }
             
         }
-    }
-    NSDictionary *delDictCopy = [NSDictionary dictionaryWithDictionary:deleteLocalizedDict];
-    for(NSString *key in delDictCopy.allKeys){
-        NSString *srcVal = delDictCopy[key];
-        if(self.config.ignoreKeyDict[key]){
-            [deleteLocalizedDict removeObjectForKey:key];
-            [YFLocalizeUtil append:ignoreMstr key:key val:srcVal];
+        
+        
+        // export
+        
+        NSMutableString *deleteMstr = [NSMutableString string];
+        for(NSString *key in deleteLocalizedDict.allKeys){
+            NSString *val = deleteLocalizedDict[key];
+            [YFLocalizeUtil append:deleteMstr key:key val:val];
         }
         
+        
+        NSString *mergedStr = iFormatStr(@"%@\n\n//updated\n%@\n\n//ignored\n%@\n\n//notrans\n%@\n\n//added\n%@\n\n//deleted\n%@\n",unchangeMstr,updatedMstr,ignoreMstr,notransMstr,addedMstr,deleteMstr);
+        NSString *destFile = [self.config destFileBy:i];
+        if(![iFm fileExistsAtPath:destFile]){
+            [iFm createDirectoryAtPath:destFile.stringByDeletingLastPathComponent withIntermediateDirectories:YES attributes:nil error:nil];
+        }
+        [mergedStr writeToFile:[self.config destFileBy:i] atomically:YES encoding:4 error:0];
+        if(self.config.onlyExportMerged) continue;
+        
+        
+        if(!emptyStr(deleteMstr))
+            [deleteMstr writeToFile:[self.config deletedLocalizedStringFileBy:i] atomically:YES encoding:4 error:0];
+        if(!emptyStr(updatedMstr))
+            [updatedMstr writeToFile:[self.config substitutedLocalizedStringFileBy:i] atomically:YES encoding:4 error:0];
+        if(!emptyStr(addedMstr))
+            [addedMstr writeToFile:[self.config addedLocalizedStringFileBy:i] atomically:YES encoding:4 error:0];
+        if(!emptyStr(unchangeMstr))
+            [unchangeMstr writeToFile:[self.config unchangedLocalizedStringFileBy:i] atomically:YES encoding:4 error:0];
+        if(!emptyStr(notransMstr))
+            [notransMstr writeToFile:[self.config noTranslatedLocalizedStringFileBy:i] atomically:YES encoding:4 error:0];
+        if(!emptyStr(ignoreMstr))
+            [ignoreMstr writeToFile:[self.config ignoreLocalizedStringFileBy:i] atomically:YES encoding:4 error:0];
     }
     
     
-    // export
+    //merge dest files into single file for QA check
+    NSString *fulldir = [self.config fullOutputPath:@""];
+    NSString *qaname = fulldir.lastPathComponent;
+    NSString *qadir = iFormatStr(@"%@/多语言文案_IOS/",[fulldir stringByDeletingLastPathComponent]);
+    [YFStringMergeNDisperseHelper mergeDir:self.config.destDir toFile:iFormatStr(@"%@%@.strings",qadir,qaname)];
     
-    NSMutableString *deleteMstr = [NSMutableString string];
-    for(NSString *key in deleteLocalizedDict.allKeys){
-        NSString *val = deleteLocalizedDict[key];
-        [YFLocalizeUtil append:deleteMstr key:key val:val];
-    }
-    
-    
-    NSString *mergedStr = iFormatStr(@"%@\n\n//updated\n%@\n\n//ignored\n%@\n\n//notrans\n%@\n\n//added\n%@\n\n//deleted\n%@\n",unchangeMstr,updatedMstr,ignoreMstr,notransMstr,addedMstr,deleteMstr);
-    [mergedStr writeToFile:self.config.mergedFile atomically:YES encoding:4 error:0];
-    
-   
-    if(self.config.onlyExportMerged) return;
-    
-    
-    if(!emptyStr(deleteMstr))
-        [deleteMstr writeToFile:self.config.deletedLocalizedStringFile atomically:YES encoding:4 error:0];
-    if(!emptyStr(updatedMstr))
-        [updatedMstr writeToFile:self.config.substitutedLocalizedStringFile atomically:YES encoding:4 error:0];
-    if(!emptyStr(addedMstr))
-        [addedMstr writeToFile:self.config.addedLocalizedStringFile atomically:YES encoding:4 error:0];
-    if(!emptyStr(unchangeMstr))
-         [unchangeMstr writeToFile:self.config.unchangedLocalizedStringFile atomically:YES encoding:4 error:0];
-    if(!emptyStr(notransMstr))
-        [notransMstr writeToFile:self.config.noTranslatedLocalizedStringFile atomically:YES encoding:4 error:0];
-    if(!emptyStr(ignoreMstr))
-        [ignoreMstr writeToFile:self.config.ignoreLocalizedStringFile atomically:YES encoding:4 error:0];
 }
 
 @end

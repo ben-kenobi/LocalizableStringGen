@@ -6,12 +6,12 @@
 //  Copyright © 2018 yf. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import "YFBaseConfig.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface YFStringsMergeOrDisperseConfig : NSObject
-@property (nonatomic,strong)NSString *dispersedStringDir;
+@interface YFStringsMergeOrDisperseConfig : YFBaseConfig
+@property (nonatomic,copy)NSArray<NSString *> *dispersedStringsDirs;
 @property (nonatomic,strong)NSString *mergedStringFile;
 @property (nonatomic,assign)BOOL reverse;//NO:merge  YES:disperse
 -(NSString *)dispsersedPathByModule:(NSString *)module;

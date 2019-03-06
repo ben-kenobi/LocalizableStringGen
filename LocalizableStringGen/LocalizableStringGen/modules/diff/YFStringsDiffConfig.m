@@ -7,26 +7,70 @@
 //
 
 #import "YFStringsDiffConfig.h"
+@interface YFStringsDiffConfig()
+
+@end
 
 @implementation YFStringsDiffConfig
--(instancetype)init{
-    if(self = [super init]){
-        [self defSetting];
-    }
-    return self;
-}
 
--(void)defSetting{
+
+-(void)initData{
    
-    self.ignoreKeyDict = iRes4dict(@"ignorKeys.plist"); self.srcLocalizedStringFile=workingPath(@"Localizable.strings");
-    self.tarLocalizedStringFile=workingPath(@"key_adjusted_strings_merged.strings");
-    self.addedLocalizedStringFile=workingPath(@"Localizable_new.strings");
-    self.deletedLocalizedStringFile=workingPath(@"Localizable_delete.strings");
-    self.substitutedLocalizedStringFile=workingPath(@"Localizable_update.strings");
-    self.unchangedLocalizedStringFile=workingPath(@"Localizable_unchanged.strings");
-    self.noTranslatedLocalizedStringFile=workingPath(@"Localizable_notranslated.strings");
-    self.mergedFile = workingPath(@"Localizable_merged.strings");
-    self.ignoreLocalizedStringFile = workingPath(@"Localizable_ignore.strings");
-
+    self.ignoreKeyDict = iRes4dict(@"ignorKeys.plist");
+    
+    NSMutableArray *mary = [NSMutableArray array];
+    BOOL isdir=NO;
+    NSString *dir = workingPath(@"srcDir/");
+    BOOL exist = [iFm fileExistsAtPath:dir isDirectory:&isdir];
+    NSAssert(exist, @"-----dir not exists -----");
+    NSAssert(isdir, @"----- not dir -----");
+    NSArray *ary = [iFm subpathsAtPath:dir];
+    for(NSString *file in ary){
+        if([file hasSuffix:@".strings"])
+            [mary addObject: iFormatStr(@"%@%@",dir,file)];
+    }
+        
+    self.srcLocalizedStringFiles = mary;
 }
+
+
+-(NSString *)tarLocalizedStringFileBy:(NSInteger)idx{
+    NSString *path = iFormatStr(@"%@/strings_merged.strings",[[self.srcLocalizedStringFiles[idx] lastPathComponent] stringByDeletingPathExtension]);
+    return [self fullOutputPath:path];
+}
+-(NSString *)addedLocalizedStringFileBy:(NSInteger)idx{
+    NSString *path = iFormatStr(@"%@/strings_new.strings",[[self.srcLocalizedStringFiles[idx] lastPathComponent] stringByDeletingPathExtension]);
+    return [self fullOutputPath:path];
+}
+-(NSString *)deletedLocalizedStringFileBy:(NSInteger)idx{
+    NSString *path = iFormatStr(@"%@/strings_delete.strings",[[self.srcLocalizedStringFiles[idx] lastPathComponent] stringByDeletingPathExtension]);
+    return [self fullOutputPath:path];
+}
+-(NSString *)substitutedLocalizedStringFileBy:(NSInteger)idx{
+    NSString *path = iFormatStr(@"%@/strings_update.strings",[[self.srcLocalizedStringFiles[idx] lastPathComponent] stringByDeletingPathExtension]);
+    return [self fullOutputPath:path];
+}
+-(NSString *)unchangedLocalizedStringFileBy:(NSInteger)idx{
+    
+    NSString *path = iFormatStr(@"%@/strings_unchanged.strings",[[self.srcLocalizedStringFiles[idx] lastPathComponent] stringByDeletingPathExtension]);
+    return [self fullOutputPath:path];
+}
+-(NSString *)noTranslatedLocalizedStringFileBy:(NSInteger)idx{
+    NSString *path = iFormatStr(@"%@/strings_notranslated.strings",[[self.srcLocalizedStringFiles[idx] lastPathComponent] stringByDeletingPathExtension]);
+    return [self fullOutputPath:path];
+}
+
+-(NSString *)ignoreLocalizedStringFileBy:(NSInteger)idx{
+    NSString *path = iFormatStr(@"%@/strings_ignore.strings",[[self.srcLocalizedStringFiles[idx] lastPathComponent] stringByDeletingPathExtension]);
+    return [self fullOutputPath:path];
+}
+
+-(NSString *)destFileBy:(NSInteger)idx{
+    NSString *path = iFormatStr(@"dest/%@",[self.srcLocalizedStringFiles[idx] lastPathComponent]);
+    return [self fullOutputPath:path];
+}
+-(NSString *)destDir{
+    return [self fullOutputPath:@"dest/"];
+}
+
 @end

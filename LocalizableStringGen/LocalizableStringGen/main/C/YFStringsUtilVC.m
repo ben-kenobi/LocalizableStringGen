@@ -20,6 +20,7 @@
 #import "YFStringUpdateHelper.h"
 #import "YFTimezoneListHelper.h"
 #import "YFTimezoneListConfig.h"
+#import "YFFlowPrepareConfig.h"
 
 @interface YFStringsUtilVC ()
 @property (nonatomic,strong)id helper;
@@ -41,30 +42,45 @@
 
 
 #pragma mark - actions
-
+-(void)genFlowPrepare:(NSIndexPath *)idxpath{
+    [[[YFFlowPrepareConfig alloc]init] prepare];
+}
 -(void)commonFlow:(NSIndexPath *)idxpath{
-    
     [iPop showProg];
-    
-    // tsv -> strings
-    YFLovslTSVConvertConfig *config = [[YFLovslTSVConvertConfig alloc]init];
-    config.revert=YES;
-    
-    self.helper=[YFLocalTSVConvertHelper startWithConfig:config compCB:^{
-        // merge strings files to single file
-        YFStringsMergeOrDisperseConfig *config = [[YFStringsMergeOrDisperseConfig alloc]init];
-        config.reverse=NO;
-        self.helper=[YFStringMergeNDisperseHelper startWithConfig:config compCB:^{
-            // diff two strings file and only reserve merged file
-            YFStringsDiffConfig *config = [[YFStringsDiffConfig alloc]init];
-            config.onlyExportMerged = YES;
-            self.helper=[YFStringsDiffHelper startWithConfig:config compCB:^{
-                [iPop dismProg];
-            }];
-            
-        }];
-    }];
+    runOnGlobal(^{
+        [self doCommonFlow];
+        [iPop dismProg];
+    });
+}
 
+-(void)doCommonFlow{
+    int valIdxes[] = {2,3,4,5,6,7,8,9};
+    NSString *valTitle[] = {@"EN",@"CN",@"ES",@"FR",@"DE",@"IT",@"NL",@"AR"};
+    
+    dispatch_semaphore_t sema = dispatch_semaphore_create(0);
+    for(int i=0;i<sizeof(valIdxes)/sizeof(int);i++){
+        // tsv -> strings
+        NSString *odir = valTitle[i];
+        YFLovslTSVConvertConfig *config = [[YFLovslTSVConvertConfig alloc]initWithOutputDir:odir];
+        config.valIdx = valIdxes[i];
+        config.revert=YES;
+        
+        self.helper=[YFLocalTSVConvertHelper startWithConfig:config compCB:^{
+            // merge strings files to single file
+            YFStringsMergeOrDisperseConfig *config = [[YFStringsMergeOrDisperseConfig alloc]initWithOutputDir:odir];
+            config.reverse=NO;
+            self.helper=[YFStringMergeNDisperseHelper startWithConfig:config compCB:^{
+                // diff two strings file and only reserve merged file
+                YFStringsDiffConfig *config = [[YFStringsDiffConfig alloc]initWithOutputDir:odir];
+                config.onlyExportMerged = YES;
+                self.helper=[YFStringsDiffHelper startWithConfig:config compCB:^{
+                    dispatch_semaphore_signal(sema);
+                }];
+                
+            }];
+        }];
+        dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER);
+    }
 }
 
 -(void)gen:(NSIndexPath *)idxpath{

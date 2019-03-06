@@ -62,8 +62,17 @@
 
 #pragma mark - merge
 -(void)mergeStrings{
+    for(int i=0;i<self.config.dispersedStringsDirs.count;i++){
+        NSString *dir = self.config.dispersedStringsDirs[i];
+        NSString *parentDir = [dir stringByDeletingLastPathComponent];
+
+        [self.class mergeDir:dir toFile:iFormatStr(@"%@/%@",parentDir,@"strings_merged.strings")];
+       
+    }
+}
+
++(void)mergeDir:(NSString *)dir toFile:(NSString *)file{
     BOOL isdir=NO;
-    NSString *dir = self.config.dispersedStringDir;
     NSMutableString *mstr = [NSMutableString string];
     BOOL exist = [iFm fileExistsAtPath:dir isDirectory:&isdir];
     NSAssert(exist, @"-----file not exists-----");
@@ -75,10 +84,23 @@
     }else{
         [self mergeStrings:dir dir:@"" mstr:mstr];
     }
-    [mstr writeToFile:self.config.mergedStringFile atomically:YES encoding:4 error:0];
+    
+    
+    isdir = NO;
+    NSString *destDir = [file stringByDeletingLastPathComponent];
+    exist = [iFm fileExistsAtPath:destDir isDirectory:&isdir];
+    
+    NSAssert(!exist||isdir, @"-----Not a directory-----");
+    
+    if(!exist){
+        [iFm createDirectoryAtPath:destDir withIntermediateDirectories:YES attributes:0 error:0];
+    }
+    
+    
+    [mstr writeToFile:file  atomically:YES encoding:4 error:0];
 }
 
--(void)mergeStrings:(NSString *)file dir:(NSString *)dir mstr:(NSMutableString *)mstr{
++(void)mergeStrings:(NSString *)file dir:(NSString *)dir mstr:(NSMutableString *)mstr{
     NSString *srcStr = [YFLocalizeUtil strFromValidFile:file dir:dir fileExts:@[@".strings"]  excludeFiles:nil];
     if(!srcStr)return;
     [mstr appendFormat:@"%@\n",srcStr];

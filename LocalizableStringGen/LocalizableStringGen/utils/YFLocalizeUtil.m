@@ -41,7 +41,10 @@
 
 
 +(NSString *)strFromValidFile:(NSString *)file dir:(NSString *)dir fileExts:(NSArray *)fileExts excludeFiles:(NSArray *)excludeFiles{
-    NSString *path = iFormatStr(@"%@%@",dir,file);
+    NSString *slash = @"";
+    if(![dir hasSuffix:@"/"])
+        slash = @"/";
+        NSString *path = iFormatStr(@"%@%@%@",dir,slash,file);
     
     BOOL isDir = NO;
     BOOL exist = [iFm fileExistsAtPath:path isDirectory:&isDir];
