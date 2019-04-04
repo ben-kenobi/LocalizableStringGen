@@ -16,8 +16,8 @@
     BOOL isdir=NO;
     NSString *tsvDir = workingPath(@"tsvDir/");
     BOOL exist = [iFm fileExistsAtPath:tsvDir isDirectory:&isdir];
-    NSAssert(exist, @"-----dir not exists -----");
-    NSAssert(isdir, @"----- not dir -----");
+//    NSAssert(exist, @"-----dir not exists -----");
+//    NSAssert(isdir, @"----- not dir -----");
     NSArray *ary = [iFm subpathsAtPath:tsvDir];
     for(NSString *file in ary){
         NSString *tdir = iFormatStr(@"%@%@",tsvDir,file);
