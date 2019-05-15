@@ -90,7 +90,7 @@
 -(void)convertCSVtoStrings:(NSString *)file dir:(NSString *)dir{
     NSString *csvStr = [YFLocalizeUtil strFromValidFile:file dir:dir fileExts:@[@".csv"] excludeFiles:nil];
     if(emptyStr(csvStr))return;
-    NSArray *csvary = [csvStr componentsSeparatedByCharactersInSet:NSCharacterSet.newlineCharacterSet];
+    NSArray *csvary = [csvStr componentsSeparatedByString:@"\r\n"];
     NSMutableString *destmstr=[NSMutableString string];
     for(int i=1;i<csvary.count;i++){ //首行为标题，不做处理
         NSArray *enval = [self parseCSV:csvary[i]];
@@ -127,14 +127,14 @@
                     }
                 }
                 if(newSeg){
-                    [ary addObject: [[csv substringWithRange:NSMakeRange(fromidx + 1, i-fromidx - 2)]stringByReplacingOccurrencesOfString:@"\"\"" withString:@"\""]];
+                    [ary addObject: [self getCSVStrWithinQuotedStr:[csv substringWithRange:NSMakeRange(fromidx + 1, i-fromidx - 2)]]];
                     beginStr = nil;
                     continue;
                 }
             }
         }else if(i == csv.length - 1){
             if([beginStr isEqualToString:@"\""]){
-                [ary addObject: [[csv substringWithRange:NSMakeRange(fromidx + 1, i-fromidx - 2)] stringByReplacingOccurrencesOfString:@"\"\"" withString:@"\""]];
+                [ary addObject: [self getCSVStrWithinQuotedStr:[csv substringWithRange:NSMakeRange(fromidx + 1, i-fromidx - 2)]]];
             }else{
                 [ary addObject: [csv substringWithRange:NSMakeRange(fromidx, i-fromidx)]];
             }
@@ -145,5 +145,8 @@
     
     if(ary.count>self.config.valIdx)return @[ary[self.config.keyIdx],ary[self.config.valIdx]];
     return nil;
+}
+-(NSString *)getCSVStrWithinQuotedStr:(NSString *)quotedStr{
+    return [[quotedStr stringByReplacingOccurrencesOfString:@"\"\"" withString:@"\""] stringByReplacingOccurrencesOfString:@"\n" withString:@"  "];
 }
 @end

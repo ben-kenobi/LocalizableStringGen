@@ -19,7 +19,7 @@
     for(NSString *file in ary){
         if(![file hasSuffix:@".strings"]) continue;
         NSString *name = [[file lastPathComponent] stringByDeletingPathExtension];
-        [iFm createDirectoryAtPath:workingPath(iFormatStr(@"tsvDir/%@/",name)) withIntermediateDirectories:YES attributes:0 error:0];
+        [iFm createDirectoryAtPath:workingPath(iFormatStr(@"csvDir/%@/",name)) withIntermediateDirectories:YES attributes:0 error:0];
     }
     
 }
