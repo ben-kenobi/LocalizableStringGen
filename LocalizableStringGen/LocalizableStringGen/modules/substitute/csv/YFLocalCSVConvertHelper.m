@@ -147,6 +147,6 @@
     return nil;
 }
 -(NSString *)getCSVStrWithinQuotedStr:(NSString *)quotedStr{
-    return [[quotedStr stringByReplacingOccurrencesOfString:@"\"\"" withString:@"\""] stringByReplacingOccurrencesOfString:@"\n" withString:@"  "];
+    return [[quotedStr stringByReplacingOccurrencesOfString:@"\"\"" withString:@"\""] stringByReplacingOccurrencesOfString:@"\n" withString:@" "];
 }
 @end
