@@ -48,11 +48,43 @@
 -(void)commonFlow:(NSIndexPath *)idxpath{
     [iPop showProg];
     runOnGlobal(^{
-        [self doCommonFlow];
+        [self doCSVCommonFlow];
         [iPop dismProg];
     });
 }
 
+-(void)doCSVCommonFlow{
+    int valIdxes[] = {2,3,4,5,6,7,8,9};
+    NSString *valTitle[] = {@"EN",@"CN",@"ES",@"FR",@"DE",@"IT",@"NL",@"AR"};
+    
+    dispatch_semaphore_t sema = dispatch_semaphore_create(0);
+    for(int i=0;i<sizeof(valIdxes)/sizeof(int);i++){
+        // tsv -> strings
+        NSString *odir = valTitle[i];
+        YFLocalCSVConvetConfig *config = [[YFLocalCSVConvetConfig alloc]initWithOutputDir:odir];
+        config.valIdx = valIdxes[i];
+        config.revert=YES;
+        
+        self.helper=[YFLocalCSVConvertHelper startWithConfig:config compCB:^{
+            // merge strings files to single file
+            YFStringsMergeOrDisperseConfig *config = [[YFStringsMergeOrDisperseConfig alloc]initWithOutputDir:odir];
+            config.reverse=NO;
+            self.helper=[YFStringMergeNDisperseHelper startWithConfig:config compCB:^{
+                // diff two strings file and only reserve merged file
+                YFStringsDiffConfig *config = [[YFStringsDiffConfig alloc]initWithOutputDir:odir];
+                config.onlyExportMerged = YES;
+                self.helper=[YFStringsDiffHelper startWithConfig:config compCB:^{
+                    dispatch_semaphore_signal(sema);
+                }];
+                
+            }];
+        }];
+        dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER);
+    }
+}
+
+
+//TSV
 -(void)doCommonFlow{
     int valIdxes[] = {2,3,4,5,6,7,8,9};
     NSString *valTitle[] = {@"EN",@"CN",@"ES",@"FR",@"DE",@"IT",@"NL",@"AR"};

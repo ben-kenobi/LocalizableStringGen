@@ -72,6 +72,78 @@
 
 #pragma mark - revert convert
 -(void)convertToStrings{
+    for(int i=0;i<self.config.csvDirs.count;i++){
+        BOOL isdir=NO;
+        NSString *dir = self.config.csvDirs[i];
+        BOOL exist = [iFm fileExistsAtPath:dir isDirectory:&isdir];
+        NSAssert(exist, @"-----file not exists-----");
+        if(isdir){
+            NSArray *ary = [iFm subpathsAtPath:dir];
+            for(NSString *file in ary){
+                [self convertCSVtoStrings:file dir:dir];
+            }
+        }else{
+            [self convertCSVtoStrings:dir dir:@""];
+        }
+    }
+}
+-(void)convertCSVtoStrings:(NSString *)file dir:(NSString *)dir{
+    NSString *csvStr = [YFLocalizeUtil strFromValidFile:file dir:dir fileExts:@[@".csv"] excludeFiles:nil];
+    if(emptyStr(csvStr))return;
+    NSArray *csvary = [csvStr componentsSeparatedByCharactersInSet:NSCharacterSet.newlineCharacterSet];
+    NSMutableString *destmstr=[NSMutableString string];
+    for(int i=1;i<csvary.count;i++){ //首行为标题，不做处理
+        NSArray *enval = [self parseCSV:csvary[i]];
+        if(!enval)continue;
+        [YFLocalizeUtil append:destmstr key:enval[0] val:enval[1]];
+    }
+    [destmstr writeToFile:[self.config stringDestPathBySrcfile:file dir:dir] atomically:YES encoding:4 error:0];
+}
+-(NSArray<NSString *> *)parseCSV:(NSString *)csv{
+
+    NSMutableArray *ary = [NSMutableArray array];
+    NSInteger fromidx = 0;
+    NSString *beginStr = nil;
+    for(int i = 0;i<csv.length;i++){
+        NSString *ss = [csv substringWithRange:NSMakeRange(i, 1)];
+        if(!beginStr){
+            beginStr = ss;
+            fromidx = i;
+        }
+        if([ss isEqualToString:@","]){
+            if(![beginStr isEqualToString:@"\""]){
+                [ary addObject: [csv substringWithRange:NSMakeRange(fromidx, i-fromidx)]];
+                beginStr = nil;
+                continue;
+            }else{
+                BOOL newSeg = NO;//是否是新一段
+                for(int j = i-1; j>fromidx; j--){
+                    NSString *substr = [csv substringWithRange:NSMakeRange(j, 1)];
+                    if([substr isEqualToString:@"\""]){
+                        newSeg = !newSeg;//奇数个"则算结束
+                    }else{
+                        //遇到非引号则判断结束
+                        break;
+                    }
+                }
+                if(newSeg){
+                    [ary addObject: [[csv substringWithRange:NSMakeRange(fromidx + 1, i-fromidx - 2)]stringByReplacingOccurrencesOfString:@"\"\"" withString:@"\""]];
+                    beginStr = nil;
+                    continue;
+                }
+            }
+        }else if(i == csv.length - 1){
+            if([beginStr isEqualToString:@"\""]){
+                [ary addObject: [[csv substringWithRange:NSMakeRange(fromidx + 1, i-fromidx - 2)] stringByReplacingOccurrencesOfString:@"\"\"" withString:@"\""]];
+            }else{
+                [ary addObject: [csv substringWithRange:NSMakeRange(fromidx, i-fromidx)]];
+            }
+        }
+        
     
+    }
+    
+    if(ary.count>self.config.valIdx)return @[ary[self.config.keyIdx],ary[self.config.valIdx]];
+    return nil;
 }
 @end

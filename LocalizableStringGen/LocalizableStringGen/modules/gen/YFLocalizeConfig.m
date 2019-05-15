@@ -7,10 +7,6 @@
 //
 
 #import "YFLocalizeConfig.h"
-NSString *const YF_LOCALIZE_BASE_WORKING_DIR = @"/Users/yf/Desktop/I18N/";
-NSString *const YF_LOCALIZE_BASE_PROJECT_DIR = @"/Users/yf/Desktop/IOS/eufySecurity_ios/BatteryCam/";
-
-
 
 //static NSString *const LOCALIZE_RE=@"NSLocalizedString.*?\\(.*?@\"(.+)\".*?,.*?\\)(?=.+NSLocalizedString)|NSLocalizedString.*?\\(.*?@\"(.+)\".*?,.*?\\)";
 NSString *const LOCALIZE_RE = @"NSLocalizedString\\s*?\\(\\s*?@\"(.+?)\"\\s*?,\\s*?(?:NULL|nil|0)\\s*?\\)";
