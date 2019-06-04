@@ -134,9 +134,9 @@
             }
         }else if(i == csv.length - 1){
             if([beginStr isEqualToString:@"\""]){
-                [ary addObject: [self getCSVStrWithinQuotedStr:[csv substringWithRange:NSMakeRange(fromidx + 1, i-fromidx - 2)]]];
+                [ary addObject: [self getCSVStrWithinQuotedStr:[csv substringWithRange:NSMakeRange(fromidx + 1, i-fromidx - 2 + 1)]]];
             }else{
-                [ary addObject: [csv substringWithRange:NSMakeRange(fromidx, i-fromidx)]];
+                [ary addObject: [csv substringWithRange:NSMakeRange(fromidx, i-fromidx+1)]];
             }
         }
         
