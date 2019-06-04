@@ -21,6 +21,8 @@
 #import "YFTimezoneListHelper.h"
 #import "YFTimezoneListConfig.h"
 #import "YFFlowPrepareConfig.h"
+#import "YFTranslatorHelper.h"
+#import "LKConstants.h"
 
 @interface YFStringsUtilVC ()
 @property (nonatomic,strong)id helper;
@@ -113,6 +115,20 @@
         }];
         dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER);
     }
+}
+
+-(void)translate:(NSIndexPath *)idxpath{
+    [iPop showProg];
+    NSString *srclan = kLKLanguageEnglish;
+    NSString *valTitle[] = {kLKLanguageChineseSimplified,kLKLanguageSpanish,kLKLanguageFrench,kLKLanguageGerman,kLKLanguageItalian,kLKLanguageDutch,kLKLanguageArabic};
+    dispatch_semaphore_t sema = dispatch_semaphore_create(0);
+    for(int i=0;i<sizeof(valTitle)/sizeof(NSString *);i++){
+        self.helper=[YFTranslatorHelper startWithConfig:[[YFTranlatorConfig alloc]initWithFromLan:srclan toLan:valTitle[i]] compCB:^{
+            dispatch_semaphore_signal(sema);
+        }];
+        dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER);
+    }
+    [iPop dismProg];
 }
 
 -(void)gen:(NSIndexPath *)idxpath{

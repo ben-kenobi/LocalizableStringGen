@@ -41,6 +41,22 @@
 			</dict>
 			<dict>
 				<key>title</key>
+				<string>Tranlator</string>
+				<key>detail</key>
+				<string>使用google翻译，具体翻译文件在config中配置</string>
+				<key>switchView</key>
+				<false/>
+				<key>editable</key>
+				<true/>
+				<key>hasEdit</key>
+				<true/>
+				<key>editMethod</key>
+				<string>translate:</string>
+				<key>extraData</key>
+				<string>XXXXX</string>
+			</dict>
+			<dict>
+				<key>title</key>
 				<string>Group TSV</string>
 				<key>detail</key>
 				<string> 语言本地话工具，用于将分组后的语言tsv文件与未分组的strings文件进行比较,匹配上的添加到tsv文件中，并导出一份未匹配列表</string>
