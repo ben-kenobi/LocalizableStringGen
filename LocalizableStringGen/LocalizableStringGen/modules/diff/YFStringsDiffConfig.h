@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface YFStringsDiffConfig : YFBaseConfig
 @property (nonatomic,assign)BOOL onlyExportMerged;//是否只导出merged文件
+@property (nonatomic,assign)BOOL changeStoAt;
 @property (nonatomic,copy)NSArray<NSString *> *srcLocalizedStringFiles;//原始文件
 
 

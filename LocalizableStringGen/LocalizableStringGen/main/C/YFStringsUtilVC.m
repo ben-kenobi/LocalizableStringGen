@@ -74,6 +74,7 @@
             self.helper=[YFStringMergeNDisperseHelper startWithConfig:config compCB:^{
                 // diff two strings file and only reserve merged file
                 YFStringsDiffConfig *config = [[YFStringsDiffConfig alloc]initWithOutputDir:odir];
+                config.changeStoAt = YES;
                 config.onlyExportMerged = YES;
                 self.helper=[YFStringsDiffHelper startWithConfig:config compCB:^{
                     dispatch_semaphore_signal(sema);

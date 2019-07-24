@@ -93,6 +93,9 @@
         if(![iFm fileExistsAtPath:destFile]){
             [iFm createDirectoryAtPath:destFile.stringByDeletingLastPathComponent withIntermediateDirectories:YES attributes:nil error:nil];
         }
+        if(self.config.changeStoAt){
+            mergedStr = [mergedStr stringByReplacingOccurrencesOfString:@"%s" withString:@"%@"];
+        }
         [mergedStr writeToFile:[self.config destFileBy:i] atomically:YES encoding:4 error:0];
         if(self.config.onlyExportMerged) continue;
         

@@ -27,7 +27,7 @@
 				<key>title</key>
 				<string>Common Flow</string>
 				<key>detail</key>
-				<string>标准合并字串工作流，先将tsv转化成strings，再将strings.文件合并，最后跟localizable.string比较并合并</string>
+				<string>标准合并字串工作流，先将csv转化成strings，再将strings.文件合并，最后跟localizable.string比较并合并(比较合并完后默认把%s改成%@)</string>
 				<key>switchView</key>
 				<false/>
 				<key>editable</key>
