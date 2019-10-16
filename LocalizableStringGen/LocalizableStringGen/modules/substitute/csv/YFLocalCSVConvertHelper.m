@@ -95,7 +95,8 @@
     for(int i=1;i<csvary.count;i++){ //首行为标题，不做处理
         NSArray *enval = [self parseCSV:csvary[i]];
         if(!enval)continue;
-        [YFLocalizeUtil append:destmstr key:enval[0] val:enval[1]];
+        NSString *key = [enval[0] stringByTrimmingCharactersInSet:NSCharacterSet.whitespaceAndNewlineCharacterSet];
+        [YFLocalizeUtil append:destmstr key:key val:enval[1]];
     }
     [destmstr writeToFile:[self.config stringDestPathBySrcfile:file dir:dir] atomically:YES encoding:4 error:0];
 }
