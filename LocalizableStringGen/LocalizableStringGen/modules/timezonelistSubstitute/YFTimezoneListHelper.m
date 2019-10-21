@@ -31,7 +31,37 @@
     });
 }
 #pragma mark - action
+
+
 -(void)substitute{
+    NSString *srcFile = self.config.srcPlist;
+    NSString *subFile = self.config.substituteStrings;
+
+    
+    BOOL exist = [iFm fileExistsAtPath:srcFile isDirectory:0];
+    NSAssert(exist, @"-----file not exists-----");
+    exist = [iFm fileExistsAtPath:subFile isDirectory:0];
+    NSAssert(exist, @"-----file not exists-----");
+    
+    NSArray *jsonary=[NSJSONSerialization JSONObjectWithData:iData4F(subFile) options:0 error:0];
+    NSArray<NSDictionary *> *srcTZList = [NSArray arrayWithContentsOfFile:srcFile];
+    NSMutableArray<NSDictionary *> *destTZList = [NSMutableArray array];
+    for(int i=0;i<srcTZList.count;i++){
+        NSMutableDictionary *mdict = [NSMutableDictionary dictionaryWithDictionary:srcTZList[i]];
+        NSString *cityID = mdict[@"cityName"];
+        for(NSDictionary *dict in jsonary){
+            if([dict[@"timeId"] isEqualToString:cityID]){
+                mdict[@"name"] = dict[@"timeZoneName"];
+            }
+        }
+        [destTZList addObject:mdict];
+    }
+
+    // export
+    [destTZList writeToFile:self.config.destPlist atomically:YES];
+}
+
+-(void)substitute2{
     NSString *srcFile = self.config.srcPlist;
     NSString *subFile = self.config.substituteStrings;
 
@@ -52,8 +82,6 @@
 
     // export
     [destTZList writeToFile:self.config.destPlist atomically:YES];
-
-    
 }
 
 @end
