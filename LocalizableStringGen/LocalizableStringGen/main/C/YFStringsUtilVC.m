@@ -23,6 +23,7 @@
 #import "YFFlowPrepareConfig.h"
 #import "YFTranslatorHelper.h"
 #import "LKConstants.h"
+#import "YFFindNLocateHelper.h"
 
 @interface YFStringsUtilVC ()
 @property (nonatomic,strong)id helper;
@@ -217,6 +218,14 @@
     [iPop showProg];
     YFTimezoneListConfig *config = [[YFTimezoneListConfig alloc]init];
     self.helper=[YFTimezoneListHelper startWithConfig:config compCB:^{
+        [iPop dismProg];
+    }];
+}
+
+-(void)findNLocateString:(NSIndexPath *)idxpath{
+    [iPop showProg];
+    YFFindNlocateConfig *config = [[YFFindNlocateConfig alloc]init];
+    self.helper=[YFFindNLocateHelper startWithConfig:config compCB:^{
         [iPop dismProg];
     }];
 }

@@ -153,6 +153,22 @@
 				<key>extraData</key>
 				<string>XXXXX</string>
 			</dict>
+			<dict>
+				<key>title</key>
+				<string>FindNLocateString</string>
+				<key>detail</key>
+				<string>用于将tsv文件与strings文件进行字符串比较,匹配上的添加key到tsv文件中</string>
+				<key>switchView</key>
+				<false/>
+				<key>editable</key>
+				<true/>
+				<key>hasEdit</key>
+				<true/>
+				<key>editMethod</key>
+				<string>findNLocateString:</string>
+				<key>extraData</key>
+				<string>XXXXX</string>
+			</dict>
 		</array>
 	</dict>
 	<dict>
