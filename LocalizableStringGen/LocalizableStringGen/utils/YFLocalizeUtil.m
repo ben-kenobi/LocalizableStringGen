@@ -17,7 +17,21 @@
 +(void)append:(NSMutableString *)mstr key:(NSString *)key val:(NSString *)val{
     if([val containsString:@"++++++"])
         val=key;
-    [mstr appendFormat:@"\"%@\" = \"%@\";\n",key,val];
+    NSMutableString * mval = val.mutableCopy;
+           
+   for(int i=0;i<mval.length;i++){
+       NSString *substr = [mval substringWithRange:NSMakeRange(i, 1)];
+       NSString *preStr = @"";
+       if(i > 0){
+           preStr = [mval substringWithRange:NSMakeRange(i-1, 1)];
+       }
+       if([substr isEqualToString:@"\""] && ![preStr isEqualToString:@"\\"]){
+           [mval insertString:@"\\" atIndex:i];
+           i++;
+       }
+   }
+           
+    [mstr appendFormat:@"\"%@\" = \"%@\";\n",key,mval.copy];
 }
 
 +(NSString *)handleCheckResult:(NSTextCheckingResult *)result srcStr:(NSString *)srcStr range:(NSRange *)orange{
