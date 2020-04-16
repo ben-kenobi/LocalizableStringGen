@@ -96,6 +96,7 @@
         NSArray *enval = [self parseCSV:csvary[i]];
         if(!enval)continue;
         NSString *key = [enval[0] stringByTrimmingCharactersInSet:NSCharacterSet.whitespaceAndNewlineCharacterSet];
+        if(emptyStr(key) || emptyStr(enval[1]))continue;
         [YFLocalizeUtil append:destmstr key:key val:enval[1]];
     }
     [destmstr writeToFile:[self.config stringDestPathBySrcfile:file dir:dir] atomically:YES encoding:4 error:0];
