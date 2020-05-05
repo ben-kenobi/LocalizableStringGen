@@ -57,8 +57,8 @@
 }
 
 -(void)doCSVCommonFlow{
-    int valIdxes[] = {2,3,4,5,6,7,8,9};
-    NSString *valTitle[] = {@"EN",@"CN",@"ES",@"FR",@"DE",@"IT",@"NL",@"AR"};
+    int valIdxes[] = {2,3,4,5,6,7,8,9,10};
+    NSString *valTitle[] = {@"EN",@"CN",@"ES",@"FR",@"DE",@"IT",@"NL",@"AR",@"JP"};
     
     dispatch_semaphore_t sema = dispatch_semaphore_create(0);
     for(int i=0;i<sizeof(valIdxes)/sizeof(int);i++){
