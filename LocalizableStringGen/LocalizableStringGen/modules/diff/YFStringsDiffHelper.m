@@ -49,8 +49,11 @@
         NSMutableString *ignoreMstr = [NSMutableString string];
         NSMutableDictionary *deleteLocalizedDict=[NSMutableDictionary dictionaryWithDictionary:srcLocalizedDict];
         [deleteLocalizedDict removeObjectsForKeys:tarLocalizedDict.allKeys];
-        
-        for(NSString *key in tarLocalizedDict.allKeys){
+        NSArray *keyary = tarLocalizedDict.allKeys;
+        keyary = [keyary sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+            return [obj1 compare:obj2];
+        }];
+        for(NSString *key in keyary){
             NSString *srcVal = srcLocalizedDict[key];
             NSString *tarval = tarLocalizedDict[key];
             if(srcVal){
