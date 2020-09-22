@@ -85,7 +85,10 @@
         // export
         
         NSMutableString *deleteMstr = [NSMutableString string];
-        for(NSString *key in deleteLocalizedDict.allKeys){
+        NSArray *deleteKeys = [deleteLocalizedDict.allKeys sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+            return [obj1 compare:obj2];
+        }];
+        for(NSString *key in deleteKeys){
             NSString *val = deleteLocalizedDict[key];
             [YFLocalizeUtil append:deleteMstr key:key val:val];
         }
