@@ -39,8 +39,8 @@
 -(void)diff{
     for(int i=0;i<self.config.srcLocalizedStringFiles.count;i++){
         NSMutableDictionary *srcLocalizedDict=[YFLocalizeUtil localStringDictFrom:self.config.srcLocalizedStringFiles[i]];
-        
-        NSMutableDictionary *tarLocalizedDict=[YFLocalizeUtil localStringDictFrom:[self.config tarLocalizedStringFileBy:i]];
+        NSMutableString *repeatedMstr = [NSMutableString string];
+        NSMutableDictionary *tarLocalizedDict=[YFLocalizeUtil localStringDictFrom:[self.config tarLocalizedStringFileBy:i] oRepeatedMStr:&repeatedMstr];
         
         NSMutableString *unchangeMstr = [NSMutableString string];
         NSMutableString *addedMstr = [NSMutableString string];
@@ -100,6 +100,9 @@
             mergedStr = [mergedStr stringByReplacingOccurrencesOfString:@"%s" withString:@"%@"];
         }
         [mergedStr writeToFile:[self.config destFileBy:i] atomically:YES encoding:4 error:0];
+        
+        if(!emptyStr(repeatedMstr))
+            [repeatedMstr writeToFile:[self.config repeatedLocalizedStringFileBy:i] atomically:YES encoding:4 error:0];
         if(self.config.onlyExportMerged) continue;
         
         

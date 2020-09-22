@@ -30,6 +30,7 @@ NS_ASSUME_NONNULL_BEGIN
 -(NSString *)substitutedLocalizedStringFileBy:(NSInteger)idx;
 -(NSString *)unchangedLocalizedStringFileBy:(NSInteger)idx;
 -(NSString *)noTranslatedLocalizedStringFileBy:(NSInteger)idx;
+-(NSString *)repeatedLocalizedStringFileBy:(NSInteger)idx; // 同一个key多次出现
 
 
 -(NSString *)ignoreLocalizedStringFileBy:(NSInteger)idx;

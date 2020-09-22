@@ -98,13 +98,17 @@
     return dict;
 }
 
-+(NSMutableDictionary *)localStringDictFrom:(NSString *)localstringFile{
-    return [self localStringDictFrom:localstringFile revert:NO];
++(NSMutableDictionary *)localStringDictFrom:(NSString *)localstringFile oRepeatedMStr:(NSMutableString **)repeatedMStr{
+    return [self localStringDictFrom:localstringFile revert:NO oRepeatedMStr:repeatedMStr];
 }
-
++(NSMutableDictionary *)localStringDictFrom:(NSString *)localstringFile{
+    return [self localStringDictFrom:localstringFile revert:NO oRepeatedMStr:nil];
+}
 //revert:YES  key 与value位置互换  ,NO 正常key value
-+(NSMutableDictionary *)localStringDictFrom:(NSString *)localstringFile  revert:(BOOL)revert{
-    NSMutableString *mstr = [NSMutableString string];
++(NSMutableDictionary *)localStringDictFrom:(NSString *)localstringFile  revert:(BOOL)revert oRepeatedMStr:(NSMutableString **)repeatedMStr{
+    NSMutableString *mstr = nil;
+    if(repeatedMStr)
+       mstr = *repeatedMStr;
     return [self localStringDictFrom:localstringFile revert:revert multiOccuredString:mstr];
 }
 

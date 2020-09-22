@@ -59,6 +59,10 @@
     NSString *path = iFormatStr(@"%@/strings_notranslated.strings",[[self.srcLocalizedStringFiles[idx] lastPathComponent] stringByDeletingPathExtension]);
     return [self fullOutputPath:path];
 }
+-(NSString *)repeatedLocalizedStringFileBy:(NSInteger)idx{
+    NSString *path = iFormatStr(@"%@/strings_repeated.strings",[[self.srcLocalizedStringFiles[idx] lastPathComponent] stringByDeletingPathExtension]);
+    return [self fullOutputPath:path];
+}
 
 -(NSString *)ignoreLocalizedStringFileBy:(NSInteger)idx{
     NSString *path = iFormatStr(@"%@/strings_ignore.strings",[[self.srcLocalizedStringFiles[idx] lastPathComponent] stringByDeletingPathExtension]);

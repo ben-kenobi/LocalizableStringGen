@@ -26,8 +26,8 @@ NSString *projectPath(NSString *path);
 
 +(NSString *)strFromValidFile:(NSString *)file dir:(NSString *)dir fileExts:(NSArray *)fileExts excludeFiles:(NSArray *)excludeFiles;
 
-
 +(NSMutableDictionary *)localStringDictFrom:(NSString *)localstringFile;
++(NSMutableDictionary *)localStringDictFrom:(NSString *)localstringFile oRepeatedMStr:(NSMutableString **)repeatedMStr;
 
 //revert:YES  key 与value位置互换  ,NO 正常key value
 +(NSMutableDictionary *)localStringDictFrom:(NSString *)localstringFile  revert:(BOOL)revert;
