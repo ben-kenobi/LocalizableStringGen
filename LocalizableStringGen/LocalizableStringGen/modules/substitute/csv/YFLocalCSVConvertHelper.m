@@ -136,7 +136,9 @@
             }
         }else if(i == csv.length - 1){
             if([beginStr isEqualToString:@"\""]){
-                [ary addObject: [self getCSVStrWithinQuotedStr:[csv substringWithRange:NSMakeRange(fromidx + 1, i-fromidx - 2 + 1)]]];
+                NSInteger slen = (i-fromidx - 2 + 1);
+                NSAssert(slen >= 0,@"字符长度小于0");
+                [ary addObject: [self getCSVStrWithinQuotedStr:[csv substringWithRange:NSMakeRange(fromidx + 1, slen)]]];
             }else{
                 [ary addObject: [csv substringWithRange:NSMakeRange(fromidx, i-fromidx+1)]];
             }
