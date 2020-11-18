@@ -7,11 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
-#define USER_NAME @"yf"
-
-#define YF_LOCALIZE_BASE_WORKING_DIR iFormatStr(@"/Users/%@/Desktop/I18N/",USER_NAME)
-#define YF_LOCALIZE_BASE_PROJECT_DIR iFormatStr(@"/Users/%@/Desktop/IOS/eufySecurity_ios/BatteryCam/",USER_NAME) 
+#import "YFLocConfig.h"
 
 NSString *workingPath(NSString *path);
 NSString *projectPath(NSString *path);

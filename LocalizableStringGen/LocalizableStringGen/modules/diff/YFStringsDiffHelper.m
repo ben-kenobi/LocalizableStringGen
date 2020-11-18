@@ -103,7 +103,15 @@
             mergedStr = [mergedStr stringByReplacingOccurrencesOfString:@"%s" withString:@"%@"];
         }
         [mergedStr writeToFile:[self.config destFileBy:i] atomically:YES encoding:4 error:0];
-        
+        if(self.config.replaceProjectSrcFile){
+            NSString *projFilePath = [self.config projectDestFileBy:i];
+            BOOL projFileExists = [iFm fileExistsAtPath:projFilePath];
+            if(projFileExists){
+                NSError *err = nil;
+                [mergedStr writeToFile:[self.config projectDestFileBy:i] atomically:YES encoding:4 error:&err];
+                NSLog(@"write to project err = %@",err);
+            }
+        }
         if(!emptyStr(repeatedMstr))
             [repeatedMstr writeToFile:[self.config repeatedLocalizedStringFileBy:i] atomically:YES encoding:4 error:0];
         if(self.config.onlyExportMerged) continue;

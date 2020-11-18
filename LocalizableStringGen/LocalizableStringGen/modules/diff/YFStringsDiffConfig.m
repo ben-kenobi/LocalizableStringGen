@@ -7,6 +7,7 @@
 //
 
 #import "YFStringsDiffConfig.h"
+#import "YFLocConfig.h"
 @interface YFStringsDiffConfig()
 
 @end
@@ -73,6 +74,21 @@
     NSString *path = iFormatStr(@"dest/%@",[self.srcLocalizedStringFiles[idx] lastPathComponent]);
     return [self fullOutputPath:path];
 }
+
+-(NSString *)projectDestFileBy:(NSInteger)idx{
+    NSArray *pathComponents = [self tarLocalizedStringFileBy:idx].pathComponents;
+    NSString *lan = pathComponents[pathComponents.count-3];
+    NSString *locFileName = [self.srcLocalizedStringFiles[idx] lastPathComponent];
+    NSString *path = iFormatStr(@"%@.lproj/%@",lan,locFileName);
+    NSLog(@"project file path = %@---",path);
+    return [self fullProjectOutputPath:path];
+}
+
+-(NSString *)fullProjectOutputPath:(NSString *)subPath{
+    return projectPath(iFormatStr(@"%@/%@",@"BatteryCam/info",subPath));
+}
+
+
 -(NSString *)destDir{
     return [self fullOutputPath:@"dest/"];
 }

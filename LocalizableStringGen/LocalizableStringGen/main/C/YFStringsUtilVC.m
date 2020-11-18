@@ -57,8 +57,8 @@
 }
 
 -(void)doCSVCommonFlow{
-    int valIdxes[] = {2,3,4,5,6,7,8,9,10,11,12};
-    NSString *valTitle[] = {@"EN",@"CN",@"ES",@"FR",@"DE",@"IT",@"NL",@"AR",@"JP",@"KO",@"VI"};
+    int valIdxes[] = {2,4,5,6,7,8,9,10,11,12};
+    NSString *valTitle[] = {@"en",@"es",@"fr",@"de",@"it",@"nl-NL",@"ar",@"ja",@"ko",@"vi"};
     
     dispatch_semaphore_t sema = dispatch_semaphore_create(0);
     for(int i=0;i<sizeof(valIdxes)/sizeof(int);i++){
@@ -77,6 +77,7 @@
                 YFStringsDiffConfig *config = [[YFStringsDiffConfig alloc]initWithOutputDir:odir];
                 config.changeStoAt = YES;
                 config.onlyExportMerged = YES;
+                config.replaceProjectSrcFile = YES;
                 self.helper=[YFStringsDiffHelper startWithConfig:config compCB:^{
                     dispatch_semaphore_signal(sema);
                 }];

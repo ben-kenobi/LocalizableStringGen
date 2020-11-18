@@ -85,6 +85,7 @@
 		B8169C3922261F5700197CFF /* YFTimezoneListHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YFTimezoneListHelper.h; sourceTree = "<group>"; };
 		B8169C3A22261F5700197CFF /* YFTimezoneListHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YFTimezoneListHelper.m; sourceTree = "<group>"; };
 		B81FC68421D610520074A0FC /* ExportOptions.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ExportOptions.plist; sourceTree = "<group>"; };
+		B82E7F2F2564F22600B9D802 /* YFLocConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YFLocConfig.h; sourceTree = "<group>"; };
 		B82FBDA6238FFF8B00016DC4 /* YFFindNlocateConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YFFindNlocateConfig.h; sourceTree = "<group>"; };
 		B82FBDA7238FFF8B00016DC4 /* YFFindNlocateConfig.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YFFindNlocateConfig.m; sourceTree = "<group>"; };
 		B82FBDA9238FFF9B00016DC4 /* YFFindNLocateHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YFFindNLocateHelper.h; sourceTree = "<group>"; };
@@ -341,6 +342,7 @@
 				B8B7666421A7A7A5000E6ABA /* PrefixHeader.pch */,
 				B8B7665E21A7A614000E6ABA /* YFLocalizeUtil.h */,
 				B8B7665F21A7A614000E6ABA /* YFLocalizeUtil.m */,
+				B82E7F2F2564F22600B9D802 /* YFLocConfig.h */,
 			);
 			path = utils;
 			sourceTree = "<group>";
