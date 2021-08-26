@@ -816,7 +816,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 6U96F6BXWV;
+				DEVELOPMENT_TEAM = 3W4XL8NW87;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/LocalizableStringGen/utils/PrefixHeader.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/LocalizableStringGen/info/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -834,8 +834,8 @@
 			baseConfigurationReference = F50041756B98D1F6E0AF472B /* Pods-LocalizableStringGen.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 6U96F6BXWV;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
 				GCC_PREFIX_HEADER = "$(SRCROOT)/LocalizableStringGen/utils/PrefixHeader.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/LocalizableStringGen/info/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -844,6 +844,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.yf.LocalizableStringGen;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
