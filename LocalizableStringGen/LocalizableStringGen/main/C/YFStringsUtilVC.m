@@ -24,6 +24,7 @@
 #import "YFTranslatorHelper.h"
 #import "LKConstants.h"
 #import "YFFindNLocateHelper.h"
+#import "FileUtil.h"
 
 @interface YFStringsUtilVC ()
 @property (nonatomic,strong)id helper;
@@ -59,6 +60,10 @@
 -(void)doCSVCommonFlow{
     int valIdxes[] = {2,4,5,6,7,8,9,10,11,12,13};
     NSString *valTitle[] = {@"en",@"es",@"fr",@"de",@"it",@"nl-NL",@"ar",@"ja",@"ko",@"vi",@"pt-PT"};
+    
+    // 移除output dir
+    YFBaseConfig *basecfg = [[YFBaseConfig alloc]init];
+    [FileUtil clearFileAtPath:[basecfg fullOutputPath:@""]];
     
     dispatch_semaphore_t sema = dispatch_semaphore_create(0);
     for(int i=0;i<sizeof(valIdxes)/sizeof(int);i++){
